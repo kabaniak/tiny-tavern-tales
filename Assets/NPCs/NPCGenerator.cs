@@ -1,0 +1,31 @@
+using UnityEngine;
+
+/// <summary>
+/// Periodically creates a new NPC
+/// </summary>
+public class NPCGenerator : MonoBehaviour
+{
+    /// <summary>
+    /// Object to spawn
+    /// </summary>
+    public GameObject NPCPrefab;
+
+    /// <summary>
+    /// Seconds between spawn operations
+    /// </summary>
+    public float SpawnInterval = 10;
+
+    public float SpawnTime = 0;
+    /// <summary>
+    /// Check if we need to generate an NPC and if so, do so.
+    /// </summary>
+    void Update()
+    {
+        if (Time.time > SpawnTime)
+        {
+            SpawnTime += SpawnInterval;
+            Instantiate(NPCPrefab, new Vector3(0, Screen.height / 2, 0), Quaternion.identity);
+        }
+        return;
+    }
+}
