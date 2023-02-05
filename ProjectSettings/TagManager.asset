@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Player1
   - Player2
+  - table
+  - NPC
   layers:
   - Default
   - TransparentFX
