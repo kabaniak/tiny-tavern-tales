@@ -24,7 +24,7 @@ public class NPCGenerator : MonoBehaviour
         if (Time.time > SpawnTime)
         {
             SpawnTime += SpawnInterval;
-            Instantiate(NPCPrefab, new Vector3(-13, 0,0), Quaternion.identity);
+            Instantiate(NPCPrefab, new Vector3(-31, 1,0), Quaternion.identity);
         }
         return;
     }
