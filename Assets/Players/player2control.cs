@@ -31,9 +31,6 @@ public class player2control : MonoBehaviour
         transform.position += new Vector3(hmove2, vmove2, 0) * speed * Time.deltaTime;
         
 
-    
-
-
         if (inRangeKeg == true & Input.GetKeyDown(KeyCode.Slash) & carrying == false)
         {
             pickupFromSource(gameObject, BoozePrefab);
@@ -47,6 +44,11 @@ public class player2control : MonoBehaviour
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
+        }
+
+        if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        {
+            FeedtheDog();
         }
     }
 
@@ -65,6 +67,10 @@ public class player2control : MonoBehaviour
         {
             inRangeKeg = true;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -78,5 +84,16 @@ public class player2control : MonoBehaviour
         {
             inRangeKeg = false;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = false;
+        }
+    }
+
+    void FeedtheDog()
+    {
+        Destroy(gameObject.transform.GetChild(0).gameObject);
+        carrying = false;
+        currentObject = "";
     }
 }
