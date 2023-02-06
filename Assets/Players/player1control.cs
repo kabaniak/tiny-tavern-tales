@@ -7,9 +7,10 @@ public class player1control : MonoBehaviour
     public float speed = 10;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
-    private bool carrying;
+    public bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
+    public bool inRangeDog;
     public string currentObject = "";
 
     public bool canServe;
@@ -20,7 +21,7 @@ public class player1control : MonoBehaviour
     {
         carrying = false;
         inRangeRack = false;
-        inRangeRack = false;
+        inRangeDog = false;
     }
 
     // Update is called once per frame
@@ -49,6 +50,11 @@ public class player1control : MonoBehaviour
         if (canServe & Input.GetKeyDown(KeyCode.E) & carrying == true)
         {
             servable.serveSeat(gameObject);
+
+        }
+        if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        {
+            FeedtheDog();
         }
     }
 
@@ -67,6 +73,10 @@ public class player1control : MonoBehaviour
         {
             inRangeKeg = true;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -80,5 +90,19 @@ public class player1control : MonoBehaviour
         {
             inRangeKeg = false;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = false;
+        }
+    }
+
+    void FeedtheDog()
+    {
+        for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
+        {
+            Destroy(gameObject.transform.GetChild(i).gameObject);
+        }
+        carrying = false;
+        currentObject = "";
     }
 }

@@ -727,7 +727,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0653c0d6e8327e044b3724a64701c708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
   p1: {fileID: 0}
   p2: {fileID: 0}
 --- !u!61 &248943212
@@ -1667,6 +1666,7 @@ GameObject:
   - component: {fileID: 1015853810}
   - component: {fileID: 1015853812}
   - component: {fileID: 1015853813}
+  - component: {fileID: 1015853814}
   m_Layer: 0
   m_Name: TrashDog
   m_TagString: Untagged
@@ -1752,7 +1752,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.042154998}
+  m_Offset: {x: 0.0058737174, y: 0.04215499}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1763,7 +1763,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.23569}
+  m_Size: {x: 0.26909435, y: 0.23569001}
   m_EdgeRadius: 0
 --- !u!50 &1015853813
 Rigidbody2D:
@@ -1786,6 +1786,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!61 &1015853814
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015853809}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.02340401, y: 0.046965048}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.42517376, y: 0.32091242}
+  m_EdgeRadius: 0
 --- !u!4 &1064518998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4495993303269876538, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
