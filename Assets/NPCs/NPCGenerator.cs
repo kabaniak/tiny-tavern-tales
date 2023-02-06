@@ -13,7 +13,7 @@ public class NPCGenerator : MonoBehaviour
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    public float SpawnInterval = 10;
+    public float SpawnInterval = 5;
 
     public float SpawnTime = 0;
     /// <summary>
@@ -24,7 +24,7 @@ public class NPCGenerator : MonoBehaviour
         if (Time.time > SpawnTime)
         {
             SpawnTime += SpawnInterval;
-            Instantiate(NPCPrefab, new Vector3(-31, 1,0), Quaternion.identity);
+            Instantiate(NPCPrefab, new Vector3(-31, 1, 0), Quaternion.identity);
         }
         return;
     }
