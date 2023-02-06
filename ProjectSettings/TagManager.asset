@@ -10,6 +10,8 @@ TagManager:
   - NPC
   - Kegs
   - MeatRack
+  - Booze
+  - Meat
   layers:
   - Default
   - TransparentFX

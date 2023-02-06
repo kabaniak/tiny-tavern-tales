@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Kegs : MonoBehaviour
 {
-    private bool pickupable = false;
-    public GameObject BoozePrefab;
     public GameObject p1;
     public GameObject p2;
 

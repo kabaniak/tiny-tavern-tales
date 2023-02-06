@@ -10,6 +10,7 @@ public class player2control : MonoBehaviour
     private bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
+    private bool inRangeDog;
     public string currentObject = "";
 
     // Start is called before the first frame update
@@ -17,7 +18,7 @@ public class player2control : MonoBehaviour
     {
         carrying = false;
         inRangeRack = false;
-        inRangeRack = false;
+        inRangeDog = false;
     }
 
     // Update is called once per frame
