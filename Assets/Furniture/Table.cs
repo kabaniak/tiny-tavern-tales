@@ -22,7 +22,13 @@ public class Table : MonoBehaviour
     /// </summary>
     void Update()
     {
-
+        for (int i = 0; i< 4; i++)
+        {
+            if (foodServed[i] != null && atTable[i] != null)
+            {
+                atTable[i].GetComponent<NPCSpriteBehavior>().hasFood = true;
+            }
+        }
     }
 
     /// <summary>
@@ -63,7 +69,8 @@ public class Table : MonoBehaviour
             if (atTable[i] == npc)
             {
                 atTable[i] = null;
-                foodServed = null;
+                Destroy(foodServed[i]);
+                foodServed[i] = null;
                 return;
             }
         }

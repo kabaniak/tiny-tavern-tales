@@ -17,7 +17,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public GameObject mytable;
 
     public bool startedTimer = false;
-    public float tempTimer = 2;
+    public float tempTimer = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         if (leaving)
         {
             // if we're at door level just head out
-            if (transform.position.y < 1 && transform.position.y > -1)
+            if (transform.position.y < 2 && transform.position.y > 1)
             {
                 transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
             }
@@ -71,8 +71,10 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
         }
 
-        // check if we've been served our food
-        if (hasFood)
+
+        // if it's reached it's seat
+        // and if we've been served our food
+        if (reachedSeat && hasFood)
         {
             // start an eat "timer" before it leaves
             if ( ! startedTimer)
