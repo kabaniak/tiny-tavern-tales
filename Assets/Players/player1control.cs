@@ -98,10 +98,7 @@ public class player1control : MonoBehaviour
 
     public void FeedtheDog()
     {
-        for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(gameObject.transform.GetChild(i).gameObject);
-        }
+        Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;
         currentObject = "";
     }

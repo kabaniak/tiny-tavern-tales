@@ -10,7 +10,7 @@ public class player2control : MonoBehaviour
     private bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
-    private bool inRangeDog;
+    public bool inRangeDog;
     public string currentObject = "";
 
     public bool canServe;
@@ -34,9 +34,6 @@ public class player2control : MonoBehaviour
         transform.position += new Vector3(hmove2, vmove2, 0) * speed * Time.deltaTime;
         
 
-    
-
-
         if (inRangeKeg == true & Input.GetKeyDown(KeyCode.Slash) & carrying == false)
         {
             pickupFromSource(gameObject, BoozePrefab);
@@ -50,6 +47,11 @@ public class player2control : MonoBehaviour
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
+        }
+
+        if (inRangeDog == true & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
+        {
+            FeedtheDog();
         }
     }
 
@@ -68,6 +70,10 @@ public class player2control : MonoBehaviour
         {
             inRangeKeg = true;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -81,5 +87,16 @@ public class player2control : MonoBehaviour
         {
             inRangeKeg = false;
         }
+        if (collision.gameObject.name.Equals("TrashDog"))
+        {
+            inRangeDog = false;
+        }
+    }
+
+    void FeedtheDog()
+    {
+        Destroy(gameObject.transform.GetChild(0).gameObject);
+        carrying = false;
+        currentObject = "";
     }
 }
