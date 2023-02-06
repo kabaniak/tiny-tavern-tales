@@ -6,28 +6,94 @@ public class NPCSpriteBehavior : MonoBehaviour
 {
     SpriteRenderer spriteRender;
     public float timeRemaining;
-    public bool seated = false;
-    public bool reachedSeat = false;
     public int speed = 5;
 
-    public Vector3 seatCoords;
+    public bool seated = false;
+    public bool reachedSeat = false;
+    public bool hasFood = false;
+    public bool leaving = false;
 
+    public Vector3 seatCoords;
     public GameObject mytable;
+
+    public bool startedTimer = false;
+    public float tempTimer = 2;
 
     // Start is called before the first frame update
     void Start()
     {
         // the amount of time this npc will wait for
-        timeRemaining = 30;
+        timeRemaining = 40;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if won't wait anymore
+        // check if we're on our way out
+        if (leaving)
+        {
+            // if we're at door level just head out
+            if (transform.position.y < 1 && transform.position.y > -1)
+            {
+                transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
+            }
+            // in these two seats you move horizontal first
+            else if (seatCoords.y > 11 || seatCoords.y < -10)
+            {
+                if (transform.position.x > -25.7)
+                {
+                    transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
+                }
+                // need to get to correct x position
+                else
+                {
+                    if (seatCoords.y > 0)
+                    {
+                        transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
+                    }
+                    else
+                    {
+                        transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
+                    }
+                }
+            }
+            // otherwise horizontal first
+            else
+            {
+                if (seatCoords.y > 0)
+                {
+                    transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
+                }
+                else
+                {
+                    transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
+                }
+            }
+        }
+
+        // check if we've been served our food
+        if (hasFood)
+        {
+            // start an eat "timer" before it leaves
+            if ( ! startedTimer)
+            {
+                startedTimer = true;
+            }
+
+            // if timer has run out it should leave
+            if (tempTimer < 0)
+            {
+                leaveTable();
+            }
+
+            tempTimer -= Time.unscaledDeltaTime;
+        }
+
+        // if we won't wait anymore
         if (timeRemaining <= 0)
         {
-            leave();
+            // should leave (will do later)
+            
         }
 
         // if not seated yet
@@ -120,8 +186,12 @@ public class NPCSpriteBehavior : MonoBehaviour
         timeRemaining = timeRemaining - Time.unscaledDeltaTime;
     }
 
-    void leave()
+    void leaveTable()
     {
-        // leaving doesn't actually leave yet
+        // leaving should remove me from table
+        mytable.GetComponent<Table>().removeNPC(gameObject);
+
+        // indicate that we're leaving now
+        leaving = true;
     }
 }

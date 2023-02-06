@@ -10,6 +10,9 @@ public class Table : MonoBehaviour
     /// </summary>
     public GameObject[] atTable = { null, null, null, null };
 
+    /// Array of food on the table
+    public GameObject[] foodServed = { null, null, null, null };
+
     /// <summary>
     /// nothing for now
     /// </summary>
@@ -49,6 +52,19 @@ public class Table : MonoBehaviour
         return false;
     }
 
+    public void removeNPC(GameObject npc)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (atTable[i] == npc)
+            {
+                atTable[i] = null;
+                foodServed = null;
+                return;
+            }
+        }
+    }
+
     public Vector3 getSeatCoords(GameObject npc)
     {
         for (int i = 0; i < 4; i++)
@@ -75,5 +91,49 @@ public class Table : MonoBehaviour
             }
         }
         return new Vector3(-31, 1, 0);
+    }
+
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
+        {
+            // activate ability to serve a seat
+            GameObject player = collision.gameObject;
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
+        {
+            // deactivate ability to serve a seat
+            GameObject player = collision.gameObject;
+        }
+    }
+
+    public bool serveSeat(GameObject o)
+    {
+        PlayerControl player = o.GetComponent<PlayerControl>();
+        // seat 0
+        if (player.transform.position.x < transform.position.x - 1.3)
+        {
+            //foodServed[0] = player.currentObject;
+        }
+        // seat 1
+        else if (player.transform.position.y < transform.position.y - 1.3)
+        {
+            //foodServed[1] = player.currentObject;
+        }
+        // seat 2
+        else if (player.transform.position.x > transform.position.x + 1.3)
+        {
+            //foodServed[2] = player.currentObject;
+        }
+        // seat 3
+        else if (player.transform.position.y > transform.position.y + 1.3)
+        {
+            //foodServed[3] = player.currentObject;
+        }
+        return false;
     }
 }
