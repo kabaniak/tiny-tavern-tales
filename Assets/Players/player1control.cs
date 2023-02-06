@@ -96,7 +96,7 @@ public class player1control : MonoBehaviour
         }
     }
 
-    void FeedtheDog()
+    public void FeedtheDog()
     {
         for (var i = gameObject.transform.childCount - 1; i >= 0; i--)
         {
