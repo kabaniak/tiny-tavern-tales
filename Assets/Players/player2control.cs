@@ -12,6 +12,9 @@ public class player2control : MonoBehaviour
     private bool inRangeRack;
     public string currentObject = "";
 
+    public bool canServe;
+    public Table servable;
+
     // Start is called before the first frame update
     void Start()
     {

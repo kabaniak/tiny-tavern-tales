@@ -5,6 +5,10 @@ using UnityEngine;
 /// </summary>
 public class Table : MonoBehaviour
 {
+
+    public GameObject BoozePrefab;
+    public GameObject MeatPrefab;
+
     /// <summary>
     /// Array of the NPCs seated at the table
     /// </summary>
@@ -95,45 +99,104 @@ public class Table : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
+        if(collision.gameObject.tag == "Player1")
         {
             // activate ability to serve a seat
-            GameObject player = collision.gameObject;
+            player1control player = collision.gameObject.GetComponent<player1control>();
+
+            player.canServe = true;
+            player.servable = gameObject.GetComponent<Table>();
+        }
+        else if (collision.gameObject.tag == "Player2")
+        {
+            // activate ability to serve a seat
+            player2control player = collision.gameObject.GetComponent<player2control>();
+
+            player.canServe = true;
+            player.servable = gameObject.GetComponent<Table>();
         }
     }
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player1" || collision.gameObject.tag == "Player2")
+        if (collision.gameObject.tag == "Player1")
         {
             // deactivate ability to serve a seat
-            GameObject player = collision.gameObject;
+            player1control player = collision.gameObject.GetComponent<player1control>();
+
+            player.canServe = false;
+            player.servable = null;
+        }
+        else if (collision.gameObject.tag == "Player2")
+        {
+            // deactivate ability to serve a seat
+            player2control player = collision.gameObject.GetComponent<player2control>();
+
+            player.canServe = false;
+            player.servable = null;
         }
     }
 
     public bool serveSeat(GameObject o)
     {
-        PlayerControl player = o.GetComponent<PlayerControl>();
-        // seat 0
-        if (player.transform.position.x < transform.position.x - 1.3)
+        if (o.tag == "Player1")
         {
-            //foodServed[0] = player.currentObject;
+            player1control player = o.GetComponent<player1control>();
+
+            GameObject toCreate = BoozePrefab;
+            if (player.currentObject == ""){
+                return false;
+            }
+            else if (player.currentObject == "Meat")
+            {
+                toCreate = MeatPrefab;
+            }
+
+            // seat 0
+            if (player.transform.position.x < transform.position.x - 1.3)
+            {
+                foodServed[0] = createOnTable(0, toCreate);
+            }
+            // seat 1
+            else if (player.transform.position.y < transform.position.y - 1.3)
+            {
+                foodServed[1] = createOnTable(1, toCreate);
+            }
+            // seat 2
+            else if (player.transform.position.x > transform.position.x + 1.3)
+            {
+                foodServed[2] = createOnTable(2, toCreate);
+            }
+            // seat 3
+            else if (player.transform.position.y > transform.position.y + 1.3)
+            {
+                foodServed[3] = createOnTable(3, toCreate);
+            }
         }
-        // seat 1
-        else if (player.transform.position.y < transform.position.y - 1.3)
+        else if(o.tag == "Player2")
         {
-            //foodServed[1] = player.currentObject;
+            player2control player = o.GetComponent<player2control>();
         }
-        // seat 2
-        else if (player.transform.position.x > transform.position.x + 1.3)
-        {
-            //foodServed[2] = player.currentObject;
-        }
-        // seat 3
-        else if (player.transform.position.y > transform.position.y + 1.3)
-        {
-            //foodServed[3] = player.currentObject;
-        }
+
         return false;
+    }
+
+    public GameObject createOnTable(int seat, GameObject source)
+    {
+        float xCoord = transform.position.x;
+        if(seat %2 == 0)
+        {
+            xCoord += 1.5f * (seat - 1);
+        }
+
+        float yCoord = transform.position.y;
+        if (seat % 2 != 0)
+        {
+            yCoord += 1.5f * (seat - 2);
+        }
+
+        GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
+        thing.transform.localScale = new Vector3(3, 3, 1);
+        return thing;
     }
 }
