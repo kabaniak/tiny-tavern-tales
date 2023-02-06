@@ -50,7 +50,6 @@ public class player1control : MonoBehaviour
         if (canServe & Input.GetKeyDown(KeyCode.E) & carrying == true)
         {
             servable.serveSeat(gameObject);
-
         }
         if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
         {

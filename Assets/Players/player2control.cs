@@ -49,6 +49,10 @@ public class player2control : MonoBehaviour
             currentObject = "Meat";
         }
 
+        if (canServe & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
+        {
+            servable.serveSeat(gameObject);
+        }
         if (inRangeDog == true & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
         {
             FeedtheDog();
@@ -93,7 +97,7 @@ public class player2control : MonoBehaviour
         }
     }
 
-    void FeedtheDog()
+    public void FeedtheDog()
     {
         Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;

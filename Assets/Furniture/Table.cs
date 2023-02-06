@@ -181,6 +181,42 @@ public class Table : MonoBehaviour
         else if(o.tag == "Player2")
         {
             player2control player = o.GetComponent<player2control>();
+
+            GameObject toCreate = BoozePrefab;
+            if (player.currentObject == "")
+            {
+                return false;
+            }
+            else if (player.currentObject == "Meat")
+            {
+                toCreate = MeatPrefab;
+            }
+
+            // seat 0
+            if (player.transform.position.x < transform.position.x - 1.3)
+            {
+                foodServed[0] = createOnTable(0, toCreate);
+                player.FeedtheDog();
+            }
+            // seat 1
+            else if (player.transform.position.y < transform.position.y - 1.3)
+            {
+                foodServed[1] = createOnTable(1, toCreate);
+                foodServed[1].GetComponent<Renderer>().sortingOrder = 0;
+                player.FeedtheDog();
+            }
+            // seat 2
+            else if (player.transform.position.x > transform.position.x + 1.3)
+            {
+                foodServed[2] = createOnTable(2, toCreate);
+                player.FeedtheDog();
+            }
+            // seat 3
+            else if (player.transform.position.y > transform.position.y + 1.3)
+            {
+                foodServed[3] = createOnTable(3, toCreate);
+                player.FeedtheDog();
+            }
         }
 
         return false;
