@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public float speed = 10;
+    public GameObject BoozePrefab;
+    public GameObject MeatPrefab;
+    private bool hold = false;
 
     // Start is called before the first frame update
     void Start()
@@ -28,5 +31,15 @@ public class PlayerControl : MonoBehaviour
         {
             transform.position += new Vector3(hmove2, vmove2, 0) * speed * Time.deltaTime;
         }
+
+        if (hold == false && Input.GetKeyDown(KeyCode.E))
+        {
+            PickUp();
+        }
+    }
+
+    void PickUp()
+    {
+
     }
 }

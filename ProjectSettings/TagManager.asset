@@ -8,6 +8,8 @@ TagManager:
   - Player2
   - table
   - NPC
+  - Kegs
+  - MeatRack
   layers:
   - Default
   - TransparentFX
