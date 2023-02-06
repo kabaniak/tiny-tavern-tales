@@ -98,7 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3198e1b45ddbe449a9e994c6189c111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
+  MeatPrefab: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
   atTable:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  foodServed:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

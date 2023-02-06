@@ -13,6 +13,9 @@ public class player2control : MonoBehaviour
     public bool inRangeDog;
     public string currentObject = "";
 
+    public bool canServe;
+    public Table servable;
+
     // Start is called before the first frame update
     void Start()
     {

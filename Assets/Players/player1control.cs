@@ -13,6 +13,9 @@ public class player1control : MonoBehaviour
     public bool inRangeDog;
     public string currentObject = "";
 
+    public bool canServe;
+    public Table servable;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,11 @@ public class player1control : MonoBehaviour
             currentObject = "Meat";
         }
 
+        if (canServe & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        {
+            servable.serveSeat(gameObject);
+
+        }
         if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
         {
             FeedtheDog();
