@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6640116159889267481}
   - component: {fileID: 6640116159889267482}
   - component: {fileID: 6640116159889267460}
-  - component: {fileID: 6640116159889267483}
   - component: {fileID: 6640116159889267461}
+  - component: {fileID: -6138134370124744895}
   m_Layer: 0
   m_Name: p2Prefab
   m_TagString: Player2
@@ -96,19 +96,6 @@ SortingGroup:
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
   m_SortingOrder: 0
---- !u!114 &6640116159889267483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6640116159889267462}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2367cfd077f3af94c9edfa05eae6aa56, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
 --- !u!61 &6640116159889267461
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -135,3 +122,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.22557515, y: 0.32}
   m_EdgeRadius: 0
+--- !u!114 &-6138134370124744895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6640116159889267462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efeb6ab28cc79bd4487b093a53709f1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
+  MeatPrefab: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
+  currentObject: 

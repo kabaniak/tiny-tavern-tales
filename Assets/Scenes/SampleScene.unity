@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: MeatPrefab
+      value: 
+      objectReference: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: BoozePrefab
+      value: 
+      objectReference: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
     - target: {fileID: 5523879856289242537, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -517,6 +525,8 @@ GameObject:
   - component: {fileID: 248943207}
   - component: {fileID: 248943209}
   - component: {fileID: 248943210}
+  - component: {fileID: 248943212}
+  - component: {fileID: 248943211}
   m_Layer: 0
   m_Name: Kegs
   m_TagString: Kegs
@@ -636,6 +646,47 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!114 &248943211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248943206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0653c0d6e8327e044b3724a64701c708, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+--- !u!61 &248943212
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248943206}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.042514324, y: -0.090738416}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.6, y: 3.6}
+    newSize: {x: 3.6, y: 3.6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 4.5353365, y: 4.3259068}
+  m_EdgeRadius: 0
 --- !u!1001 &295266345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1126,6 +1177,7 @@ GameObject:
   - component: {fileID: 537992443}
   - component: {fileID: 537992445}
   - component: {fileID: 537992446}
+  - component: {fileID: 537992447}
   m_Layer: 0
   m_Name: MeatStorage
   m_TagString: MeatRack
@@ -1245,6 +1297,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
+--- !u!61 &537992447
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537992442}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.012017459, y: 0.004276678}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.32, y: 0.32}
+    newSize: {x: 0.32, y: 0.32}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.5042679, y: 0.44830057}
+  m_EdgeRadius: 0
 --- !u!1 &538893799
 GameObject:
   m_ObjectHideFlags: 0
