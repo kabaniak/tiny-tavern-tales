@@ -10,7 +10,7 @@ public class player2control : MonoBehaviour
     private bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
-    private bool inRangeDog;
+    public bool inRangeDog;
     public string currentObject = "";
 
     // Start is called before the first frame update
@@ -46,7 +46,7 @@ public class player2control : MonoBehaviour
             currentObject = "Meat";
         }
 
-        if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        if (inRangeDog == true & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
         {
             FeedtheDog();
         }
