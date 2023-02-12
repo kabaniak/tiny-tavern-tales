@@ -10,9 +10,11 @@ public class player1control : MonoBehaviour
     public bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
-    public bool inRangeDog;
+    private bool inRangeDog;
+    private bool inRangePrep;
+    private bool inRangeHeat;
     public string currentObject = "";
-
+    public GameObject PrepPrefab;
     public bool canServe;
     public Table servable;
 
@@ -20,8 +22,11 @@ public class player1control : MonoBehaviour
     void Start()
     {
         carrying = false;
+        inRangeKeg = false;
         inRangeRack = false;
         inRangeDog = false;
+        inRangeHeat = false;
+        inRangePrep = false;
     }
 
     // Update is called once per frame
@@ -51,9 +56,16 @@ public class player1control : MonoBehaviour
         {
             servable.serveSeat(gameObject);
         }
+
         if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
         {
             FeedtheDog();
+        }
+
+        if (inRangePrep == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        {
+            FeedtheDog();
+            Prep();
         }
     }
 
@@ -76,6 +88,10 @@ public class player1control : MonoBehaviour
         {
             inRangeDog = true;
         }
+        if (collision.gameObject.name.Equals("Prep"))
+        {
+            inRangeDog = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -93,6 +109,10 @@ public class player1control : MonoBehaviour
         {
             inRangeDog = false;
         }
+        if (collision.gameObject.name.Equals("Prep"))
+        {
+            inRangeDog = false;
+        }
     }
 
     public void FeedtheDog()
@@ -100,5 +120,10 @@ public class player1control : MonoBehaviour
         Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;
         currentObject = "";
+    }
+
+    public void Prep()
+    {
+        
     }
 }
