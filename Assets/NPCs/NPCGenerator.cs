@@ -16,6 +16,7 @@ public class NPCGenerator : MonoBehaviour
     public float SpawnInterval = 2;
 
     public float SpawnTime = 0;
+
     /// <summary>
     /// Check if we need to generate an NPC and if so, do so.
     /// </summary>
