@@ -12,6 +12,8 @@ TagManager:
   - MeatRack
   - Booze
   - Meat
+  - Prep
+  - Heat
   layers:
   - Default
   - TransparentFX
