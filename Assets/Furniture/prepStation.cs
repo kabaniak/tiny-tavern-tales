@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class prepStation : MonoBehaviour
 {
+    public bool prepComplete;
+    public GameObject progBar;
+
     // Start is called before the first frame update
     void Start()
     {

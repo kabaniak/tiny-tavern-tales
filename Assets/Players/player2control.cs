@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class player2control : MonoBehaviour
 {
-    public float speed = 10;
+    public float speed = 11;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
     private bool carrying;
