@@ -15,6 +15,8 @@ TagManager:
   - Prep
   - Heat
   - Coin
+  - Money Stat
+  - Fame Stat
   layers:
   - Default
   - TransparentFX

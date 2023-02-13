@@ -59,7 +59,7 @@ public class OrderTracker : MonoBehaviour
                 float yPos = 15 - 4 * i;
                 orderDisplay[i]=Instantiate(OrderPrefab, transform.position + new Vector3(xPos, yPos, 0), Quaternion.identity, transform);
                 Color npcColor = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getColor();
-                if (npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getMyOrder() == "Beer")
+                if (npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getMyOrder() == "Booze")
                 {
                     orderDisplay[i].GetComponent<Order>().DisplayOrder(BoozePrefab, FacePrefab, npcColor);
                 }

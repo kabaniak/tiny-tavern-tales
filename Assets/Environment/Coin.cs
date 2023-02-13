@@ -7,6 +7,8 @@ public class Coin : MonoBehaviour
     float lifespan = 15;
     public GameObject myTable;
 
+    public int[] value = { 0, 0 };
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,9 @@ public class Coin : MonoBehaviour
         if(lifespan <= 0)
         {
             myTable.GetComponent<Table>().removeCoin(gameObject);
+
+            GameObject.FindObjectOfType<GameManager>().orderCompleted(value[0], value[1]);
+
             Destroy(gameObject);
         }
 

@@ -235,7 +235,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         float ord = Random.value;
         if (ord < .5)
         {
-            myOrder = "Beer";
+            myOrder = "Booze";
         }
         else
         {

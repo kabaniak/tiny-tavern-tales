@@ -69,11 +69,33 @@ public class Table : MonoBehaviour
         {
             if (atTable[i] == npc)
             {
+                int price = 0;
+                int rep = 0;
+
+                if (foodServed[i].tag == atTable[i].GetComponent<NPCSpriteBehavior>().getMyOrder())
+                {
+                    // order is correct
+                    price = (int)GameManager.prices.correct;
+                    rep = (int)GameManager.popularity.correct;
+                }
+                else
+                {
+                    // order is incorrect
+                    price = (int)GameManager.prices.incorrect;
+                    rep = (int)GameManager.popularity.incorrect;
+                }
+                
                 atTable[i] = null;
                 Destroy(foodServed[i]);
+
                 foodServed[i] = createOnTable(i, CoinPrefab);
                 foodServed[i].transform.localScale = new Vector3(0.1f, 0.1f, 1);
                 foodServed[i].GetComponent<Coin>().myTable = gameObject;
+
+                foodServed[i].GetComponent<Coin>().value[0] = price;
+                foodServed[i].GetComponent<Coin>().value[1] = rep;
+
+
                 return;
             }
         }
