@@ -9,6 +9,7 @@ public class player1control : MonoBehaviour
     public float prepSpeed = 0.05f;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
+    public GameObject PreppedMeatPrefab;
     public bool carrying;
     public bool inRangeKeg;
     public bool inRangeRack;
@@ -84,12 +85,22 @@ public class player1control : MonoBehaviour
         {
             PrepItem();
         }
+
+        if (Prep.GetComponent<prepStation>().holdingItem == true &
+            Prep.GetComponent<prepStation>().prepComplete == true &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == false)
+        {
+            pickupFromSource(gameObject, PreppedMeatPrefab);
+            currentObject = "PreppedMeat";
+        }
     }
 
     void pickupFromSource(GameObject player, GameObject source)
     {
         GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
         created.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        carrying = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -148,6 +159,11 @@ public class player1control : MonoBehaviour
     public void PrepItem()
     {
         pfill = GameObject.Find("PrepFill");
-        pfill.transform.GetComponent<Image>().fillAmount += prepSpeed; 
+        pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
+        if (pfill.transform.GetComponent<Image>().fillAmount >= 1)
+        {
+            Prep.transform.GetComponent<prepStation>().prepComplete = true;
+            pmask.SetActive(false);
+        }
     }
 }

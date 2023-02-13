@@ -8,6 +8,7 @@ public class Table : MonoBehaviour
 
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
+    public GameObject PreppedMeatPrefab;
     public GameObject CoinPrefab;
 
     /// <summary>
@@ -204,6 +205,10 @@ public class Table : MonoBehaviour
             {
                 toCreate = MeatPrefab;
             }
+            else if (player.currentObject == "PreppedMeat")
+            {
+                toCreate = PreppedMeatPrefab;
+            }
 
             int closest = 0;
             float mindist = 4000;
@@ -237,6 +242,10 @@ public class Table : MonoBehaviour
             else if (player.currentObject == "Meat")
             {
                 toCreate = MeatPrefab;
+            }
+            else if (player.currentObject == "PreppedMeat")
+            {
+                toCreate = PreppedMeatPrefab;
             }
 
             int closest = 0;

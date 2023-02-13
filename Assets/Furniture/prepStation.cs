@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class prepStation : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class prepStation : MonoBehaviour
     public GameObject fill;
     public GameObject p1;
     public GameObject p2;
+    public GameObject PreppedMeatPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +29,15 @@ public class prepStation : MonoBehaviour
         {
             mask.SetActive(true);
             p1.transform.GetComponent<player1control>().pfill = fill;
+        }
+
+        if (prepComplete == true)
+        {
+            holdingItem = false;
+            prepComplete = false;
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+            fill.transform.GetComponent<Image>().fillAmount = 0;
+            mask.SetActive(false);
         }
     }
 }
