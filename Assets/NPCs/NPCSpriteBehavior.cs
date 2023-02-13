@@ -8,14 +8,21 @@ public class NPCSpriteBehavior : MonoBehaviour
     public float timeRemaining;
     public int speed = 5;
 
+    // booleans describing the npc's state
     public bool seated = false;
     public bool reachedSeat = false;
     public bool hasFood = false;
     public bool leaving = false;
+    public bool orderAdded = false;
 
+    // information about where the npc is seated
     public Vector3 seatCoords;
     public GameObject mytable;
 
+    // information about the npcs order
+    private string myOrder = "";
+
+    // temporary timer info
     public bool startedTimer = false;
     public float tempTimer = 5;
 
@@ -184,6 +191,13 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         }
 
+        if (reachedSeat && !orderAdded)
+        {
+            OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
+            ot.addOrder(gameObject);
+            orderAdded = true;
+        }
+
         // each time we update, subtract from time we'll wait
         timeRemaining = timeRemaining - Time.unscaledDeltaTime;
     }
@@ -195,5 +209,28 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         // indicate that we're leaving now
         leaving = true;
+    }
+
+    public string getMyOrder()
+    {
+        if (myOrder == "")
+        {
+            createOrder();
+        }
+
+        return myOrder;
+    }
+
+    private void createOrder()
+    {
+        float ord = Random.value;
+        if (ord < .5)
+        {
+            myOrder = "Beer";
+        }
+        else
+        {
+            myOrder = "Meat";
+        }
     }
 }
