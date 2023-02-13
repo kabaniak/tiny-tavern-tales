@@ -58,13 +58,14 @@ public class OrderTracker : MonoBehaviour
                 float xPos = 2;
                 float yPos = 15 - 4 * i;
                 orderDisplay[i]=Instantiate(OrderPrefab, transform.position + new Vector3(xPos, yPos, 0), Quaternion.identity, transform);
+                Color npcColor = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getColor();
                 if (npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getMyOrder() == "Beer")
                 {
-                    orderDisplay[i].GetComponent<Order>().DisplayOrder(BoozePrefab, FacePrefab);
+                    orderDisplay[i].GetComponent<Order>().DisplayOrder(BoozePrefab, FacePrefab, npcColor);
                 }
                 else
                 {
-                    orderDisplay[i].GetComponent<Order>().DisplayOrder(MeatPrefab, FacePrefab);
+                    orderDisplay[i].GetComponent<Order>().DisplayOrder(MeatPrefab, FacePrefab, npcColor);
                 }
             }
         }
@@ -83,6 +84,10 @@ public class OrderTracker : MonoBehaviour
 
     private void removeOrder(int index)
     {
+
+        npcOrderInfo[index] = null;
+        Destroy(orderDisplay[index]);
+        orderDisplay[index] = null;
         for (int i = index + 1; i< npcOrderInfo.Length - 1; i++)
         {
             npcOrderInfo[i - 1] = npcOrderInfo[i];
@@ -90,8 +95,6 @@ public class OrderTracker : MonoBehaviour
             orderDisplay[i] = null;
         }
 
-        npcOrderInfo[7] = null;
-        orderDisplay[7] = null;
     }
 
     private void sortByPatience()
@@ -118,7 +121,11 @@ public class OrderTracker : MonoBehaviour
                         orderDisplay[j + 1] = null;
                     }
                 }
-                
+                if (npcOrderInfo[j + 1] == null)
+                {
+                    continue;
+                }
+
                 NPCSpriteBehavior one = npcOrderInfo[j].GetComponent<NPCSpriteBehavior>();
                 NPCSpriteBehavior two = npcOrderInfo[j + 1].GetComponent<NPCSpriteBehavior>();
                 if (one.timeRemaining > two.timeRemaining)

@@ -31,6 +31,10 @@ public class NPCSpriteBehavior : MonoBehaviour
     {
         // the amount of time this npc will wait for
         timeRemaining = 40;
+        spriteRender = GetComponent<SpriteRenderer>();
+
+        spriteRender.color = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
+
     }
 
     // Update is called once per frame
@@ -200,6 +204,11 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         // each time we update, subtract from time we'll wait
         timeRemaining = timeRemaining - Time.unscaledDeltaTime;
+    }
+
+    public Color getColor()
+    {
+        return spriteRender.color;
     }
 
     void leaveTable()

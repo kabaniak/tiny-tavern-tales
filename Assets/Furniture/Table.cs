@@ -8,6 +8,7 @@ public class Table : MonoBehaviour
 
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
+    public GameObject CoinPrefab;
 
     /// <summary>
     /// Array of the NPCs seated at the table
