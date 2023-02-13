@@ -131,6 +131,9 @@ public class player1control : MonoBehaviour
 
     public void PrepItem()
     {
+        if (Prep.GetComponent<prepStation>().holdingItem == true & Prep.GetComponent<prepStation>().prepComplete == false)
+        {
 
+        }
     }
 }
