@@ -47,7 +47,7 @@ public class OrderTracker : MonoBehaviour
         }
 
         // sort by how much patience is left (come back)
-        //sortByPatience();
+        sortByPatience();
 
         // display orders
         for (int i = 0; i < npcOrderInfo.Length; i++)
@@ -88,12 +88,14 @@ public class OrderTracker : MonoBehaviour
         npcOrderInfo[index] = null;
         Destroy(orderDisplay[index]);
         orderDisplay[index] = null;
-        for (int i = index + 1; i< npcOrderInfo.Length - 1; i++)
+        for (int i = index + 1; i< npcOrderInfo.Length; i++)
         {
             npcOrderInfo[i - 1] = npcOrderInfo[i];
             Destroy(orderDisplay[i]);
             orderDisplay[i] = null;
         }
+
+        npcOrderInfo[7] = null;
 
     }
 
