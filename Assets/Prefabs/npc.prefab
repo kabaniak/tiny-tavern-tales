@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f1d2551f1195f1b4cb5d97749150ae20, type: 3}
   m_Color: {r: 0.735849, g: 0.72613025, b: 0.72613025, a: 0.6156863}
   m_FlipX: 0
@@ -95,7 +95,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
 --- !u!61 &-3437706608764612575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   reachedSeat: 0
   hasFood: 0
   leaving: 0
+  orderAdded: 0
   seatCoords: {x: 0, y: 0, z: 0}
   mytable: {fileID: 0}
   startedTimer: 0

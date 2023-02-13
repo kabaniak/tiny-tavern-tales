@@ -13,7 +13,7 @@ public class NPCGenerator : MonoBehaviour
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    public float SpawnInterval = 2;
+    public float SpawnInterval = 5;
 
     public float SpawnTime = 0;
 
