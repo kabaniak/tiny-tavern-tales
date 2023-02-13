@@ -73,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: f5ef9d727685f374ba9fb19557f4d05a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,7 +95,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 2
 --- !u!61 &5523879856289242542
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,3 +134,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d851b2d81c5be438e7518387107699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 11
+  BoozePrefab: {fileID: 0}
+  MeatPrefab: {fileID: 0}
+  carrying: 0
+  inRangeKeg: 0
+  inRangeRack: 0
+  inRangeDog: 0
+  inRangePrep: 0
+  inRangeHeat: 0
+  currentObject: 
+  Prep: {fileID: 0}
+  canServe: 0
+  servable: {fileID: 0}

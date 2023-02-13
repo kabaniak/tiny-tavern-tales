@@ -61,7 +61,8 @@ public class player2control : MonoBehaviour
 
     void pickupFromSource(GameObject player, GameObject source)
     {
-        Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
+        GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
+        created.GetComponent<SpriteRenderer>().sortingOrder = 3;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

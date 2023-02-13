@@ -25,7 +25,7 @@ public class Table : MonoBehaviour
     {
         for (int i = 0; i< 4; i++)
         {
-            if (foodServed[i] != null && atTable[i] != null)
+            if (foodServed[i] != null && atTable[i] != null && atTable[i].GetComponent<Coin>() == null)
             {
                 atTable[i].GetComponent<NPCSpriteBehavior>().hasFood = true;
             }
@@ -71,7 +71,9 @@ public class Table : MonoBehaviour
             {
                 atTable[i] = null;
                 Destroy(foodServed[i]);
-                foodServed[i] = null;
+                foodServed[i] = createOnTable(i, CoinPrefab);
+                foodServed[i].transform.localScale = new Vector3(0.1f, 0.1f, 1);
+                foodServed[i].GetComponent<Coin>().myTable = gameObject;
                 return;
             }
         }
@@ -103,6 +105,27 @@ public class Table : MonoBehaviour
             }
         }
         return new Vector3(-31, 1, 0);
+    }
+
+    public Vector3 getSeatCoordsByInd(int i)
+    {
+        float xCoord = gameObject.transform.position.x;
+        if (i % 2 == 0)
+        {
+            xCoord += (i - 1) * 5;
+        }
+        float yCoord = gameObject.transform.position.y;
+        yCoord += 2;
+        if (i % 2 != 0)
+        {
+            yCoord += (i - 2) * 5;
+            if (i == 3)
+            {
+                yCoord -= 2;
+            }
+        }
+
+        return new Vector3(xCoord, yCoord, 0);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -160,31 +183,25 @@ public class Table : MonoBehaviour
                 toCreate = MeatPrefab;
             }
 
-            // seat 0
-            if (player.transform.position.x < transform.position.x - 1.3)
+            int closest = 0;
+            float mindist = 4000;
+
+            // figure out seat we're closest too
+            for (int i = 0; i< 4; i++)
             {
-                foodServed[0] = createOnTable(0, toCreate);
-                player.FeedtheDog();
+                Vector3 seatPos = getSeatCoordsByInd(i);
+                float dist = Vector3.Distance(seatPos, o.transform.position);
+
+                if(dist <= mindist)
+                {
+                    closest = i;
+                    mindist = dist;
+                }
+                
             }
-            // seat 1
-            else if (player.transform.position.y < transform.position.y - 1.3)
-            {
-                foodServed[1] = createOnTable(1, toCreate);
-                foodServed[1].GetComponent<Renderer>().sortingOrder = 0;
-                player.FeedtheDog();
-            }
-            // seat 2
-            else if (player.transform.position.x > transform.position.x + 1.3)
-            {
-                foodServed[2] = createOnTable(2, toCreate);
-                player.FeedtheDog();
-            }
-            // seat 3
-            else if (player.transform.position.y > transform.position.y + 1.3)
-            {
-                foodServed[3] = createOnTable(3, toCreate);
-                player.FeedtheDog();
-            }
+               
+            foodServed[closest] = createOnTable(closest, toCreate);
+            player.FeedtheDog();
         }
         else if(o.tag == "Player2")
         {
@@ -200,31 +217,25 @@ public class Table : MonoBehaviour
                 toCreate = MeatPrefab;
             }
 
-            // seat 0
-            if (player.transform.position.x < transform.position.x - 1.3)
+            int closest = 0;
+            float mindist = 4000;
+
+            // figure out seat we're closest too
+            for (int i = 0; i < 4; i++)
             {
-                foodServed[0] = createOnTable(0, toCreate);
-                player.FeedtheDog();
+                Vector3 seatPos = getSeatCoordsByInd(i);
+                float dist = Vector3.Distance(seatPos, o.transform.position);
+
+                if (dist <= mindist)
+                {
+                    closest = i;
+                    mindist = dist;
+                }
+
             }
-            // seat 1
-            else if (player.transform.position.y < transform.position.y - 1.3)
-            {
-                foodServed[1] = createOnTable(1, toCreate);
-                foodServed[1].GetComponent<Renderer>().sortingOrder = 0;
-                player.FeedtheDog();
-            }
-            // seat 2
-            else if (player.transform.position.x > transform.position.x + 1.3)
-            {
-                foodServed[2] = createOnTable(2, toCreate);
-                player.FeedtheDog();
-            }
-            // seat 3
-            else if (player.transform.position.y > transform.position.y + 1.3)
-            {
-                foodServed[3] = createOnTable(3, toCreate);
-                player.FeedtheDog();
-            }
+
+            foodServed[closest] = createOnTable(closest, toCreate);
+            player.FeedtheDog();
         }
 
         return false;
@@ -248,5 +259,17 @@ public class Table : MonoBehaviour
         GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
         thing.transform.localScale = new Vector3(3, 3, 1);
         return thing;
+    }
+
+    public void removeCoin(GameObject coin)
+    {
+        for (int i=0; i< 4; i++)
+        {
+            if( foodServed[i] == coin)
+            {
+                foodServed[i] = null;
+                return;
+            }
+        }
     }
 }
