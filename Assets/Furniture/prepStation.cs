@@ -15,16 +15,15 @@ public class prepStation : MonoBehaviour
     {
         mask = GameObject.Find("Mask");
         fill = GameObject.Find("Fill");
-        mask.GetComponent<Renderer>().enabled = false;
+        mask.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if (holdingItem == true)
-        //{
-        //    gameObject.transform.GetChild(0).GetComponent<Renderer>().enabled = true;
-        //    gameObject.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().enabled = true;
-        //}
+        if (holdingItem == true)
+        {
+            mask.SetActive(true);
+        }
     }
 }
