@@ -6,14 +6,16 @@ public class prepStation : MonoBehaviour
 {
     public bool prepComplete;
     public bool holdingItem;
-    //public GameObject progBar;
-    //public GameObject progress;
+    public GameObject mask;
+    public GameObject fill;
+    private float fillSpeed = 10f;
 
     // Start is called before the first frame update
     void Start()
     {
-        //progBar = GameObject.Find("ProgressBar");
-        //progress = GameObject.Find("Progress");
+        mask = GameObject.Find("Mask");
+        fill = GameObject.Find("Fill");
+        mask.GetComponent<Renderer>().enabled = false;
     }
 
     // Update is called once per frame
