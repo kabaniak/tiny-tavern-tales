@@ -67,6 +67,8 @@ public class player1control : MonoBehaviour
         {
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
+            Prep.GetComponent<prepStation>().holdingItem = true;
+            Prep.transform.GetChild(0).GetChild(0).transform.localScale = new Vector3(0.5f, 0f, 0f);
         }
     }
 
