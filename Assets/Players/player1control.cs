@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player1control : MonoBehaviour
 {
     public float speed = 11;
+    public float prepSpeed = 0.1f;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
     public bool carrying;
@@ -17,6 +19,7 @@ public class player1control : MonoBehaviour
     public GameObject Prep;
     public bool canServe;
     public Table servable;
+    public GameObject pfill;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +31,7 @@ public class player1control : MonoBehaviour
         inRangeHeat = false;
         inRangePrep = false;
         Prep = GameObject.FindWithTag("Prep");
+        pfill = GameObject.Find("PrepFill");
     }
 
     // Update is called once per frame
@@ -35,9 +39,9 @@ public class player1control : MonoBehaviour
     {
         var hmove1 = Input.GetAxis("Horizontal");
         var vmove1 = Input.GetAxis("Vertical");
-        
+
         transform.position += new Vector3(hmove1, vmove1, 0) * speed * Time.deltaTime;
-        
+
 
         if (inRangeKeg == true & Input.GetKeyDown(KeyCode.E) & carrying == false)
         {
@@ -68,6 +72,14 @@ public class player1control : MonoBehaviour
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
+        }
+
+        if (Prep.GetComponent<prepStation>().holdingItem == true &
+            Prep.GetComponent<prepStation>().prepComplete == false &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == false)
+        {
+            PrepItem();
         }
     }
 
@@ -132,9 +144,6 @@ public class player1control : MonoBehaviour
 
     public void PrepItem()
     {
-        if (Prep.GetComponent<prepStation>().holdingItem == true & Prep.GetComponent<prepStation>().prepComplete == false)
-        {
-
-        }
+        pfill.transform.GetComponent<Image>().fillAmount += 0.1f; 
     }
 }
