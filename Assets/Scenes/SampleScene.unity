@@ -135,6 +135,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1435448513}
     - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: pmask
+      value: 
+      objectReference: {fileID: 1468095095}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: MeatPrefab
       value: 
       objectReference: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
