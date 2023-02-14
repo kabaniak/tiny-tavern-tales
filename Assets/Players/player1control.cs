@@ -43,34 +43,44 @@ public class player1control : MonoBehaviour
     {
         var hmove1 = Input.GetAxis("Horizontal");
         var vmove1 = Input.GetAxis("Vertical");
+        transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove1, vmove1) * speed * Time.deltaTime;
 
-        transform.position += new Vector3(hmove1, vmove1, 0) * speed * Time.deltaTime;
-
-        if (inRangeKeg == true & Input.GetKeyDown(KeyCode.E) & carrying == false)
+        if (inRangeKeg == true &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == false)
         {
             pickupFromSource(gameObject, BoozePrefab);
             carrying = true;
             currentObject = "Booze";
         }
 
-        if (inRangeRack == true & Input.GetKeyDown(KeyCode.E) & carrying == false)
+        if (inRangeRack == true &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == false)
         {
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
         }
 
-        if (canServe & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        if (canServe & Input.GetKeyDown(KeyCode.E) &
+            carrying == true)
         {
             servable.serveSeat(gameObject);
         }
 
-        if (inRangeDog == true & Input.GetKeyDown(KeyCode.E) & carrying == true)
+        if (inRangeDog == true &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == true)
         {
             FeedtheDog();
         }
 
-        if (inRangePrep == true & Input.GetKeyDown(KeyCode.E) & carrying == true & currentObject == "Meat")
+        if (inRangePrep == true &
+            Input.GetKeyDown(KeyCode.E) &
+            carrying == true &
+            currentObject == "Meat" &
+            Prep.GetComponent<prepStation>().holdingItem == false)
         {
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();

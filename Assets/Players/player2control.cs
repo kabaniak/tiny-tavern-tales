@@ -31,7 +31,7 @@ public class player2control : MonoBehaviour
         var hmove2 = Input.GetAxis("Horizontal2");
         var vmove2 = Input.GetAxis("Vertical2");
         
-        transform.position += new Vector3(hmove2, vmove2, 0) * speed * Time.deltaTime;
+        transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove2, vmove2) * speed * Time.deltaTime;
         
 
         if (inRangeKeg == true & Input.GetKeyDown(KeyCode.Slash) & carrying == false)
