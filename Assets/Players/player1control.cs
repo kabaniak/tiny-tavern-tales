@@ -53,12 +53,13 @@ public class player1control : MonoBehaviour
         inRangeDog = false;
         inRangeHeat = false;
         inRangePrep = false;
+        cmask = GameObject.Find("CookMask");
+        cfill = GameObject.Find("CookFill");
         Prep = GameObject.FindWithTag("Prep");
         Cook = GameObject.FindWithTag("Heat");
         pmask = GameObject.Find("PrepMask");
         pfill = GameObject.Find("PrepFill");
-        cmask = GameObject.Find("CookMask");
-        cfill = GameObject.Find("CookFill");
+
         pmask.SetActive(false);
         cmask.SetActive(false);
     }
@@ -113,6 +114,7 @@ public class player1control : MonoBehaviour
             currentObject == "Meat" &
             Prep.GetComponent<prepStation>().holdingItem == false)
         {
+            pmask.SetActive(true);
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
@@ -127,7 +129,6 @@ public class player1control : MonoBehaviour
             Input.GetKeyDown(KeyCode.E) &
             carrying == false)
         {
-            pmask.SetActive(true);
             PrepItem();
         }
 
@@ -148,6 +149,7 @@ public class player1control : MonoBehaviour
             currentObject == "PreppedMeat" &
             Cook.GetComponent<cookStation>().holdingItem == false)
         {
+            cmask.SetActive(true);
             PlaceOnSource(Cook, PreppedMeatPrefab);
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;

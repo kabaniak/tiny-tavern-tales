@@ -15,8 +15,8 @@ public class cookStation : MonoBehaviour
     public bool holdingItem;
     public bool doomsday;
     public bool stop;
-    public GameObject mask;
-    public GameObject fill;
+    private GameObject fill;
+    private GameObject mask;
     public GameObject p1;
     public GameObject p2;
     public GameObject PreppedMeatPrefab;
@@ -28,8 +28,8 @@ public class cookStation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mask = GameObject.Find("CookMask");
-        fill = GameObject.Find("CookFill");
+        mask = GameObject.FindWithTag("CookMask");
+        fill = GameObject.FindWithTag("CookFill");
         p1 = GameObject.Find("p1");
         p2 = GameObject.Find("p2");
         holdingItem = false;
@@ -46,7 +46,8 @@ public class cookStation : MonoBehaviour
     {
         if (holdingItem == true)
         {
-            mask.SetActive(true);
+            mask = GameObject.FindWithTag("CookMask");
+            fill = GameObject.FindWithTag("CookFill");
         }
 
         if (holdingItem == true & cooked == false & burnt == false)
