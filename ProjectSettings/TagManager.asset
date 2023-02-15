@@ -17,6 +17,8 @@ TagManager:
   - Coin
   - Money Stat
   - Fame Stat
+  - CookMask
+  - CookFill
   layers:
   - Default
   - TransparentFX
