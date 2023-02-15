@@ -82,9 +82,18 @@ public class Table : MonoBehaviour
 
                 if (foodTypes[i] == atTable[i].GetComponent<NPCSpriteBehavior>().getMyOrder())
                 {
-                    // order is correct
-                    price = (int)GameManager.prices.correct;
-                    rep = (int)GameManager.popularity.correct;
+                    if(foodTypes[i] == "Booze")
+                    {
+                        // order is correct beer
+                        price = (int)GameManager.prices.booze_correct;
+                        rep = (int)GameManager.popularity.correct;
+                    }
+                    else
+                    {
+                        // order is correct meat
+                        price = (int)GameManager.prices.meat_correct;
+                        rep = (int)GameManager.popularity.correct;
+                    }
                 }
                 else
                 {

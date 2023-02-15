@@ -12,7 +12,8 @@ public class GameManager : MonoBehaviour
 
     public enum prices
     {
-        correct = 5,
+        meat_correct = 6,
+        booze_correct = 3,
         incorrect = 0
     }
 
