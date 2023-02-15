@@ -10,6 +10,8 @@ public class Table : MonoBehaviour
     public GameObject MeatPrefab;
     public GameObject PreppedMeatPrefab;
     public GameObject CoinPrefab;
+    public GameObject CookedMeatPrefab;
+    public GameObject BurntMeatPrefab;
 
     /// <summary>
     /// Array of the NPCs seated at the table
@@ -209,6 +211,14 @@ public class Table : MonoBehaviour
             {
                 toCreate = PreppedMeatPrefab;
             }
+            else if (player.currentObject == "CookedMeat")
+            {
+                toCreate = CookedMeatPrefab;
+            }
+            else if (player.currentObject == "BurntMeat")
+            {
+                toCreate = BurntMeatPrefab;
+            }
 
             int closest = 0;
             float mindist = 4000;
@@ -246,6 +256,14 @@ public class Table : MonoBehaviour
             else if (player.currentObject == "PreppedMeat")
             {
                 toCreate = PreppedMeatPrefab;
+            }
+            else if (player.currentObject == "CookedMeat")
+            {
+                toCreate = CookedMeatPrefab;
+            }
+            else if (player.currentObject == "BurntMeat")
+            {
+                toCreate = BurntMeatPrefab;
             }
 
             int closest = 0;
