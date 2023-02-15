@@ -189,7 +189,6 @@ public class Table : MonoBehaviour
         {
             // activate ability to serve a seat
             player1control player = collision.gameObject.GetComponent<player1control>();
-
             player.canServe = true;
             player.servable = gameObject.GetComponent<Table>();
         }
@@ -197,7 +196,6 @@ public class Table : MonoBehaviour
         {
             // activate ability to serve a seat
             player2control player = collision.gameObject.GetComponent<player2control>();
-
             player.canServe = true;
             player.servable = gameObject.GetComponent<Table>();
         }
