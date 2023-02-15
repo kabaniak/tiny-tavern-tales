@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class cookStation : MonoBehaviour
 {
     private string cookState;
+    private float gradientAdjust = 1.2f;
     private float cookSpeed = 0.15f;
     private float overcooked;
     private float burnTime;
@@ -61,6 +62,17 @@ public class cookStation : MonoBehaviour
 
         if (holdingItem == true & cooked)
         {
+            if (Time.time - overcooked < burnTime)
+            {
+                fill.transform.GetComponent<Image>().color += 
+                    new Color(Time.deltaTime * cookSpeed * gradientAdjust, -Time.deltaTime * cookSpeed * gradientAdjust, 0, 1);
+                gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color -=
+                    new Color(Time.deltaTime * cookSpeed * gradientAdjust,
+                    Time.deltaTime * cookSpeed * gradientAdjust,
+                    Time.deltaTime * cookSpeed * gradientAdjust, 
+                    0);
+            } 
+
             if (Time.time - overcooked >= burnTime)
             {
                 cooked = false;
