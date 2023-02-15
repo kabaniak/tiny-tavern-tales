@@ -7,7 +7,7 @@ public class player2control : MonoBehaviour
     public float speed = 11;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
-    private bool carrying;
+    public bool carrying;
     private bool inRangeKeg;
     private bool inRangeRack;
     public bool inRangeDog;
