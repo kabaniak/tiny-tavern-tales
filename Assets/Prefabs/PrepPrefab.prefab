@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8607951512993012590}
   m_Layer: 0
   m_Name: PrepPrefab
-  m_TagString: Untagged
+  m_TagString: Prep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,3 +144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86ae88572b8949745a0ddf7b35931a39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prepComplete: 0
+  holdingItem: 0
+  mask: {fileID: 0}
+  fill: {fileID: 0}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+  PreppedMeatPrefab: {fileID: 0}

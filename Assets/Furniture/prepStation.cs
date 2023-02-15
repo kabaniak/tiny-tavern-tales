@@ -20,6 +20,7 @@ public class prepStation : MonoBehaviour
         fill = GameObject.Find("PrepFill");
         p1 = GameObject.Find("p1");
         p2 = GameObject.Find("p2");
+        holdingItem = false;
     }
 
     // Update is called once per frame

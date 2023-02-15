@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2314831841273926875}
   m_Layer: 0
   m_Name: HeatPrefab
-  m_TagString: Untagged
+  m_TagString: Heat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
