@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public enum prices
     {
         correct = 5,
-        incorrect = 2
+        incorrect = 0
     }
 
     public enum popularity

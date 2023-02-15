@@ -49,7 +49,7 @@ public class player2control : MonoBehaviour
             currentObject = "Meat";
         }
 
-        if (canServe & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
+        if (canServe & Input.GetKeyDown(KeyCode.Slash))
         {
             servable.serveSeat(gameObject);
         }
@@ -59,7 +59,7 @@ public class player2control : MonoBehaviour
         }
     }
 
-    void pickupFromSource(GameObject player, GameObject source)
+    public void pickupFromSource(GameObject player, GameObject source)
     {
         GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
         created.GetComponent<SpriteRenderer>().sortingOrder = 3;

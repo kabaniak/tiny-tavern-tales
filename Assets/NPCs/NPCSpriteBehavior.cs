@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCSpriteBehavior : MonoBehaviour
 {
     SpriteRenderer spriteRender;
+    Color orig;
     public float timeRemaining;
     public int speed = 5;
 
@@ -14,6 +15,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public bool hasFood = false;
     public bool leaving = false;
     public bool orderAdded = false;
+    public bool angry = false;
 
     // information about where the npc is seated
     public Vector3 seatCoords;
@@ -33,7 +35,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         timeRemaining = 40;
         spriteRender = GetComponent<SpriteRenderer>();
 
-        spriteRender.color = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
+        orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
+        spriteRender.color = orig;
 
     }
 
@@ -93,7 +96,20 @@ public class NPCSpriteBehavior : MonoBehaviour
             // start an eat "timer" before it leaves
             if ( ! startedTimer)
             {
+                // check if food is our correct order
+                string received = mytable.GetComponent<Table>().getFoodServedToNPC(gameObject);
+                if (received != myOrder)
+                {
+                    spriteRender.color = new Color(1, 0, 0, 1.75f);
+                    angry = true;
+                }
+
                 startedTimer = true;
+            }
+
+            if (angry)
+            {
+                spriteRender.color = Color.Lerp(new Color(1, 0, 0, 1.75f), orig, tempTimer / 5.0f);
             }
 
             // if timer has run out it should leave
@@ -103,7 +119,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 leaving = true;
             }
 
-            tempTimer -= Time.unscaledDeltaTime;
+            tempTimer -= Time.fixedDeltaTime;
         }
 
         // if we won't wait anymore
@@ -218,7 +234,14 @@ public class NPCSpriteBehavior : MonoBehaviour
     void leaveTable()
     {
         // leaving should remove me from table
-        mytable.GetComponent<Table>().removeNPC(gameObject);
+        if (angry)
+        {
+            mytable.GetComponent<Table>().removeAngryNPC(gameObject);
+        }
+        else
+        {
+            mytable.GetComponent<Table>().removeNPC(gameObject);
+        }
     }
 
     public string getMyOrder()
@@ -240,7 +263,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         else
         {
-            myOrder = "Meat";
+            myOrder = "CookedMeat";
         }
     }
 }

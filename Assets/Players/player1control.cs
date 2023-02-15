@@ -93,8 +93,7 @@ public class player1control : MonoBehaviour
         }
 
         // Serve Table
-        if (canServe & Input.GetKeyDown(KeyCode.E) &
-            carrying == true)
+        if (canServe & Input.GetKeyDown(KeyCode.E))
         {
             servable.serveSeat(gameObject);
         }
@@ -178,7 +177,7 @@ public class player1control : MonoBehaviour
         }
     }
 
-    void pickupFromSource(GameObject player, GameObject source)
+    public void pickupFromSource(GameObject player, GameObject source)
     {
         GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
         created.GetComponent<SpriteRenderer>().sortingOrder = 3;

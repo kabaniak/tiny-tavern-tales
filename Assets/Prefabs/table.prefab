@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -6314127078025145416}
   - component: {fileID: 7554558924196623631}
   - component: {fileID: -237626599607639925}
-  - component: {fileID: 6003452096075282474}
+  - component: {fileID: 9051054413382485141}
   m_Layer: 0
   m_Name: table
   m_TagString: table
@@ -100,7 +100,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
   MeatPrefab: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
+  PreppedMeatPrefab: {fileID: 6859087964037426725, guid: 091cf5d6a3416664cb66a9746588b0c0, type: 3}
   CoinPrefab: {fileID: 2847433371952488076, guid: fdc0ec3ba1eacd94db50f5818fde1230, type: 3}
+  CookedMeatPrefab: {fileID: 3715560899715520505, guid: f18ab430b8efe8d4cbc15ec16e4a05d3, type: 3}
+  BurntMeatPrefab: {fileID: 2907171010765767753, guid: 3d16f861ac45cf04db8d83748213e1d5, type: 3}
   atTable:
   - {fileID: 0}
   - {fileID: 0}
@@ -111,6 +114,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  foodTypes:
+  - 
+  - 
+  - 
+  - 
 --- !u!50 &7554558924196623631
 Rigidbody2D:
   serializedVersion: 4
@@ -148,8 +156,8 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
---- !u!60 &6003452096075282474
-PolygonCollider2D:
+--- !u!58 &9051054413382485141
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -162,30 +170,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3.76, y: 3.38}
-    newSize: {x: 3.76, y: 3.38}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 2.6419501, y: -1.6850007}
-      - {x: 2.6128478, y: -1.6300005}
-      - {x: 1.8370743, y: -2.4499989}
-      - {x: 0.0000017285347, y: -3.4899998}
-      - {x: -1.7177237, y: -2.6699996}
-      - {x: -2.1354492, y: -2.1800017}
-      - {x: -3, y: -1.3}
-      - {x: -3.7790244, y: 0}
-      - {x: -3, y: 1.3}
-      - {x: -2.1951222, y: 2.235002}
-      - {x: -1.3, y: 3}
-      - {x: 0, y: 3.6}
-      - {x: 1.3, y: 3}
-      - {x: 2.3144736, y: 2.3450022}
-      - {x: 3, y: 1.3}
-      - {x: 3.6596744, y: 0.16500029}
+  serializedVersion: 2
+  m_Radius: 3

@@ -20,6 +20,7 @@ public class Table : MonoBehaviour
 
     /// Array of food on the table
     public GameObject[] foodServed = { null, null, null, null };
+    public string[] foodTypes = { "", "", "", "" };
 
     /// <summary>
     /// nothing for now
@@ -44,7 +45,7 @@ public class Table : MonoBehaviour
     {
         for (int i=0; i< 4; i++)
         {
-            if(atTable[i] == null) { return true; }
+            if(atTable[i] == null && foodServed[i] == null) { return true; }
         }
         return false;
     }
@@ -58,7 +59,7 @@ public class Table : MonoBehaviour
         {
             for (int i = 0; i < 4; i++)
             {
-                if (atTable[i] == null) 
+                if (atTable[i] == null && foodServed[i] == null) 
                 {
                     atTable[i] = npc;
                     return true;
@@ -74,10 +75,10 @@ public class Table : MonoBehaviour
         {
             if (atTable[i] == npc)
             {
-                int price = 0;
-                int rep = 0;
+                int price;
+                int rep;
 
-                if (foodServed[i].tag == atTable[i].GetComponent<NPCSpriteBehavior>().getMyOrder())
+                if (foodTypes[i] == atTable[i].GetComponent<NPCSpriteBehavior>().getMyOrder())
                 {
                     // order is correct
                     price = (int)GameManager.prices.correct;
@@ -91,6 +92,7 @@ public class Table : MonoBehaviour
                 }
                 
                 atTable[i] = null;
+                foodTypes[i] = "";
                 Destroy(foodServed[i]);
 
                 foodServed[i] = createOnTable(i, CoinPrefab);
@@ -106,6 +108,29 @@ public class Table : MonoBehaviour
         }
     }
 
+    public void removeAngryNPC(GameObject npc)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (atTable[i] == npc)
+            {
+                atTable[i] = null;
+                return;
+            }
+        }
+    }
+
+    public string getFoodServedToNPC(GameObject npc)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (atTable[i] == npc)
+            {
+                return foodTypes[i];
+            }
+        }
+        return "";
+    }
     public Vector3 getSeatCoords(GameObject npc)
     {
         for (int i = 0; i < 4; i++)
@@ -195,15 +220,59 @@ public class Table : MonoBehaviour
         }
     }
 
-    public bool serveSeat(GameObject o)
+    public void serveSeat(GameObject o)
     {
+        int closest = 0;
+        float mindist = 4000;
+
+        // figure out seat we're closest too
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 seatPos = getSeatCoordsByInd(i);
+            float dist = Vector3.Distance(seatPos, o.transform.position);
+
+            if (dist <= mindist)
+            {
+                closest = i;
+                mindist = dist;
+            }
+
+        }
+
         if (o.tag == "Player1")
         {
             player1control player = o.GetComponent<player1control>();
 
             GameObject toCreate = BoozePrefab;
             if (player.currentObject == ""){
-                return false;
+                if (foodServed[closest] != null)
+                {
+                    if (foodTypes[closest] == "Meat")
+                    {
+                        player.pickupFromSource(o, MeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "PreppedMeat")
+                    {
+                        player.pickupFromSource(o, PreppedMeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "CookedMeat")
+                    {
+                        player.pickupFromSource(o, CookedMeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "BurntMeat")
+                    {
+                        player.pickupFromSource(o, BurntMeatPrefab);
+                    }
+                    else
+                    {
+                        player.pickupFromSource(o, BoozePrefab);
+                    }
+
+                    Destroy(foodServed[closest]);
+                    foodServed[closest] = null;
+                    foodTypes[closest] = "";
+                    return;
+                }
             }
             else if (player.currentObject == "Meat")
             {
@@ -222,26 +291,10 @@ public class Table : MonoBehaviour
                 toCreate = BurntMeatPrefab;
             }
 
-            int closest = 0;
-            float mindist = 4000;
-
-            // figure out seat we're closest too
-            for (int i = 0; i< 4; i++)
-            {
-                Vector3 seatPos = getSeatCoordsByInd(i);
-                float dist = Vector3.Distance(seatPos, o.transform.position);
-
-                if(dist <= mindist)
-                {
-                    closest = i;
-                    mindist = dist;
-                }
-                
-            }
-
             if (foodServed[closest] == null)
             {
                 foodServed[closest] = createOnTable(closest, toCreate);
+                foodTypes[closest] = player.currentObject;
                 player.FeedtheDog();
             }
         }
@@ -252,7 +305,34 @@ public class Table : MonoBehaviour
             GameObject toCreate = BoozePrefab;
             if (player.currentObject == "")
             {
-                return false;
+                if (foodServed[closest] != null)
+                {
+                    if (foodTypes[closest] == "Meat")
+                    {
+                        player.pickupFromSource(o, MeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "PreppedMeat")
+                    {
+                        player.pickupFromSource(o, PreppedMeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "CookedMeat")
+                    {
+                        player.pickupFromSource(o, CookedMeatPrefab);
+                    }
+                    else if (foodTypes[closest] == "BurntMeat")
+                    {
+                        player.pickupFromSource(o, BurntMeatPrefab);
+                    }
+                    else
+                    {
+                        player.pickupFromSource(o, BoozePrefab);
+                    }
+
+                    Destroy(foodServed[closest]);
+                    foodServed[closest] = null;
+                    foodTypes[closest] = "";
+                    return;
+                }
             }
             else if (player.currentObject == "Meat")
             {
@@ -271,31 +351,13 @@ public class Table : MonoBehaviour
                 toCreate = BurntMeatPrefab;
             }
 
-            int closest = 0;
-            float mindist = 4000;
-
-            // figure out seat we're closest too
-            for (int i = 0; i < 4; i++)
-            {
-                Vector3 seatPos = getSeatCoordsByInd(i);
-                float dist = Vector3.Distance(seatPos, o.transform.position);
-
-                if (dist <= mindist)
-                {
-                    closest = i;
-                    mindist = dist;
-                }
-
-            }
-
             if (foodServed[closest] == null)
             {
                 foodServed[closest] = createOnTable(closest, toCreate);
+                foodTypes[closest] = player.currentObject;
                 player.FeedtheDog();
             }
         }
-
-        return false;
     }
 
     public GameObject createOnTable(int seat, GameObject source)
