@@ -285,6 +285,8 @@ public class Table : MonoBehaviour
                     Destroy(foodServed[closest]);
                     foodServed[closest] = null;
                     foodTypes[closest] = "";
+                    player.canServe = true;
+                    player.servable = this;
                     return;
                 }
             }
@@ -349,6 +351,8 @@ public class Table : MonoBehaviour
 
                     Destroy(foodServed[closest]);
                     foodServed[closest] = null;
+                    player.canServe = true;
+                    player.servable = this;
                     foodTypes[closest] = "";
                     return;
                 }
