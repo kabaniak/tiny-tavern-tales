@@ -21,6 +21,7 @@ public class Table : MonoBehaviour
     /// Array of food on the table
     public GameObject[] foodServed = { null, null, null, null };
     public string[] foodTypes = { "", "", "", "" };
+    private bool[] locked = { false, false, false, false };
 
     /// <summary>
     /// nothing for now
@@ -34,6 +35,7 @@ public class Table : MonoBehaviour
             {
                 //if(foodServed[i].tag == "Meat" || foodServed[i].tag == "")
                 atTable[i].GetComponent<NPCSpriteBehavior>().hasFood = true;
+                locked[i] = true;
             }
         }
     }
@@ -115,6 +117,7 @@ public class Table : MonoBehaviour
             if (atTable[i] == npc)
             {
                 atTable[i] = null;
+                locked[i] = false;
                 return;
             }
         }
@@ -245,7 +248,7 @@ public class Table : MonoBehaviour
 
             GameObject toCreate = BoozePrefab;
             if (player.currentObject == ""){
-                if (foodServed[closest] != null)
+                if (foodServed[closest] != null && !locked[closest])
                 {
                     if (foodTypes[closest] == "Meat")
                     {
@@ -305,7 +308,7 @@ public class Table : MonoBehaviour
             GameObject toCreate = BoozePrefab;
             if (player.currentObject == "")
             {
-                if (foodServed[closest] != null)
+                if (foodServed[closest] != null && !locked[closest])
                 {
                     if (foodTypes[closest] == "Meat")
                     {
@@ -388,6 +391,7 @@ public class Table : MonoBehaviour
             {
                 Destroy(foodServed[i]);
                 foodServed[i] = null;
+                locked[i] = false;
                 return;
             }
         }
