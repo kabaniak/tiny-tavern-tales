@@ -20,11 +20,9 @@ public class Coin : MonoBehaviour
     {
         if(lifespan <= 0)
         {
-            myTable.GetComponent<Table>().removeCoin(gameObject);
-
             GameObject.FindObjectOfType<GameManager>().orderCompleted(value[0], value[1]);
 
-            Destroy(gameObject);
+            myTable.GetComponent<Table>().removeCoin(gameObject);
         }
 
         lifespan -= 0.25f;

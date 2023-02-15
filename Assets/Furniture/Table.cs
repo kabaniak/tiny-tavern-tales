@@ -28,8 +28,10 @@ public class Table : MonoBehaviour
     {
         for (int i = 0; i< 4; i++)
         {
-            if (foodServed[i] != null && atTable[i] != null && atTable[i].GetComponent<Coin>() == null)
+            GameObject temp = foodServed[i];
+            if (foodServed[i] != null && atTable[i] != null && foodServed[i].GetComponent<Coin>() == null)
             {
+                //if(foodServed[i].tag == "Meat" || foodServed[i].tag == "")
                 atTable[i].GetComponent<NPCSpriteBehavior>().hasFood = true;
             }
         }
@@ -316,6 +318,7 @@ public class Table : MonoBehaviour
         {
             if( foodServed[i] == coin)
             {
+                Destroy(foodServed[i]);
                 foodServed[i] = null;
                 return;
             }

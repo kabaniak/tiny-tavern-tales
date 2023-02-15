@@ -43,8 +43,12 @@ public class NPCSpriteBehavior : MonoBehaviour
         // check if we're on our way out
         if (leaving)
         {
+            if(transform.position.x < -31.1)
+            {
+                Destroy(gameObject);
+            }
             // if we're at door level just head out
-            if (transform.position.y < 2 && transform.position.y > 1)
+            else if (transform.position.y < 2 && transform.position.y > 1)
             {
                 transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
             }
@@ -82,10 +86,9 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
         }
 
-
         // if it's reached it's seat
         // and if we've been served our food
-        if (reachedSeat && hasFood)
+        else if (reachedSeat && hasFood)
         {
             // start an eat "timer" before it leaves
             if ( ! startedTimer)
@@ -94,23 +97,24 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
 
             // if timer has run out it should leave
-            if (tempTimer < 0)
+            if (tempTimer < 0 && !leaving)
             {
                 leaveTable();
+                leaving = true;
             }
 
             tempTimer -= Time.unscaledDeltaTime;
         }
 
         // if we won't wait anymore
-        if (timeRemaining <= 0)
+        else if (timeRemaining <= 0)
         {
             // should leave (will do later)
             
         }
 
         // if not seated yet
-        if (!seated)
+        else if (!seated)
         {
             // try to find a table to go to
             GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
@@ -131,7 +135,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
 
         // if not at table yet
-        if (seated && !reachedSeat)
+        else if (seated && !reachedSeat)
         {
             // head to seat coordinates
             if (transform.position.x < -25.7) {
@@ -195,7 +199,7 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         }
 
-        if (reachedSeat && !orderAdded)
+        else if (reachedSeat && !orderAdded)
         {
             OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
             ot.addOrder(gameObject);
@@ -203,7 +207,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
 
         // each time we update, subtract from time we'll wait
-        timeRemaining = timeRemaining - Time.unscaledDeltaTime;
+        //timeRemaining = timeRemaining - Time.unscaledDeltaTime;
     }
 
     public Color getColor()
@@ -215,9 +219,6 @@ public class NPCSpriteBehavior : MonoBehaviour
     {
         // leaving should remove me from table
         mytable.GetComponent<Table>().removeNPC(gameObject);
-
-        // indicate that we're leaving now
-        leaving = true;
     }
 
     public string getMyOrder()

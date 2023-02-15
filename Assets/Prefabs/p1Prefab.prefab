@@ -134,16 +134,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d851b2d81c5be438e7518387107699, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 11
+  speed: 15
+  prepSpeed: 0.05
   BoozePrefab: {fileID: 0}
   MeatPrefab: {fileID: 0}
+  PreppedMeatPrefab: {fileID: 0}
+  CookedMeatPrefab: {fileID: 0}
+  BurntMeatPrefab: {fileID: 0}
   carrying: 0
   inRangeKeg: 0
   inRangeRack: 0
   inRangeDog: 0
   inRangePrep: 0
   inRangeHeat: 0
+  canServe: 0
   currentObject: 
   Prep: {fileID: 0}
-  canServe: 0
+  Cook: {fileID: 0}
   servable: {fileID: 0}
+  pfill: {fileID: 0}
+  pmask: {fileID: 0}
+  cfill: {fileID: 0}
+  cmask: {fileID: 0}

@@ -134,7 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efeb6ab28cc79bd4487b093a53709f1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   BoozePrefab: {fileID: 4290813477325698048, guid: dd009d6b73084f4429654fff979f3e2d, type: 3}
   MeatPrefab: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
   inRangeDog: 0
