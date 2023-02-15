@@ -223,7 +223,7 @@ public class Table : MonoBehaviour
         }
     }
 
-    public void serveSeat(GameObject o)
+    public int getClosestInd(GameObject o)
     {
         int closest = 0;
         float mindist = 4000;
@@ -241,6 +241,12 @@ public class Table : MonoBehaviour
             }
 
         }
+        return closest;
+    }
+
+    public void serveSeat(GameObject o)
+    {
+        int closest = getClosestInd(o);
 
         if (o.tag == "Player1")
         {
@@ -253,22 +259,27 @@ public class Table : MonoBehaviour
                     if (foodTypes[closest] == "Meat")
                     {
                         player.pickupFromSource(o, MeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "PreppedMeat")
                     {
                         player.pickupFromSource(o, PreppedMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "CookedMeat")
                     {
                         player.pickupFromSource(o, CookedMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "BurntMeat")
                     {
                         player.pickupFromSource(o, BurntMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else
                     {
                         player.pickupFromSource(o, BoozePrefab);
+                        player.currentObject = foodTypes[closest];
                     }
 
                     Destroy(foodServed[closest]);
@@ -313,22 +324,27 @@ public class Table : MonoBehaviour
                     if (foodTypes[closest] == "Meat")
                     {
                         player.pickupFromSource(o, MeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "PreppedMeat")
                     {
                         player.pickupFromSource(o, PreppedMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "CookedMeat")
                     {
                         player.pickupFromSource(o, CookedMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "BurntMeat")
                     {
                         player.pickupFromSource(o, BurntMeatPrefab);
+                        player.currentObject = foodTypes[closest];
                     }
                     else
                     {
                         player.pickupFromSource(o, BoozePrefab);
+                        player.currentObject = foodTypes[closest];
                     }
 
                     Destroy(foodServed[closest]);
