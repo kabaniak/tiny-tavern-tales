@@ -238,9 +238,12 @@ public class Table : MonoBehaviour
                 }
                 
             }
-               
-            foodServed[closest] = createOnTable(closest, toCreate);
-            player.FeedtheDog();
+
+            if (foodServed[closest] == null)
+            {
+                foodServed[closest] = createOnTable(closest, toCreate);
+                player.FeedtheDog();
+            }
         }
         else if(o.tag == "Player2")
         {
@@ -285,8 +288,11 @@ public class Table : MonoBehaviour
 
             }
 
-            foodServed[closest] = createOnTable(closest, toCreate);
-            player.FeedtheDog();
+            if (foodServed[closest] == null)
+            {
+                foodServed[closest] = createOnTable(closest, toCreate);
+                player.FeedtheDog();
+            }
         }
 
         return false;
