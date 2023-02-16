@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6411241974014753303, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3779056280338482800, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -75,5 +79,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CookedMeatPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6411241974014753303, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}

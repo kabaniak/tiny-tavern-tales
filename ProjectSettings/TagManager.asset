@@ -19,6 +19,8 @@ TagManager:
   - Fame Stat
   - CookMask
   - CookFill
+  - PrepMask
+  - PrepFill
   layers:
   - Default
   - TransparentFX

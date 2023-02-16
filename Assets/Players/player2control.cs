@@ -1,61 +1,172 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class player2control : MonoBehaviour
-{
+{ 
+    // floats
     public float speed = 11;
+    public float prepSpeed = 0.05f;
+
+    // prefabs
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
-    public bool carrying;
-    private bool inRangeKeg;
-    private bool inRangeRack;
-    public bool inRangeDog;
-    public string currentObject = "";
+    public GameObject PreppedMeatPrefab;
+    public GameObject CookedMeatPrefab;
+    public GameObject BurntMeatPrefab;
 
+    // bools (optimize later)
+    public bool carrying;
+    public bool inRangeKeg;
+    public bool inRangeRack;
+    public bool inRangeDog;
+    public bool inRangePrep;
+    public bool inRangeHeat;
     public bool canServe;
+
+    // holders
+    public string currentObject = "";
+    private bool holdKeg;
+    private bool holdRack;
+    private bool holdDog;
+    private bool holdPrep;
+    private bool holdHeat;
+
+    // interatables
+    public GameObject Prep;
+    public GameObject Cook;
     public Table servable;
+
+    // ui
+    public GameObject pfill;
+    public GameObject pmask;
+    public GameObject cfill;
+    public GameObject cmask;
 
     // Start is called before the first frame update
     void Start()
     {
         carrying = false;
+        inRangeKeg = false;
         inRangeRack = false;
         inRangeDog = false;
+        inRangeHeat = false;
+        inRangePrep = false;
+        Prep = GameObject.FindWithTag("Prep");
+        Cook = GameObject.FindWithTag("Heat");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Move Player
         var hmove2 = Input.GetAxis("Horizontal2");
         var vmove2 = Input.GetAxis("Vertical2");
-        
         transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove2, vmove2) * speed * Time.deltaTime;
-        
 
-        if (inRangeKeg == true & Input.GetKeyDown(KeyCode.Slash) & carrying == false)
+        // Pick up beer from keg
+        if (inRangeKeg == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == false)
         {
             pickupFromSource(gameObject, BoozePrefab);
             carrying = true;
             currentObject = "Booze";
         }
 
-
-        if (inRangeRack == true & Input.GetKeyDown(KeyCode.Slash) & carrying == false)
+        // Get meat from rack
+        if (inRangeRack == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == false)
         {
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
         }
 
+        // Serve Table
         if (canServe & Input.GetKeyDown(KeyCode.Slash))
         {
             servable.serveSeat(gameObject);
         }
-        if (inRangeDog == true & Input.GetKeyDown(KeyCode.Slash) & carrying == true)
+
+        // Feed the Dog
+        if (inRangeDog == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == true)
         {
             FeedtheDog();
+        }
+
+        // Place meat onto the prep station
+        if (inRangePrep == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == true &
+            currentObject == "Meat" &
+            Prep.GetComponent<prepStation>().holdingItem == false)
+        {
+            pmask.SetActive(true);
+            PlaceOnSource(Prep, MeatPrefab);
+            FeedtheDog();
+            Prep.GetComponent<prepStation>().holdingItem = true;
+            pfill = GameObject.Find("PrepFill");
+            carrying = false;
+        }
+
+        // Prep the meat
+        if (inRangePrep == true &
+            Prep.GetComponent<prepStation>().holdingItem == true &
+            Prep.GetComponent<prepStation>().prepComplete == false &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == false)
+        {
+            PrepItem();
+        }
+
+        // Pick up prepped meat
+        if (Prep.GetComponent<prepStation>().holdingItem == true &
+            Prep.GetComponent<prepStation>().prepComplete == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == false)
+        {
+            pickupFromSource(gameObject, PreppedMeatPrefab);
+            currentObject = "PreppedMeat";
+        }
+
+        // Place prepped meat onto cooking station
+        if (inRangeHeat == true &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == true &
+            currentObject == "PreppedMeat" &
+            Cook.GetComponent<cookStation>().holdingItem == false)
+        {
+            cmask.SetActive(true);
+            PlaceOnSource(Cook, PreppedMeatPrefab);
+            FeedtheDog();
+            Cook.GetComponent<cookStation>().holdingItem = true;
+            carrying = false;
+        }
+
+        // Pick up cooked or burnt meat from station
+        if (inRangeHeat == true &
+            Cook.GetComponent<cookStation>().holdingItem == true &
+            (Cook.GetComponent<cookStation>().cooked == true |
+            Cook.GetComponent<cookStation>().burnt == true) &
+            Input.GetKeyDown(KeyCode.Slash) &
+            carrying == false)
+        {
+            if (Cook.GetComponent<cookStation>().cooked == true)
+            {
+                pickupFromSource(gameObject, CookedMeatPrefab);
+                currentObject = "CookedMeat";
+            }
+            else
+            {
+                pickupFromSource(gameObject, BurntMeatPrefab);
+                currentObject = "BurntMeat";
+            }
+            Cook.GetComponent<cookStation>().doomsday = true;
         }
     }
 
@@ -63,6 +174,7 @@ public class player2control : MonoBehaviour
     {
         GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
         created.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        carrying = true;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -79,6 +191,14 @@ public class player2control : MonoBehaviour
         {
             inRangeDog = true;
         }
+        if (collision.gameObject.name.Equals("PrepStation"))
+        {
+            inRangePrep = true;
+        }
+        if (collision.gameObject.name.Equals("CookStation"))
+        {
+            inRangeHeat = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -87,7 +207,6 @@ public class player2control : MonoBehaviour
         {
             inRangeRack = false;
         }
-
         if (collision.gameObject.name.Equals("Kegs"))
         {
             inRangeKeg = false;
@@ -96,12 +215,46 @@ public class player2control : MonoBehaviour
         {
             inRangeDog = false;
         }
+        if (collision.gameObject.name.Equals("PrepStation"))
+        {
+            inRangePrep = false;
+        }
+        if (collision.gameObject.name.Equals("CookStation"))
+        {
+            inRangeHeat = false;
+        }
     }
 
     public void FeedtheDog()
     {
+        holdRack = inRangeRack;
+        holdKeg = inRangeKeg;
+        holdDog = inRangeDog;
+        holdPrep = inRangePrep;
+        holdHeat = inRangeHeat;
         Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;
         currentObject = "";
+        inRangeRack = holdRack;
+        inRangeKeg = holdKeg;
+        inRangeDog = holdDog;
+        inRangePrep = holdPrep;
+        inRangeHeat = holdHeat;
+    }
+
+    public void PlaceOnSource(GameObject source, GameObject item)
+    {
+        Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
+    }
+
+    public void PrepItem()
+    {
+        pfill = GameObject.Find("PrepFill");
+        if (pfill.transform.GetComponent<Image>().fillAmount >= 1)
+        {
+            Prep.transform.GetComponent<prepStation>().prepComplete = true;
+            pmask.SetActive(false);
+        }
+        pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
     }
 }

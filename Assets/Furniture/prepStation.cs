@@ -26,19 +26,12 @@ public class prepStation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (holdingItem == true)
-        {
-            mask.SetActive(true);
-            p1.transform.GetComponent<player1control>().pfill = fill;
-        }
-
         if (prepComplete == true)
         {
             holdingItem = false;
             prepComplete = false;
             Destroy(gameObject.transform.GetChild(0).gameObject);
             fill.transform.GetComponent<Image>().fillAmount = 0;
-            mask.SetActive(false);
         }
     }
 }

@@ -53,15 +53,12 @@ public class player1control : MonoBehaviour
         inRangeDog = false;
         inRangeHeat = false;
         inRangePrep = false;
-        cmask = GameObject.Find("CookMask");
-        cfill = GameObject.Find("CookFill");
         Prep = GameObject.FindWithTag("Prep");
         Cook = GameObject.FindWithTag("Heat");
-        pmask = GameObject.Find("PrepMask");
         pfill = GameObject.Find("PrepFill");
-
-        pmask.SetActive(false);
-        cmask.SetActive(false);
+        pmask = GameObject.Find("PrepMask");
+        cfill = GameObject.Find("CookFill");
+        cmask = GameObject.Find("CookMask");
     }
 
     // Update is called once per frame
@@ -113,11 +110,10 @@ public class player1control : MonoBehaviour
             currentObject == "Meat" &
             Prep.GetComponent<prepStation>().holdingItem == false)
         {
-            pmask.SetActive(true);
+            pmask.transform.GetComponent<Image>().color += new Color(0,0,0,1);
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
-            pfill = GameObject.Find("PrepFill");
             carrying = false;
         }
 
@@ -137,6 +133,7 @@ public class player1control : MonoBehaviour
             Input.GetKeyDown(KeyCode.E) &
             carrying == false)
         {
+            pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
         }
@@ -148,7 +145,7 @@ public class player1control : MonoBehaviour
             currentObject == "PreppedMeat" &
             Cook.GetComponent<cookStation>().holdingItem == false)
         {
-            cmask.SetActive(true);
+            cmask.transform.GetComponent<Image>().color += new Color(0, 0, 0, 1);
             PlaceOnSource(Cook, PreppedMeatPrefab);
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;
@@ -163,6 +160,7 @@ public class player1control : MonoBehaviour
             Input.GetKeyDown(KeyCode.E) &
             carrying == false)
         {
+            cmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             if (Cook.GetComponent<cookStation>().cooked ==  true)
             {
                 pickupFromSource(gameObject, CookedMeatPrefab);
@@ -256,11 +254,9 @@ public class player1control : MonoBehaviour
 
     public void PrepItem()
     {
-        pfill = GameObject.Find("PrepFill");
         if (pfill.transform.GetComponent<Image>().fillAmount >= 1)
         {
             Prep.transform.GetComponent<prepStation>().prepComplete = true;
-            pmask.SetActive(false);
         }
         pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
     }
