@@ -71,5 +71,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: BurntMeatPrefab
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -6411241974014753303, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}

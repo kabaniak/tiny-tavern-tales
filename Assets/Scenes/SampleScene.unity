@@ -755,6 +755,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: cfill
+      value: 
+      objectReference: {fileID: 436894485}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: cmask
+      value: 
+      objectReference: {fileID: 1380210157}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: pfill
+      value: 
+      objectReference: {fileID: 1435448513}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: pmask
+      value: 
+      objectReference: {fileID: 1468095095}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: BurntMeatPrefab
+      value: 
+      objectReference: {fileID: 2907171010765767753, guid: 3d16f861ac45cf04db8d83748213e1d5, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: CookedMeatPrefab
+      value: 
+      objectReference: {fileID: 3715560899715520505, guid: f18ab430b8efe8d4cbc15ec16e4a05d3, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: PreppedMeatPrefab
+      value: 
+      objectReference: {fileID: 6859087964037426725, guid: 091cf5d6a3416664cb66a9746588b0c0, type: 3}
     - target: {fileID: 6640116159889267461, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: m_Size.x
       value: 0.2
@@ -1080,6 +1108,7 @@ GameObject:
   - component: {fileID: 436894489}
   - component: {fileID: 436894488}
   - component: {fileID: 436894487}
+  - component: {fileID: 436894490}
   m_Layer: 5
   m_Name: CookFill
   m_TagString: CookFill
@@ -1157,6 +1186,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436894485}
   m_CullTransparentMesh: 1
+--- !u!114 &436894490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436894485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1b8cbb7dad861489becd6077258930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillAmount: 0
+  p1: {fileID: 961931567}
+  p2: {fileID: 1536588634}
+  prep: {fileID: 211960687}
+  cook: {fileID: 1907857432}
 --- !u!1 &464239517
 GameObject:
   m_ObjectHideFlags: 0
@@ -2086,7 +2132,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.02340401, y: 0.046965048}
+  m_Offset: {x: 0.06716482, y: 0.056546092}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2097,7 +2143,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.42517376, y: 0.32091242}
+  m_Size: {x: 0.51269543, y: 0.37839872}
   m_EdgeRadius: 0
 --- !u!4 &1064518998 stripped
 Transform:
@@ -2283,7 +2329,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.0035504848}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2294,7 +2340,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.32, y: 0.32710096}
   m_EdgeRadius: 0
 --- !u!50 &1183602509
 Rigidbody2D:
@@ -2848,6 +2894,7 @@ GameObject:
   - component: {fileID: 1380210158}
   - component: {fileID: 1380210160}
   - component: {fileID: 1380210159}
+  - component: {fileID: 1380210161}
   m_Layer: 5
   m_Name: CookMask
   m_TagString: CookMask
@@ -2913,6 +2960,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1380210157}
   m_CullTransparentMesh: 1
+--- !u!114 &1380210161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1380210157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777cf5ee06a28174d8b94b015cd38dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prep: {fileID: 211960687}
+  cook: {fileID: 1907857432}
 --- !u!1 &1435448513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,9 +2986,10 @@ GameObject:
   - component: {fileID: 1435448516}
   - component: {fileID: 1435448515}
   - component: {fileID: 1435448517}
+  - component: {fileID: 1435448518}
   m_Layer: 5
   m_Name: PrepFill
-  m_TagString: Untagged
+  m_TagString: PrepFill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3002,6 +3064,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &1435448518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435448513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e1b8cbb7dad861489becd6077258930, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillAmount: 0
+  p1: {fileID: 961931567}
+  p2: {fileID: 1536588634}
+  prep: {fileID: 211960687}
+  cook: {fileID: 1907857432}
 --- !u!1 &1468095095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3013,9 +3092,10 @@ GameObject:
   - component: {fileID: 1468095096}
   - component: {fileID: 1468095098}
   - component: {fileID: 1468095097}
+  - component: {fileID: 1468095099}
   m_Layer: 5
   m_Name: PrepMask
-  m_TagString: Untagged
+  m_TagString: PrepMask
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3027,14 +3107,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468095095}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.0025371886, w: 0.99999684}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0}
   m_Children:
   - {fileID: 1435448514}
   m_Father: {fileID: 1213947598}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.291}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2.46, y: 5.39}
@@ -3078,6 +3158,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468095095}
   m_CullTransparentMesh: 1
+--- !u!114 &1468095099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468095095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777cf5ee06a28174d8b94b015cd38dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prep: {fileID: 211960687}
+  cook: {fileID: 1907857432}
 --- !u!4 &1472431117 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4495993303269876538, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
@@ -3370,6 +3464,8 @@ MonoBehaviour:
   holdingItem: 0
   doomsday: 0
   stop: 0
+  fill: {fileID: 0}
+  mask: {fileID: 0}
   p1: {fileID: 961931567}
   p2: {fileID: 1536588634}
   PreppedMeatPrefab: {fileID: 6859087964037426725, guid: 091cf5d6a3416664cb66a9746588b0c0, type: 3}

@@ -15,8 +15,8 @@ public class cookStation : MonoBehaviour
     public bool holdingItem;
     public bool doomsday;
     public bool stop;
-    private GameObject fill;
-    private GameObject mask;
+    public GameObject fill;
+    public GameObject mask;
     public GameObject p1;
     public GameObject p2;
     public GameObject PreppedMeatPrefab;
@@ -44,14 +44,9 @@ public class cookStation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (holdingItem == true)
-        {
-            mask = GameObject.FindWithTag("CookMask");
-            fill = GameObject.FindWithTag("CookFill");
-        }
-
         if (holdingItem == true & cooked == false & burnt == false)
         {
+
             p1.transform.GetComponent<player1control>().cfill = fill;
             fill.transform.GetComponent<Image>().fillAmount += Time.deltaTime * cookSpeed;
             if (fill.transform.GetComponent<Image>().fillAmount >= 1)
@@ -99,7 +94,6 @@ public class cookStation : MonoBehaviour
             holdingItem = false;
             burnt = false;
             cooked = false;
-            mask.SetActive(false);
             fill.transform.GetComponent<Image>().fillAmount = 0;
             fill.transform.GetComponent<Image>().color = Color.green;
             stop = false;
