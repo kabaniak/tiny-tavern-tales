@@ -5,25 +5,24 @@ using UnityEngine;
 public class NPCSpriteBehavior : MonoBehaviour
 {
     SpriteRenderer spriteRender;
-    Color orig;
-    public float timeRemaining;
-    public int speed = 5;
 
-    // booleans describing the npc's state
-    public bool seated = false;
-    public bool reachedSeat = false;
-    public bool hasFood = false;
-    public bool leaving = false;
-    public bool orderAdded = false;
-    public bool angry = false;
+    // this will probably deprecate later
+    Color orig;
+
+    // information about the npc's stats
+    private string myOrder = ""; // their order
+    public float timeRemaining; // how long they'll wait
+    public int speed = 5; // how fast they move
+    private bool angry = false;
+
+    // string representing the npc's state
+    // either: waiting, toSeat, reachedSeat, ordered, eating, leaving
+    private string currentState = "waiting";
 
     // information about where the npc is seated
     public Vector3 seatCoords;
     public GameObject mytable;
-
-    // information about the npcs order
-    private string myOrder = "";
-
+    
     // temporary timer info
     public bool startedTimer = false;
     public float tempTimer = 5;
@@ -44,7 +43,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     void Update()
     {
         // check if we're on our way out
-        if (leaving)
+        if (currentState == "leaving")
         {
             if(transform.position.x < -31.1)
             {
@@ -91,32 +90,18 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         // if it's reached it's seat
         // and if we've been served our food
-        else if (reachedSeat && hasFood)
+        else if (currentState == "eating")
         {
-            // start an eat "timer" before it leaves
-            if ( ! startedTimer)
-            {
-                // check if food is our correct order
-                string received = mytable.GetComponent<Table>().getFoodServedToNPC(gameObject);
-                if (received != myOrder)
-                {
-                    spriteRender.color = new Color(1, 0, 0, 1.75f);
-                    angry = true;
-                }
-
-                startedTimer = true;
-            }
-
             if (angry)
             {
                 spriteRender.color = Color.Lerp(new Color(1, 0, 0, 1.75f), orig, tempTimer / 5.0f);
             }
 
             // if timer has run out it should leave
-            if (tempTimer < 0 && !leaving)
+            if (tempTimer < 0 && currentState != "leaving")
             {
                 leaveTable();
-                leaving = true;
+                currentState = "leaving";
             }
 
             tempTimer -= Time.fixedDeltaTime;
@@ -129,32 +114,19 @@ public class NPCSpriteBehavior : MonoBehaviour
             
         }
 
-        // if not seated yet
-        else if (!seated)
+        else if (currentState == "reachedSeat")
         {
-            // try to find a table to go to
-            GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
-
-            foreach(GameObject t in tables)
-            {
-                if (t.GetComponent<Table>().seatNPC(gameObject))
-                {
-                    mytable = t;
-                    seated = true;
-                    seatCoords = t.GetComponent<Table>().getSeatCoords(gameObject);
-                    break;
-                }
-            }
-
-            // if no table to go to
-            // pace up and down
+            OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
+            ot.addOrder(gameObject);
+            currentState = "ordered";
         }
 
         // if not at table yet
-        else if (seated && !reachedSeat)
+        else if (currentState == "toSeat")
         {
             // head to seat coordinates
-            if (transform.position.x < -25.7) {
+            if (transform.position.x < -25.7)
+            {
                 transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
             }
             // in these two seats you move vertical first
@@ -164,7 +136,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 {
                     if (transform.position.x >= seatCoords.x)
                     {
-                        reachedSeat = true;
+                        currentState = "reachedSeat";
                     }
                     else
                     {
@@ -174,7 +146,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 // need to get to correct x position
                 else
                 {
-                    if (seatCoords.y > 0)
+                    if (seatCoords.y > transform.position.y)
                     {
                         transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
                     }
@@ -191,11 +163,11 @@ public class NPCSpriteBehavior : MonoBehaviour
                 {
                     if (transform.position.y <= seatCoords.y + .1 && transform.position.y >= seatCoords.y - .1)
                     {
-                        reachedSeat = true;
+                        currentState = "reachedSeat";
                     }
                     else
                     {
-                        if (seatCoords.y > 0)
+                        if (seatCoords.y > transform.position.y)
                         {
                             transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
                         }
@@ -215,11 +187,25 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         }
 
-        else if (reachedSeat && !orderAdded)
+        // if not seated yet
+        else if (currentState == "waiting")
         {
-            OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
-            ot.addOrder(gameObject);
-            orderAdded = true;
+            // try to find a table to go to
+            GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
+
+            foreach(GameObject t in tables)
+            {
+                if (t.GetComponent<Table>().seatNPC(gameObject))
+                {
+                    mytable = t;
+                    currentState = "toSeat";
+                    seatCoords = t.GetComponent<Table>().getSeatCoords(gameObject);
+                    break;
+                }
+            }
+
+            // if no table to go to
+            // pace up and down
         }
 
         // each time we update, subtract from time we'll wait
@@ -265,5 +251,18 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             myOrder = "CookedMeat";
         }
+    }
+
+    public void givenFood(string received)
+    {
+        currentState = "eating";
+
+        // check if food is our correct order
+        if (received != myOrder)
+        {
+            angry = true;
+        }
+
+        GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
     }
 }

@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     int reputation = 50;
 
     GameObject textDisp;
-
     public enum prices
     {
         meat_correct = 6,

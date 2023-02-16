@@ -23,29 +23,6 @@ public class OrderTracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < npcOrderInfo.Length; i++)
-        {
-            if(npcOrderInfo[i] == null)
-            {
-                continue;
-            }
-            NPCSpriteBehavior temp = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>();
-            // check if npc is still there
-            if (!temp)
-            {
-                removeOrder(i);
-                i -= 1;
-                continue;
-            }
-            // check if they've gotten their food
-            if (temp.hasFood)
-            {
-                removeOrder(i);
-                i -= 1;
-                continue;
-            }
-        }
-
         // sort by how much patience is left (come back)
         sortByPatience();
 
@@ -77,6 +54,18 @@ public class OrderTracker : MonoBehaviour
             if (npcOrderInfo[i] == null)
             {
                 npcOrderInfo[i] = npc;
+                return;
+            }
+        }
+    }
+
+    public void removeMyOrder(GameObject npc)
+    {
+        for (int i = 0; i < npcOrderInfo.Length; i++)
+        {
+            if (npcOrderInfo[i] == npc)
+            {
+                removeOrder(i);
                 return;
             }
         }

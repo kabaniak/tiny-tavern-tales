@@ -18,10 +18,10 @@ public class Table : MonoBehaviour
     /// </summary>
     public GameObject[] atTable = { null, null, null, null };
 
-    /// Array of food on the table
-    public GameObject[] foodServed = { null, null, null, null };
-    public string[] foodTypes = { "", "", "", "" };
-    private bool[] locked = { false, false, false, false };
+    /// Arrays of stats about food on the table
+    public GameObject[] foodServed = { null, null, null, null }; // the game objects of the food served
+    public string[] foodTypes = { "", "", "", "" }; // the types of food served
+    private bool[] locked = { false, false, false, false }; // whether the food is locked
 
     /// <summary>
     /// nothing for now
@@ -33,8 +33,7 @@ public class Table : MonoBehaviour
             GameObject temp = foodServed[i];
             if (foodServed[i] != null && atTable[i] != null && foodServed[i].GetComponent<Coin>() == null)
             {
-                //if(foodServed[i].tag == "Meat" || foodServed[i].tag == "")
-                atTable[i].GetComponent<NPCSpriteBehavior>().hasFood = true;
+                atTable[i].GetComponent<NPCSpriteBehavior>().givenFood(foodTypes[i]);
                 locked[i] = true;
             }
         }
@@ -143,6 +142,7 @@ public class Table : MonoBehaviour
         }
         return "";
     }
+
     public Vector3 getSeatCoords(GameObject npc)
     {
         for (int i = 0; i < 4; i++)
