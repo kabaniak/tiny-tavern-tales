@@ -22,10 +22,9 @@ public class NPCSpriteBehavior : MonoBehaviour
     // information about where the npc is seated
     public Vector3 seatCoords;
     public GameObject mytable;
-    
+
     // temporary timer info
-    public bool startedTimer = false;
-    public float tempTimer = 5;
+    public float timerStart = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -94,17 +93,16 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             if (angry)
             {
-                spriteRender.color = Color.Lerp(new Color(1, 0, 0, 1.75f), orig, tempTimer / 5.0f);
+                spriteRender.color = Color.Lerp(new Color(1, 0, 0, 1.75f), orig, (timerStart - Time.time) / 2f);
             }
 
             // if timer has run out it should leave
-            if (tempTimer < 0 && currentState != "leaving")
+            if ((timerStart + 2.0) < Time.time && currentState != "leaving")
             {
                 leaveTable();
                 currentState = "leaving";
             }
 
-            tempTimer -= Time.fixedDeltaTime;
         }
 
         // if we won't wait anymore
@@ -255,6 +253,7 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     public void givenFood(string received)
     {
+        if(currentState == "eating") { return; }
         currentState = "eating";
 
         // check if food is our correct order
@@ -264,5 +263,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
+        timerStart = Time.time;
     }
 }

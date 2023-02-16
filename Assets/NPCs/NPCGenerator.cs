@@ -13,8 +13,8 @@ public class NPCGenerator : MonoBehaviour
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    private float SpawnInterval = 25;
-    private float SpawnTime = 26f;
+    private float SpawnInterval = 8f;
+    private float SpawnTime = 0;
 
     /// <summary>
     /// Check if we need to generate an NPC and if so, do so.
@@ -22,12 +22,11 @@ public class NPCGenerator : MonoBehaviour
     void Update()
     {
 
-        if (SpawnTime > SpawnInterval)
+        if (Time.time > SpawnTime)
         {
-            SpawnTime = 0;
+            SpawnTime = Time.time + SpawnInterval;
             Instantiate(NPCPrefab, new Vector3(-31, 1, 0), Quaternion.identity);
         }
-        SpawnTime += 0.05f;
         return;
     }
 }
