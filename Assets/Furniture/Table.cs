@@ -259,10 +259,15 @@ public class Table : MonoBehaviour
         {
             player1control player = o.GetComponent<player1control>();
 
-            GameObject toCreate = BoozePrefab;
+            GameObject toCreate = null;
             if (player.currentObject == ""){
                 if (foodServed[closest] != null && !locked[closest])
                 {
+                    if (foodTypes[closest] == "Booze")
+                    {
+                        player.pickupFromSource(o, BoozePrefab);
+                        player.currentObject = foodTypes[closest];
+                    }
                     if (foodTypes[closest] == "Meat")
                     {
                         player.pickupFromSource(o, MeatPrefab);
@@ -296,6 +301,10 @@ public class Table : MonoBehaviour
                     player.servable = this;
                     return;
                 }
+            }
+            else if (player.currentObject == "Booze")
+            {
+                toCreate = BoozePrefab;
             }
             else if (player.currentObject == "Meat")
             {
@@ -325,11 +334,16 @@ public class Table : MonoBehaviour
         {
             player2control player = o.GetComponent<player2control>();
 
-            GameObject toCreate = BoozePrefab;
+            GameObject toCreate = null;
             if (player.currentObject == "")
             {
                 if (foodServed[closest] != null && !locked[closest])
                 {
+                    if (foodTypes[closest] == "Booze")
+                    {
+                        player.pickupFromSource(o, BoozePrefab);
+                        player.currentObject = foodTypes[closest];
+                    }
                     if (foodTypes[closest] == "Meat")
                     {
                         player.pickupFromSource(o, MeatPrefab);
@@ -363,6 +377,10 @@ public class Table : MonoBehaviour
                     foodTypes[closest] = "";
                     return;
                 }
+            }
+            else if (player.currentObject == "Booze")
+            {
+                toCreate = BoozePrefab;
             }
             else if (player.currentObject == "Meat")
             {
