@@ -65,6 +65,7 @@ public class player2control : MonoBehaviour
         var vmove2 = Input.GetAxis("Vertical2");
         transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove2, vmove2) * speed * Time.deltaTime;
 
+
         // Pick up beer from keg
         if (inRangeKeg == true &
             Input.GetKeyDown(KeyCode.Slash) &
@@ -106,11 +107,10 @@ public class player2control : MonoBehaviour
             currentObject == "Meat" &
             Prep.GetComponent<prepStation>().holdingItem == false)
         {
-            pmask.SetActive(true);
+            pmask.transform.GetComponent<Image>().color += new Color(0, 0, 0, 1);
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
-            pfill = GameObject.Find("PrepFill");
             carrying = false;
         }
 
@@ -130,6 +130,7 @@ public class player2control : MonoBehaviour
             Input.GetKeyDown(KeyCode.Slash) &
             carrying == false)
         {
+            pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
         }
@@ -141,7 +142,7 @@ public class player2control : MonoBehaviour
             currentObject == "PreppedMeat" &
             Cook.GetComponent<cookStation>().holdingItem == false)
         {
-            cmask.SetActive(true);
+            cmask.transform.GetComponent<Image>().color += new Color(0, 0, 0, 1);
             PlaceOnSource(Cook, PreppedMeatPrefab);
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;
@@ -156,6 +157,7 @@ public class player2control : MonoBehaviour
             Input.GetKeyDown(KeyCode.Slash) &
             carrying == false)
         {
+            cmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             if (Cook.GetComponent<cookStation>().cooked == true)
             {
                 pickupFromSource(gameObject, CookedMeatPrefab);
@@ -249,11 +251,9 @@ public class player2control : MonoBehaviour
 
     public void PrepItem()
     {
-        pfill = GameObject.Find("PrepFill");
         if (pfill.transform.GetComponent<Image>().fillAmount >= 1)
         {
             Prep.transform.GetComponent<prepStation>().prepComplete = true;
-            pmask.SetActive(false);
         }
         pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
     }
