@@ -119,7 +119,7 @@ public class OrderTracker : MonoBehaviour
 
                 NPCSpriteBehavior one = npcOrderInfo[j].GetComponent<NPCSpriteBehavior>();
                 NPCSpriteBehavior two = npcOrderInfo[j + 1].GetComponent<NPCSpriteBehavior>();
-                if (one.timeRemaining > two.timeRemaining)
+                if (one.patience > two.patience)
                 {
                     // swap temp and arr[i]
                     GameObject temp = npcOrderInfo[j];
