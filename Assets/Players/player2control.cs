@@ -44,6 +44,13 @@ public class player2control : MonoBehaviour
     public GameObject cfill;
     public GameObject cmask;
 
+    //sprites
+    public Sprite normalsprite;
+    public Sprite b_sprite;
+    public Sprite um_sprite;
+    public Sprite cm_sprite;
+    public Sprite bm_sprite;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -74,6 +81,7 @@ public class player2control : MonoBehaviour
             pickupFromSource(gameObject, BoozePrefab);
             carrying = true;
             currentObject = "Booze";
+            GetComponent<SpriteRenderer>().sprite = b_sprite;
         }
 
         // Get meat from rack
@@ -84,12 +92,14 @@ public class player2control : MonoBehaviour
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
+            GetComponent<SpriteRenderer>().sprite = um_sprite;
         }
 
         // Serve Table
         if (canServe & Input.GetKeyDown(KeyCode.Slash))
         {
             servable.serveSeat(gameObject);
+            GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
         // Feed the Dog
@@ -98,6 +108,7 @@ public class player2control : MonoBehaviour
             carrying == true)
         {
             FeedtheDog();
+            GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
         // Place meat onto the prep station
@@ -112,6 +123,7 @@ public class player2control : MonoBehaviour
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
             carrying = false;
+            GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
         // Prep the meat
@@ -133,6 +145,7 @@ public class player2control : MonoBehaviour
             pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
+            GetComponent<SpriteRenderer>().sprite = um_sprite;
         }
 
         // Place prepped meat onto cooking station
@@ -147,6 +160,7 @@ public class player2control : MonoBehaviour
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;
             carrying = false;
+            GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
         // Pick up cooked or burnt meat from station
@@ -162,11 +176,13 @@ public class player2control : MonoBehaviour
             {
                 pickupFromSource(gameObject, CookedMeatPrefab);
                 currentObject = "CookedMeat";
+                GetComponent<SpriteRenderer>().sprite = cm_sprite;
             }
             else
             {
                 pickupFromSource(gameObject, BurntMeatPrefab);
                 currentObject = "BurntMeat";
+                GetComponent<SpriteRenderer>().sprite = bm_sprite;
             }
             Cook.GetComponent<cookStation>().doomsday = true;
         }
