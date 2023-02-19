@@ -38,8 +38,8 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
         spriteRender.color = orig;
-        tolerance = 1;
-        patience = 30;
+        tolerance = 0.8f;
+        patience = 50f;
     }
 
     // Update is called once per frame
