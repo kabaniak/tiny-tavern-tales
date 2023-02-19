@@ -143,6 +143,18 @@ public class Table : MonoBehaviour
         return "";
     }
 
+    public int getSeatInd(GameObject npc)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            if (atTable[i] == npc)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
     public Vector3 getSeatCoords(GameObject npc)
     {
         for (int i = 0; i < 4; i++)

@@ -12,7 +12,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     // information about the npc's stats
     private string myOrder = ""; // their order
     public float timeRemaining; // how long they'll wait
-    public int speed = 5; // how fast they move
+    private float speed = 0.05f; // how fast they move
     private bool angry = false;
 
     // string representing the npc's state
@@ -22,6 +22,11 @@ public class NPCSpriteBehavior : MonoBehaviour
     // information about where the npc is seated
     public Vector3 seatCoords;
     public GameObject mytable;
+
+    private int haveReached = 0;
+    private float sensitivity = 0.3f;
+    private bool forward = true;
+    private Vector2[] path = { new Vector2(-10,-20), new Vector2(0,0), new Vector2(0, 0), new Vector2(0, 0)};
 
     // temporary timer info
     public float timerStart = 0;
@@ -41,50 +46,17 @@ public class NPCSpriteBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if we're ready to be destroyed
+        if(currentState == "beDestroyed")
+        {
+            Destroy(gameObject);
+        }
+
         // check if we're on our way out
         if (currentState == "leaving")
         {
-            if(transform.position.x < -31.1)
-            {
-                Destroy(gameObject);
-            }
-            // if we're at door level just head out
-            else if (transform.position.y < 2 && transform.position.y > 1)
-            {
-                transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
-            }
-            // in these two seats you move horizontal first
-            else if (seatCoords.y > 11 || seatCoords.y < -10)
-            {
-                if (transform.position.x > -25.7)
-                {
-                    transform.position += new Vector3(-1, 0, 0) * speed * Time.deltaTime;
-                }
-                // need to get to correct x position
-                else
-                {
-                    if (seatCoords.y > 0)
-                    {
-                        transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
-                    }
-                    else
-                    {
-                        transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
-                    }
-                }
-            }
-            // otherwise horizontal first
-            else
-            {
-                if (seatCoords.y > 0)
-                {
-                    transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
-                }
-                else
-                {
-                    transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
-                }
-            }
+            forward = false;
+            move();
         }
 
         // if it's reached it's seat
@@ -122,67 +94,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         // if not at table yet
         else if (currentState == "toSeat")
         {
-            // head to seat coordinates
-            if (transform.position.x < -25.7)
-            {
-                transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
-            }
-            // in these two seats you move vertical first
-            else if (seatCoords.y > 11 || seatCoords.y < -10)
-            {
-                if (transform.position.y <= seatCoords.y + .1 && transform.position.y >= seatCoords.y - .1)
-                {
-                    if (transform.position.x >= seatCoords.x)
-                    {
-                        currentState = "reachedSeat";
-                    }
-                    else
-                    {
-                        transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
-                    }
-                }
-                // need to get to correct x position
-                else
-                {
-                    if (seatCoords.y > transform.position.y)
-                    {
-                        transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
-                    }
-                    else
-                    {
-                        transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
-                    }
-                }
-            }
-            // otherwise horizontal first
-            else
-            {
-                if (transform.position.x >= seatCoords.x)
-                {
-                    if (transform.position.y <= seatCoords.y + .1 && transform.position.y >= seatCoords.y - .1)
-                    {
-                        currentState = "reachedSeat";
-                    }
-                    else
-                    {
-                        if (seatCoords.y > transform.position.y)
-                        {
-                            transform.position += new Vector3(0, 1, 0) * speed * Time.deltaTime;
-                        }
-                        else
-                        {
-                            transform.position += new Vector3(0, -1, 0) * speed * Time.deltaTime;
-                        }
-                    }
-                }
-                // need to get to correct x position
-                else
-                {
-                    transform.position += new Vector3(1, 0, 0) * speed * Time.deltaTime;
-                }
-            }
-
-
+            forward = true;
+            move();
         }
 
         // if not seated yet
@@ -198,6 +111,21 @@ public class NPCSpriteBehavior : MonoBehaviour
                     mytable = t;
                     currentState = "toSeat";
                     seatCoords = t.GetComponent<Table>().getSeatCoords(gameObject);
+                    int seatInd = t.GetComponent<Table>().getSeatInd(gameObject);
+
+                    // record the path we should take
+                    path[3] = new Vector2(seatCoords.x, seatCoords.y);
+
+                    if(seatInd == 2)
+                    {
+                        path[1] = new Vector2(-10, 0);
+                        path[2] = new Vector2(seatCoords.x, 0);
+                    }
+                    else
+                    {
+                        path[1] = new Vector2(-10, seatCoords.y);
+                        path[2] = new Vector2(seatCoords.x, seatCoords.y);
+                    }
                     break;
                 }
             }
@@ -208,6 +136,59 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         // each time we update, subtract from time we'll wait
         //timeRemaining = timeRemaining - Time.unscaledDeltaTime;
+    }
+
+
+    void move()
+    {
+        if(currentState == "leaving" || currentState == "toSeat")
+        {
+            // we are actively moving
+            if (forward) 
+            {
+                // go to NEXT ind
+                Vector3 currPos = transform.position;
+                Vector2 dir = new Vector2(path[haveReached + 1].x - currPos.x, path[haveReached + 1].y - currPos.y);
+                dir.Normalize();
+
+                transform.position = new Vector3(currPos.x + dir.x * speed, currPos.y + dir.y * speed, 0);
+
+                if (transform.position.x - sensitivity < path[haveReached + 1].x && transform.position.x + sensitivity > path[haveReached + 1].x)
+                {
+                    if (transform.position.y - sensitivity < path[haveReached + 1].y && transform.position.y + sensitivity > path[haveReached + 1].y)
+                    {
+                        haveReached = haveReached + 1;
+                    }
+                }
+            }
+            else
+            {
+                // go to PREV ind
+                Vector3 currPos = transform.position;
+                Vector2 dir = new Vector2(path[haveReached - 1].x - currPos.x, path[haveReached - 1].y - currPos.y);
+                dir.Normalize();
+
+                transform.position = new Vector3(currPos.x + dir.x * speed, currPos.y + dir.y * speed, 0);
+
+                if (transform.position.x - sensitivity < path[haveReached - 1].x && transform.position.x + sensitivity > path[haveReached - 1].x)
+                {
+                    if (transform.position.y - sensitivity < path[haveReached - 1].y && transform.position.y + sensitivity > path[haveReached - 1].y)
+                    {
+                        haveReached = haveReached - 1;
+                    }
+                }
+            }
+
+            // check if we can stop moving
+            if(haveReached == 3 && forward)
+            {
+                currentState = "reachedSeat";
+            }
+            else if(haveReached == 0 && !forward)
+            {
+                currentState = "beDestroyed";
+            }
+        }
     }
 
     public Color getColor()
