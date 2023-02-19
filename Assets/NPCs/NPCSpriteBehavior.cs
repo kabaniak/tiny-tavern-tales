@@ -141,9 +141,6 @@ public class NPCSpriteBehavior : MonoBehaviour
             // if no table to go to
             // pace up and down
         }
-
-        // each time we update, subtract from time we'll wait
-        //timeRemaining = timeRemaining - Time.unscaledDeltaTime;
     }
 
 
