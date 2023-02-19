@@ -23,6 +23,7 @@ public class TrashDog : MonoBehaviour
             if (time >= 100)
             {
                 GetComponent<SpriteRenderer>().sprite = normalsprite;
+                time = 0;
             }
 
             else
