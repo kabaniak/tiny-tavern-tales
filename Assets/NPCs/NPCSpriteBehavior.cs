@@ -122,6 +122,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 angry = true;
                 leaveTable();
+                GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
                 currentState = "leaving";
             }
         }
