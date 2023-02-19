@@ -14,6 +14,9 @@ public class NPCSpriteBehavior : MonoBehaviour
     public float timeRemaining; // how long they'll wait
     public int speed = 5; // how fast they move
     private bool angry = false;
+    public float patience; // how willing they are to wait
+    private float tolerance; // how quickly they lose patience
+    
 
     // string representing the npc's state
     // either: waiting, toSeat, reachedSeat, ordered, eating, leaving
@@ -35,7 +38,8 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
         spriteRender.color = orig;
-
+        tolerance = 1;
+        patience = 30;
     }
 
     // Update is called once per frame
@@ -102,14 +106,6 @@ public class NPCSpriteBehavior : MonoBehaviour
                 leaveTable();
                 currentState = "leaving";
             }
-
-        }
-
-        // if we won't wait anymore
-        else if (timeRemaining <= 0)
-        {
-            // should leave (will do later)
-            
         }
 
         else if (currentState == "reachedSeat")
@@ -117,6 +113,17 @@ public class NPCSpriteBehavior : MonoBehaviour
             OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
             ot.addOrder(gameObject);
             currentState = "ordered";
+        }
+
+        else if (currentState == "ordered")
+        {
+            patience -= tolerance * Time.deltaTime;
+            if (patience <= 0)
+            {
+                angry = true;
+                leaveTable();
+                currentState = "leaving";
+            }
         }
 
         // if not at table yet
