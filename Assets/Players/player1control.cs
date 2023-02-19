@@ -112,6 +112,7 @@ public class player1control : MonoBehaviour
         {
             FeedtheDog();
             GetComponent<SpriteRenderer>().sprite = normalsprite;
+            FindObjectOfType<TrashDog>().GetComponent<SpriteRenderer>().sprite = FindObjectOfType<TrashDog>().heart_sprite;
         }
 
         // Place meat onto the prep station
