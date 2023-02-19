@@ -12,7 +12,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     // information about the npc's stats
     private string myOrder = ""; // their order
     public float timeRemaining; // how long they'll wait
-    private float speed = 0.05f; // how fast they move
+    private float speed = 0.1f; // how fast they move
     private bool angry = false;
     public float patience; // how willing they are to wait
     private float tolerance; // how quickly they lose patience
@@ -56,13 +56,6 @@ public class NPCSpriteBehavior : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // check if we're on our way out
-        if (currentState == "leaving")
-        {
-            forward = false;
-            move();
-        }
-
         // if it's reached it's seat
         // and if we've been served our food
         else if (currentState == "eating")
@@ -97,13 +90,6 @@ public class NPCSpriteBehavior : MonoBehaviour
                 GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
                 currentState = "leaving";
             }
-        }
-
-        // if not at table yet
-        else if (currentState == "toSeat")
-        {
-            forward = true;
-            move();
         }
 
         // if not seated yet
@@ -146,6 +132,21 @@ public class NPCSpriteBehavior : MonoBehaviour
         //timeRemaining = timeRemaining - Time.unscaledDeltaTime;
     }
 
+    private void FixedUpdate()
+    {
+        // check if we're on our way out
+        if (currentState == "leaving")
+        {
+            forward = false;
+            move();
+        }
+        // if not at table yet
+        else if (currentState == "toSeat")
+        {
+            forward = true;
+            move();
+        }
+    }
 
     void move()
     {
