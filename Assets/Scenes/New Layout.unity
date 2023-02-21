@@ -147,6 +147,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1468095095}
     - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: bm_sprite
+      value: 
+      objectReference: {fileID: -8224086549492008022, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: cm_sprite
+      value: 
+      objectReference: {fileID: 7957065889850167295, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: MeatPrefab
       value: 
       objectReference: {fileID: 3779056280338482803, guid: 3befff7added2944f9ebe73dd1e1f085, type: 3}
@@ -154,6 +162,14 @@ PrefabInstance:
       propertyPath: PrepPrefab
       value: 
       objectReference: {fileID: 211960687}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: ucm_sprite
+      value: 
+      objectReference: {fileID: -9077281597318736177, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
+      propertyPath: upm_sprite
+      value: 
+      objectReference: {fileID: -9024087300701384196, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
     - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: BoozePrefab
       value: 
@@ -943,6 +959,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1468095095}
     - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: bm_sprite
+      value: 
+      objectReference: {fileID: -8989289257294120553, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: cm_sprite
+      value: 
+      objectReference: {fileID: 9139909356880594190, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: ucm_sprite
+      value: 
+      objectReference: {fileID: -4243127760521825661, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
+      propertyPath: upm_sprite
+      value: 
+      objectReference: {fileID: -6795185171421732328, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: BurntMeatPrefab
       value: 
       objectReference: {fileID: 2907171010765767753, guid: 3d16f861ac45cf04db8d83748213e1d5, type: 3}
@@ -972,11 +1004,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6640116159889267461, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 3.6
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 6640116159889267461, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 6
+      value: 5.8
       objectReference: {fileID: 0}
     - target: {fileID: 6640116159889267462, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: m_Name
@@ -1054,7 +1086,7 @@ Transform:
   m_GameObject: {fileID: 307509218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -22.9, y: 16.5, z: 23.35351}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1265288383}
   m_RootOrder: 1
@@ -1099,7 +1131,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e9a23336626e7514dbc875aa2bef2403, type: 3}
+  m_Sprite: {fileID: -4198316506551018932, guid: e3bfe74f20e364037b7cb8a3b6323041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1393,7 +1425,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 1e546404e9f364847aa47acdc4d92acf, type: 3}
+  m_Sprite: {fileID: -1694339740675961873, guid: e3bfe74f20e364037b7cb8a3b6323041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1413,7 +1445,7 @@ Transform:
   m_GameObject: {fileID: 473504472}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -30.289896, y: 13.341859, z: 3.0455115}
-  m_LocalScale: {x: 9.292, y: 9.646, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 694179633}
   m_RootOrder: 3
@@ -1592,9 +1624,9 @@ GameObject:
   m_Component:
   - component: {fileID: 537992444}
   - component: {fileID: 537992443}
-  - component: {fileID: 537992445}
   - component: {fileID: 537992446}
   - component: {fileID: 537992447}
+  - component: {fileID: 537992445}
   m_Layer: 0
   m_Name: MeatStorage
   m_TagString: MeatRack
@@ -1680,7 +1712,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.044255495, y: -0.03420925}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1691,7 +1723,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.45120996, y: 0.47964334}
+  m_Size: {x: 0.32, y: 0.32}
   m_EdgeRadius: 0
 --- !u!50 &537992446
 Rigidbody2D:
@@ -1727,7 +1759,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.030214332, y: -0.020109013}
+  m_Offset: {x: -0.03021434, y: -0.05658953}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1738,7 +1770,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47462326, y: 0.49707195}
+  m_Size: {x: 0.47462326, y: 0.57003295}
   m_EdgeRadius: 0
 --- !u!1 &538893799
 GameObject:
@@ -2499,7 +2531,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: bedba270c4371e94282d8b09578e8387, type: 3}
+  m_Sprite: {fileID: -4049813609218832702, guid: e3bfe74f20e364037b7cb8a3b6323041, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2519,7 +2551,7 @@ Transform:
   m_GameObject: {fileID: 1164094140}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -30.306498, y: -3.6997414, z: 3.0455115}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 694179633}
   m_RootOrder: 2

@@ -47,7 +47,8 @@ public class player2control : MonoBehaviour
     //sprites
     public Sprite normalsprite;
     public Sprite b_sprite;
-    public Sprite um_sprite;
+    public Sprite upm_sprite;
+    public Sprite ucm_sprite;
     public Sprite cm_sprite;
     public Sprite bm_sprite;
 
@@ -92,7 +93,7 @@ public class player2control : MonoBehaviour
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
-            GetComponent<SpriteRenderer>().sprite = um_sprite;
+            GetComponent<SpriteRenderer>().sprite = upm_sprite;
         }
 
         // Serve Table
@@ -146,7 +147,7 @@ public class player2control : MonoBehaviour
             pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
-            GetComponent<SpriteRenderer>().sprite = um_sprite;
+            GetComponent<SpriteRenderer>().sprite = ucm_sprite;
         }
 
         // Place prepped meat onto cooking station
@@ -191,8 +192,8 @@ public class player2control : MonoBehaviour
 
     public void pickupFromSource(GameObject player, GameObject source)
     {
-        GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
-        created.GetComponent<SpriteRenderer>().sortingOrder = 3;
+        //GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
+        //created.GetComponent<SpriteRenderer>().sortingOrder = 3;
         carrying = true;
     }
 
@@ -251,7 +252,7 @@ public class player2control : MonoBehaviour
         holdDog = inRangeDog;
         holdPrep = inRangePrep;
         holdHeat = inRangeHeat;
-        Destroy(gameObject.transform.GetChild(0).gameObject);
+        //Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;
         currentObject = "";
         inRangeRack = holdRack;

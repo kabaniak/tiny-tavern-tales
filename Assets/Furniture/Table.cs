@@ -106,7 +106,7 @@ public class Table : MonoBehaviour
                 Destroy(foodServed[i]);
 
                 foodServed[i] = createOnTable(i, CoinPrefab);
-                foodServed[i].transform.localScale = new Vector3(0.1f, 0.1f, 1);
+                foodServed[i].transform.localScale = new Vector3(0.25f, 0.25f, 1);
                 foodServed[i].GetComponent<Coin>().myTable = gameObject;
 
                 foodServed[i].GetComponent<Coin>().value[0] = price;
@@ -436,7 +436,7 @@ public class Table : MonoBehaviour
         
 
         GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
-        thing.transform.localScale = new Vector3(3, 3, 1);
+        thing.transform.localScale = new Vector3(0.25f, 0.25f, 1);
         return thing;
     }
 
