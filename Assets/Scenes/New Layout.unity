@@ -3139,6 +3139,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 333228156}
     m_Modifications:
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: b_sprite
+      value: 
+      objectReference: {fileID: 2256643247938351710, guid: 6af9292f128164288b6e90834901d957, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: b_sprite2
+      value: 
+      objectReference: {fileID: -8938701872669142869, guid: 6af9292f128164288b6e90834901d957, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: bm_sprite
+      value: 
+      objectReference: {fileID: -8224086549492008022, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: cm_sprite
+      value: 
+      objectReference: {fileID: 7957065889850167295, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: bm_sprite2
+      value: 
+      objectReference: {fileID: -8989289257294120553, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: cm_sprite2
+      value: 
+      objectReference: {fileID: 9139909356880594190, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: ucm_sprite
+      value: 
+      objectReference: {fileID: -9077281597318736177, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: upm_sprite
+      value: 
+      objectReference: {fileID: -9024087300701384196, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: ucm_sprite2
+      value: 
+      objectReference: {fileID: -4243127760521825661, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: upm_sprite2
+      value: 
+      objectReference: {fileID: -6795185171421732328, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: normalsprite
+      value: 
+      objectReference: {fileID: 7312801566834198808, guid: 6af9292f128164288b6e90834901d957, type: 3}
     - target: {fileID: 2937920956612228396, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
       propertyPath: m_Name
       value: table 1
@@ -3837,6 +3881,50 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 333228156}
     m_Modifications:
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: b_sprite
+      value: 
+      objectReference: {fileID: 2256643247938351710, guid: 6af9292f128164288b6e90834901d957, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: b_sprite2
+      value: 
+      objectReference: {fileID: -8938701872669142869, guid: 6af9292f128164288b6e90834901d957, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: bm_sprite
+      value: 
+      objectReference: {fileID: -8224086549492008022, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: cm_sprite
+      value: 
+      objectReference: {fileID: 7957065889850167295, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: bm_sprite2
+      value: 
+      objectReference: {fileID: -8989289257294120553, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: cm_sprite2
+      value: 
+      objectReference: {fileID: 9139909356880594190, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: ucm_sprite
+      value: 
+      objectReference: {fileID: -9077281597318736177, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: upm_sprite
+      value: 
+      objectReference: {fileID: -9024087300701384196, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: ucm_sprite2
+      value: 
+      objectReference: {fileID: -4243127760521825661, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: upm_sprite2
+      value: 
+      objectReference: {fileID: -6795185171421732328, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+    - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
+      propertyPath: normalsprite
+      value: 
+      objectReference: {fileID: 7312801566834198808, guid: 6af9292f128164288b6e90834901d957, type: 3}
     - target: {fileID: -6314127078025145416, guid: b78f5cc0fc3dce84ba8670d30d70f9f4, type: 3}
       propertyPath: BurntMeatPrefab
       value: 

@@ -12,6 +12,16 @@ public class Table : MonoBehaviour
     public GameObject CoinPrefab;
     public GameObject CookedMeatPrefab;
     public GameObject BurntMeatPrefab;
+    public Sprite b_sprite;
+    public Sprite upm_sprite;
+    public Sprite ucm_sprite;
+    public Sprite cm_sprite;
+    public Sprite bm_sprite;
+    public Sprite b_sprite2;
+    public Sprite upm_sprite2;
+    public Sprite ucm_sprite2;
+    public Sprite cm_sprite2;
+    public Sprite bm_sprite2;
 
     /// <summary>
     /// Array of the NPCs seated at the table
@@ -277,31 +287,37 @@ public class Table : MonoBehaviour
                 {
                     if (foodTypes[closest] == "Booze")
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = b_sprite;
                         player.pickupFromSource(o, BoozePrefab);
                         player.currentObject = foodTypes[closest];
                     }
-                    if (foodTypes[closest] == "Meat")
+                    else if (foodTypes[closest] == "Meat")
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = upm_sprite;
                         player.pickupFromSource(o, MeatPrefab);
                         player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "PreppedMeat")
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = ucm_sprite;
                         player.pickupFromSource(o, PreppedMeatPrefab);
                         player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "CookedMeat")
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = cm_sprite;
                         player.pickupFromSource(o, CookedMeatPrefab);
                         player.currentObject = foodTypes[closest];
                     }
                     else if (foodTypes[closest] == "BurntMeat")
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = bm_sprite;
                         player.pickupFromSource(o, BurntMeatPrefab);
                         player.currentObject = foodTypes[closest];
                     }
                     else
                     {
+                        player.GetComponent<SpriteRenderer>().sprite = b_sprite;
                         player.pickupFromSource(o, BoozePrefab);
                         player.currentObject = foodTypes[closest];
                     }
@@ -335,7 +351,7 @@ public class Table : MonoBehaviour
                 toCreate = BurntMeatPrefab;
             }
 
-            if (foodServed[closest] == null)
+            if (foodServed[closest] == null & player.carrying == true)
             {
                 foodServed[closest] = createOnTable(closest, toCreate);
                 foodTypes[closest] = player.currentObject;
@@ -355,31 +371,37 @@ public class Table : MonoBehaviour
                     {
                         player.pickupFromSource(o, BoozePrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = b_sprite2;
                     }
-                    if (foodTypes[closest] == "Meat")
+                    else if (foodTypes[closest] == "Meat")
                     {
                         player.pickupFromSource(o, MeatPrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = upm_sprite2;
                     }
                     else if (foodTypes[closest] == "PreppedMeat")
                     {
                         player.pickupFromSource(o, PreppedMeatPrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = ucm_sprite2;
                     }
                     else if (foodTypes[closest] == "CookedMeat")
                     {
                         player.pickupFromSource(o, CookedMeatPrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = cm_sprite2;
                     }
                     else if (foodTypes[closest] == "BurntMeat")
                     {
                         player.pickupFromSource(o, BurntMeatPrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = bm_sprite2;
                     }
                     else
                     {
                         player.pickupFromSource(o, BoozePrefab);
                         player.currentObject = foodTypes[closest];
+                        player.GetComponent<SpriteRenderer>().sprite = b_sprite2;
                     }
 
                     Destroy(foodServed[closest]);
@@ -436,7 +458,14 @@ public class Table : MonoBehaviour
         
 
         GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
-        thing.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+        if (source == MeatPrefab | source == PreppedMeatPrefab)
+        {
+            thing.transform.localScale = new Vector3(3f, 3f, 1);
+        }
+        else
+        {
+            thing.transform.localScale = new Vector3(0.25f, 0.25f, 1);
+        }
         return thing;
     }
 

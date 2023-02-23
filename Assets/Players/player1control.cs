@@ -33,7 +33,7 @@ public class player1control : MonoBehaviour
     private bool holdPrep;
     private bool holdHeat;
 
-    // interatables
+    // interactables
     public GameObject Prep;
     public GameObject Cook;
     public Table servable;
