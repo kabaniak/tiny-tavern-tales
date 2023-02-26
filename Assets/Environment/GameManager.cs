@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
 
     int totalCoins = 0;
-    int reputation = 50;
+    public int reputation = 13;
+    public int maxRating = 25;
 
     GameObject textDisp;
     public enum prices
@@ -20,8 +21,8 @@ public class GameManager : MonoBehaviour
     {
         correct = 1,
         incorrect = -1,
-        leave = -5,
-        fight = -10
+        leave = -3,
+        fight = -5
     }
 
 
