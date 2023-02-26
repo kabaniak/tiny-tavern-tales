@@ -16,7 +16,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     private bool angry = false;
     public float patience; // how willing they are to wait
     private float tolerance; // how quickly they lose patience
-    
+    private float brawlChance;
 
     // string representing the npc's state
     // either: waiting, toSeat, reachedSeat, ordered, eating, leaving
@@ -30,6 +30,11 @@ public class NPCSpriteBehavior : MonoBehaviour
     private float sensitivity = 0.3f;
     private bool forward = true;
     private Vector2[] path = { new Vector2(-10,-20), new Vector2(0,0), new Vector2(0, 0), new Vector2(0, 0)};
+    private Vector2 paceTo = new Vector2(-10, 0);
+
+    // brawl information
+    public GameObject brawlPartner = null;
+    public GameObject BrawlPrefab;
 
     // temporary timer info
     public float timerStart = 0;
@@ -45,6 +50,9 @@ public class NPCSpriteBehavior : MonoBehaviour
         spriteRender.color = orig;
         tolerance = 0.8f;
         patience = 50f;
+        brawlChance = 0.5f;
+
+        speed = Random.Range(0.06f, 0.14f);
     }
 
     // Update is called once per frame
@@ -55,7 +63,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
         // if it's reached it's seat
         // and if we've been served our food
         else if (currentState == "eating")
@@ -82,13 +89,21 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         else if (currentState == "ordered")
         {
-            patience -= tolerance * Time.deltaTime;
             if (patience <= 0)
             {
                 angry = true;
                 leaveTable();
                 GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
-                currentState = "leaving";
+
+                // random chance of starting a brawl
+                if (Random.value < brawlChance)
+                {
+                    findBrawlTarget();
+                }
+                else
+                {
+                    currentState = "leaving";
+                }
             }
         }
 
@@ -124,9 +139,17 @@ public class NPCSpriteBehavior : MonoBehaviour
                 }
             }
 
-            // if no table to go to
-            // pace up and down
+            // check if we won't wait anymore
+            if (patience <= 0)
+            {
+                haveReached = 1;
+                angry = true;
+                currentState = "leaving";
+            }
         }
+
+
+        patience -= tolerance * Time.deltaTime;
     }
 
     private void FixedUpdate()
@@ -143,6 +166,35 @@ public class NPCSpriteBehavior : MonoBehaviour
             forward = true;
             move();
         }
+        else if(currentState == "waiting")
+        {
+            //pace();
+        }
+        else if(currentState == "preBrawl")
+        {
+            approach();
+        }
+    }
+
+    void pace()
+    {
+        // check if we've reached the next position
+        if (transform.position.x - sensitivity < paceTo.x && transform.position.x + sensitivity > paceTo.x)
+        {
+            if (transform.position.y - sensitivity < paceTo.y && transform.position.y + sensitivity > paceTo.y)
+            {
+                // generate a new position to pace to
+                paceTo = new Vector2(-10, Random.Range(-12, 16));
+            }
+        }
+
+        Vector3 currPos = transform.position;
+        Vector2 dir = new Vector2(paceTo.x - currPos.x, paceTo.y - currPos.y);
+        dir.Normalize();
+
+        transform.position = new Vector3(currPos.x + dir.x * speed, currPos.y + dir.y * speed, 0);
+
+
     }
 
     void move()
@@ -197,6 +249,25 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
     }
 
+    void approach()
+    {
+        // check if we've reached the npc
+        if (transform.position.x - sensitivity < brawlPartner.transform.position.x && transform.position.x + sensitivity > brawlPartner.transform.position.x)
+        {
+            if (transform.position.y - sensitivity < brawlPartner.transform.position.y && transform.position.y + sensitivity > brawlPartner.transform.position.y)
+            {
+                startABrawl();
+                return;
+            }
+        }
+
+        Vector3 currPos = transform.position;
+        Vector2 dir = new Vector2(brawlPartner.transform.position.x - currPos.x, brawlPartner.transform.position.y - currPos.y);
+        dir.Normalize();
+
+        transform.position = new Vector3(currPos.x + dir.x * 0.05f, currPos.y + dir.y * 0.05f, 0);
+    }
+
     public Color getColor()
     {
         return spriteRender.color;
@@ -241,15 +312,105 @@ public class NPCSpriteBehavior : MonoBehaviour
     public void givenFood(string received)
     {
         if(currentState == "eating") { return; }
+        if(currentState == "brawling" || currentState == "preBrawl") 
+        {
+            if (mytable != null)
+            {
+                angry = true;
+                leaveTable();
+            }
+            mytable = null;
+            return; 
+        }
         currentState = "eating";
 
         // check if food is our correct order
         if (received != myOrder)
         {
             angry = true;
+            if (Random.value < brawlChance)
+            {
+                findBrawlTarget();
+            }
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
         timerStart = Time.time;
+    }
+
+    private void startABrawl()
+    {
+        if (currentState == "preBrawl")
+        {
+            // this is called when we have reached the target
+
+            // instantiate a brawl sprite
+            float xpos = transform.position.x + (brawlPartner.transform.position.x - transform.position.x) / 2;
+            float ypos = transform.position.y + (brawlPartner.transform.position.y - transform.position.y) / 2;
+            GameObject br = Instantiate(BrawlPrefab, new Vector3(xpos, ypos, 0), Quaternion.identity);
+
+            // tell the brawl that it's started
+            br.GetComponent<Brawl>().startBrawl(gameObject, brawlPartner);
+        }
+    }
+
+    private void findBrawlTarget ()
+    {
+        NPCSpriteBehavior closest = null;
+        float minDist = float.PositiveInfinity;
+
+        // find nearest npc
+        foreach (NPCSpriteBehavior o in GameObject.FindObjectsOfType<NPCSpriteBehavior>())
+        {
+            // if not us
+            if (o != gameObject.GetComponent<NPCSpriteBehavior>())
+            {
+                Vector2 dist = new Vector2(o.transform.position.x - transform.position.x, o.transform.position.y - transform.position.y);
+                float distval = Mathf.Sqrt(dist.x * dist.x + dist.y * dist.y);
+                if (minDist > distval)
+                {
+                    minDist = distval;
+                    closest = o;
+                }
+
+            }
+        }
+
+        if (closest != null)
+        {
+            if (closest.engageInBrawl(gameObject))
+            {
+                brawlPartner = closest.gameObject;
+                currentState = "preBrawl";
+            }
+        }
+
+
+    }
+
+    public bool engageInBrawl(GameObject npc)
+    {
+        // if not already in a brawl and on the screen
+        if (brawlPartner == null && transform.position.y > -13)
+        {
+            brawlPartner = npc;
+            currentState = "preBrawl";
+            angry = true;
+            if (mytable)
+            {
+                leaveTable();
+                mytable = null;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public void enterBrawl()
+    {
+        // stop rendering npc
+        spriteRender.enabled = false;
+
+        currentState = "brawling";
     }
 }

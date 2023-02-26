@@ -18,6 +18,7 @@ public class player1control : MonoBehaviour
 
     // bools (optimize later)
     public bool carrying;
+    public bool inRangeBrawl;
     public bool inRangeKeg;
     public bool inRangeRack;
     public bool inRangeDog;
@@ -77,9 +78,18 @@ public class player1control : MonoBehaviour
         var vmove1 = Input.GetAxis("Vertical");
         transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove1, vmove1) * speed * Time.deltaTime;
 
+        var interacting = Input.GetKeyDown(KeyCode.E);
+
+        // If in range of a brawl can't interact with anything else
+        if (inRangeBrawl == true & interacting)
+        {
+            // try to break up brawl
+            return;
+        }
+
         // Pick up beer from keg
         if (inRangeKeg == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == false)
         {
             pickupFromSource(gameObject, BoozePrefab);
@@ -90,7 +100,7 @@ public class player1control : MonoBehaviour
 
         // Get meat from rack
         if (inRangeRack == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == false)
         {
             pickupFromSource(gameObject, MeatPrefab);
@@ -100,7 +110,7 @@ public class player1control : MonoBehaviour
         }
 
         // Serve Table
-        if (canServe & Input.GetKeyDown(KeyCode.E))
+        if (canServe & interacting)
         {
             servable.serveSeat(gameObject);
             GetComponent<SpriteRenderer>().sprite = normalsprite;
@@ -108,7 +118,7 @@ public class player1control : MonoBehaviour
 
         // Feed the Dog
         if (inRangeDog == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == true)
         {
             FeedtheDog();
@@ -118,7 +128,7 @@ public class player1control : MonoBehaviour
 
         // Place meat onto the prep station
         if (inRangePrep == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == true &
             currentObject == "Meat" &
             Prep.GetComponent<prepStation>().holdingItem == false)
@@ -135,7 +145,7 @@ public class player1control : MonoBehaviour
         if (inRangePrep == true & 
             Prep.GetComponent<prepStation>().holdingItem == true &
             Prep.GetComponent<prepStation>().prepComplete == false &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == false)
         {
             PrepItem();
@@ -144,7 +154,7 @@ public class player1control : MonoBehaviour
         // Pick up prepped meat
         if (Prep.GetComponent<prepStation>().holdingItem == true &
             Prep.GetComponent<prepStation>().prepComplete == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == false)
         {
             pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
@@ -155,7 +165,7 @@ public class player1control : MonoBehaviour
 
         // Place prepped meat onto cooking station
         if (inRangeHeat == true &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == true &
             currentObject == "PreppedMeat" &
             Cook.GetComponent<cookStation>().holdingItem == false)
@@ -173,7 +183,7 @@ public class player1control : MonoBehaviour
             Cook.GetComponent<cookStation>().holdingItem == true &
             (Cook.GetComponent<cookStation>().cooked == true | 
             Cook.GetComponent<cookStation>().burnt == true) &
-            Input.GetKeyDown(KeyCode.E) &
+            interacting &
             carrying == false)
         {
             cmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
@@ -202,6 +212,10 @@ public class player1control : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Equals("Brawl"))
+        {
+            inRangeBrawl = true;
+        }
         if (collision.gameObject.name.Equals("MeatStorage"))
         {
             inRangeRack = true;
@@ -226,6 +240,10 @@ public class player1control : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.name.Equals("Brawl"))
+        {
+            inRangeBrawl = false;
+        }
         if (collision.gameObject.name.Equals("MeatStorage"))
         {
             inRangeRack = false;

@@ -135,13 +135,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeRemaining: 0
-  speed: 5
-  seated: 0
-  reachedSeat: 0
-  hasFood: 0
-  leaving: 0
-  orderAdded: 0
+  patience: 0
   seatCoords: {x: 0, y: 0, z: 0}
   mytable: {fileID: 0}
-  startedTimer: 0
-  tempTimer: 2
+  BrawlPrefab: {fileID: 349381728258701337, guid: 87fe538311d7937449d7ffe8f8acf7da, type: 3}
+  timerStart: 0

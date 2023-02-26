@@ -31,7 +31,7 @@ public class Table : MonoBehaviour
     /// Arrays of stats about food on the table
     public GameObject[] foodServed = { null, null, null, null }; // the game objects of the food served
     public string[] foodTypes = { "", "", "", "" }; // the types of food served
-    private bool[] locked = { false, false, false, false }; // whether the food is locked
+    public bool[] locked = { false, false, false, false }; // whether the food is locked
 
     /// <summary>
     /// nothing for now
@@ -45,6 +45,10 @@ public class Table : MonoBehaviour
             {
                 atTable[i].GetComponent<NPCSpriteBehavior>().givenFood(foodTypes[i]);
                 locked[i] = true;
+            }
+            if(foodServed[i]!= null && atTable[i] == null && foodServed[i].GetComponent<Coin>() == null)
+            {
+                locked[i] = false;
             }
         }
     }
