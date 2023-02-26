@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
     public enum popularity
     {
         correct = 1,
-        incorrect = -1
+        incorrect = -1,
+        leave = -5,
+        fight = -10
     }
 
 
@@ -43,6 +45,11 @@ public class GameManager : MonoBehaviour
         totalCoins += value;
         textDisp.GetComponent<UnityEngine.UI.Text>().text = totalCoins.ToString();
         
+        reputation += effect;
+    }
+
+    public void noPatience(int effect)
+    {
         reputation += effect;
     }
 }
