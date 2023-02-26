@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: bd809205eec4f41e1bbbe6a3dc455039
+guid: 4a65b7c7c2c7eac43bbd26e596ed769f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5287370334769569202
-    second: Human Fighter NPC Sprites_0
+      213: 8903608049025104197
+    second: Stars_0
   - first:
-      213: 4033628617214597204
-    second: Human Fighter NPC Sprites_1
+      213: -7678458166956771760
+    second: Stars_1
   - first:
-      213: 8855140945352325734
-    second: Human Fighter NPC Sprites_2
+      213: 1222489850116747820
+    second: Stars_2
   - first:
-      213: -988653767376721563
-    second: Human Fighter NPC Sprites_3
+      213: 908394461399428893
+    second: Stars_3
   - first:
-      213: 3291819721422628012
-    second: Human Fighter NPC Sprites_4
+      213: 6356170700173641542
+    second: Stars_4
   - first:
-      213: -2311948654239813478
-    second: Human Fighter NPC Sprites_5
+      213: -7166871409661841802
+    second: Stars_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -50,7 +50,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -64,12 +64,12 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 5
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 2, y: 2, z: 148, w: 1}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: -1
+  spriteTessellationDetail: 0
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -86,7 +86,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -98,7 +98,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 2
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,75 +109,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_0
+      name: Stars_0
       rect:
         serializedVersion: 2
-        x: 7
-        y: 1
-        width: 19
-        height: 31
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2bdd0e74e43806940800000000000000
-      internalID: 5287370334769569202
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Human Fighter NPC Sprites_1
-      rect:
-        serializedVersion: 2
-        x: 39
-        y: 1
-        width: 18
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4581de43bd35af730800000000000000
-      internalID: 4033628617214597204
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Human Fighter NPC Sprites_2
-      rect:
-        serializedVersion: 2
-        x: 71
-        y: 1
-        width: 18
-        height: 30
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 66afdb3f5c7c3ea70800000000000000
-      internalID: 8855140945352325734
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Human Fighter NPC Sprites_3
-      rect:
-        serializedVersion: 2
-        x: 102
-        y: 1
-        width: 18
+        x: 2
+        y: 2
+        width: 28
         height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -186,19 +123,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 569a8adf2a89742f0800000000000000
-      internalID: -988653767376721563
+      spriteID: 5493375e858ff8b70800000000000000
+      internalID: 8903608049025104197
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_4
+      name: Stars_1
       rect:
         serializedVersion: 2
-        x: 135
-        y: 1
-        width: 18
+        x: 31
+        y: 2
+        width: 28
         height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -207,20 +144,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca465088894eead20800000000000000
-      internalID: 3291819721422628012
+      spriteID: 05638d7baf2a07590800000000000000
+      internalID: -7678458166956771760
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_5
+      name: Stars_2
       rect:
         serializedVersion: 2
-        x: 167
-        y: 1
-        width: 18
-        height: 31
+        x: 61
+        y: 2
+        width: 28
+        height: 29
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,13 +165,101 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a90f71db2fe4aefd0800000000000000
-      internalID: -2311948654239813478
+      spriteID: c22bab9aa0827f010800000000000000
+      internalID: 1222489850116747820
       vertices: []
       indices: 
       edges: []
       weights: []
-    outline: []
+    - serializedVersion: 2
+      name: Stars_3
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 2
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1f25a323f34b9c00800000000000000
+      internalID: 908394461399428893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stars_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 2
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 647889b4397a53850800000000000000
+      internalID: 6356170700173641542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stars_5
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 2
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67ee334bc682a8c90800000000000000
+      internalID: -7166871409661841802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline:
+    - - {x: -87, y: -14}
+      - {x: -87, y: 15}
+      - {x: -59, y: 15}
+      - {x: -59, y: 2}
+      - {x: -59, y: -14}
+    - - {x: -58, y: -14}
+      - {x: -58, y: 15}
+      - {x: -30, y: 15}
+      - {x: -30, y: -14}
+    - - {x: -28, y: -14}
+      - {x: -28, y: 15}
+      - {x: 0, y: 15}
+      - {x: 0, y: -14}
+    - - {x: 1, y: -14}
+      - {x: 1, y: 15}
+      - {x: 29, y: 15}
+      - {x: 29, y: -14}
+    - - {x: 31, y: -14}
+      - {x: 31, y: 15}
+      - {x: 59, y: 15}
+      - {x: 59, y: -14}
+    - - {x: 60, y: -14}
+      - {x: 60, y: 15}
+      - {x: 88, y: 15}
+      - {x: 88, y: -14}
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000

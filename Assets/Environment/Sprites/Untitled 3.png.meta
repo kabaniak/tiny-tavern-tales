@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: bd809205eec4f41e1bbbe6a3dc455039
+guid: 98c1e3458b7544ab48d62aa557544fed
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5287370334769569202
-    second: Human Fighter NPC Sprites_0
+      213: 7803728991293593061
+    second: Untitled 3_0
   - first:
-      213: 4033628617214597204
-    second: Human Fighter NPC Sprites_1
+      213: -1053717758255093624
+    second: Untitled 3_1
   - first:
-      213: 8855140945352325734
-    second: Human Fighter NPC Sprites_2
+      213: -7927429183465396037
+    second: Untitled 3_2
   - first:
-      213: -988653767376721563
-    second: Human Fighter NPC Sprites_3
+      213: -5894216138622135854
+    second: Untitled 3_3
   - first:
-      213: 3291819721422628012
-    second: Human Fighter NPC Sprites_4
+      213: 1616379112726634435
+    second: Untitled 3_4
   - first:
-      213: -2311948654239813478
-    second: Human Fighter NPC Sprites_5
+      213: 5772575562815957040
+    second: Untitled 3_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -109,127 +109,127 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_0
+      name: Untitled 3_0
       rect:
         serializedVersion: 2
         x: 7
-        y: 1
-        width: 19
-        height: 31
+        y: 0
+        width: 18
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bdd0e74e43806940800000000000000
-      internalID: 5287370334769569202
+      spriteID: 5e5d871fb2a6c4c60800000000000000
+      internalID: 7803728991293593061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_1
+      name: Untitled 3_1
       rect:
         serializedVersion: 2
         x: 39
-        y: 1
+        y: 0
         width: 18
-        height: 30
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4581de43bd35af730800000000000000
-      internalID: 4033628617214597204
+      spriteID: 8882fad18417061f0800000000000000
+      internalID: -1053717758255093624
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_2
+      name: Untitled 3_2
       rect:
         serializedVersion: 2
         x: 71
-        y: 1
+        y: 0
         width: 18
-        height: 30
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66afdb3f5c7c3ea70800000000000000
-      internalID: 8855140945352325734
+      spriteID: bb8ea71b82d1cf190800000000000000
+      internalID: -7927429183465396037
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_3
+      name: Untitled 3_3
       rect:
         serializedVersion: 2
         x: 102
-        y: 1
+        y: 0
         width: 18
-        height: 29
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 569a8adf2a89742f0800000000000000
-      internalID: -988653767376721563
+      spriteID: 2d19d0c96a9833ea0800000000000000
+      internalID: -5894216138622135854
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_4
+      name: Untitled 3_4
       rect:
         serializedVersion: 2
-        x: 135
-        y: 1
+        x: 134
+        y: 0
         width: 18
-        height: 29
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca465088894eead20800000000000000
-      internalID: 3291819721422628012
+      spriteID: 3cf9e643d388e6610800000000000000
+      internalID: 1616379112726634435
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Human Fighter NPC Sprites_5
+      name: Untitled 3_5
       rect:
         serializedVersion: 2
-        x: 167
-        y: 1
+        x: 166
+        y: 0
         width: 18
-        height: 31
+        height: 30
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a90f71db2fe4aefd0800000000000000
-      internalID: -2311948654239813478
+      spriteID: 038eeb4d3ee4c1050800000000000000
+      internalID: 5772575562815957040
       vertices: []
       indices: 
       edges: []

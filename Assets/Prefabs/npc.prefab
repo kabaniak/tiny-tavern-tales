@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6292195650429294072
+--- !u!1 &7427308276122731120
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5444938325567994404}
-  - component: {fileID: 4179557975892566072}
-  - component: {fileID: 8139119705289115186}
-  - component: {fileID: -3437706608764612575}
-  - component: {fileID: -5195526707513729270}
+  - component: {fileID: 4221392214259582634}
+  - component: {fileID: 2308459276369843561}
+  - component: {fileID: 2533903248310760259}
   m_Layer: 0
   m_Name: npc
   m_TagString: NPC
@@ -20,27 +18,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5444938325567994404
+--- !u!4 &4221392214259582634
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6292195650429294072}
+  m_GameObject: {fileID: 7427308276122731120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.17, y: -0.12, z: 0}
-  m_LocalScale: {x: 1.56, y: 1.63, z: 1}
+  m_LocalPosition: {x: 44.9, y: 9.6, z: -7.2940407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4179557975892566072
+--- !u!212 &2308459276369843561
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6292195650429294072}
+  m_GameObject: {fileID: 7427308276122731120}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -74,61 +72,24 @@ SpriteRenderer:
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
   m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: f1d2551f1195f1b4cb5d97749150ae20, type: 3}
-  m_Color: {r: 0.735849, g: 0.72613025, b: 0.72613025, a: 0.6156863}
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.04, y: 3.23}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!210 &8139119705289115186
-SortingGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6292195650429294072}
-  m_Enabled: 1
-  m_SortingLayerID: 1257763975
-  m_SortingLayer: 1
-  m_SortingOrder: 2
---- !u!61 &-3437706608764612575
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6292195650429294072}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.04, y: 3.23}
-    newSize: {x: 2.04, y: 3.23}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4, y: 5}
-  m_EdgeRadius: 0
---- !u!114 &-5195526707513729270
+--- !u!114 &2533903248310760259
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6292195650429294072}
+  m_GameObject: {fileID: 7427308276122731120}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fa118475b45a83d46837cc6d1d703630, type: 3}
@@ -138,5 +99,27 @@ MonoBehaviour:
   patience: 0
   seatCoords: {x: 0, y: 0, z: 0}
   mytable: {fileID: 0}
+  brawlPartner: {fileID: 0}
   BrawlPrefab: {fileID: 349381728258701337, guid: 87fe538311d7937449d7ffe8f8acf7da, type: 3}
   timerStart: 0
+  HumanSprites:
+  - {fileID: 5287370334769569202, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  - {fileID: 4033628617214597204, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  - {fileID: 8855140945352325734, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  - {fileID: -988653767376721563, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  - {fileID: 3291819721422628012, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  - {fileID: -2311948654239813478, guid: bd809205eec4f41e1bbbe6a3dc455039, type: 3}
+  TieflingSprites:
+  - {fileID: -1177230911424202732, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  - {fileID: -6133732825554281215, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  - {fileID: -7497983957789616728, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  - {fileID: -2534015848740384055, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  - {fileID: 7897509282891101175, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  - {fileID: -27503202855735340, guid: 6b57eb72c3f684b1780280d0f93c865a, type: 3}
+  ElfSprites:
+  - {fileID: 7803728991293593061, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}
+  - {fileID: -1053717758255093624, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}
+  - {fileID: -7927429183465396037, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}
+  - {fileID: -5894216138622135854, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}
+  - {fileID: 1616379112726634435, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}
+  - {fileID: 5772575562815957040, guid: 98c1e3458b7544ab48d62aa557544fed, type: 3}

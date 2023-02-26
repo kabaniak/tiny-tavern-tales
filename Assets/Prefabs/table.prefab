@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2937920956612228396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.1679392, y: -4.0458016, z: 0}
-  m_LocalScale: {x: 2.153049, y: 2.33605, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 1257763975
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: dc819152c651d1042ad600dafd01347c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09eb64e14c5e7494fa4d6219dd36d466, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,6 +104,16 @@ MonoBehaviour:
   CoinPrefab: {fileID: 2847433371952488076, guid: fdc0ec3ba1eacd94db50f5818fde1230, type: 3}
   CookedMeatPrefab: {fileID: 3715560899715520505, guid: f18ab430b8efe8d4cbc15ec16e4a05d3, type: 3}
   BurntMeatPrefab: {fileID: 2907171010765767753, guid: 3d16f861ac45cf04db8d83748213e1d5, type: 3}
+  b_sprite: {fileID: 2256643247938351710, guid: 6af9292f128164288b6e90834901d957, type: 3}
+  upm_sprite: {fileID: -9024087300701384196, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  ucm_sprite: {fileID: -9077281597318736177, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  cm_sprite: {fileID: 7957065889850167295, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  bm_sprite: {fileID: -8224086549492008022, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  b_sprite2: {fileID: -8938701872669142869, guid: 6af9292f128164288b6e90834901d957, type: 3}
+  upm_sprite2: {fileID: -6795185171421732328, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  ucm_sprite2: {fileID: -4243127760521825661, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  cm_sprite2: {fileID: 9139909356880594190, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+  bm_sprite2: {fileID: -8989289257294120553, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
   atTable:
   - {fileID: 0}
   - {fileID: 0}
@@ -119,6 +129,7 @@ MonoBehaviour:
   - 
   - 
   - 
+  locked: 00000000
 --- !u!50 &7554558924196623631
 Rigidbody2D:
   serializedVersion: 4
@@ -153,9 +164,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.09836674, y: 1.2950974}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 3.622878
 --- !u!58 &9051054413382485141
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,6 +180,6 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 1.3771214}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 6.6722198

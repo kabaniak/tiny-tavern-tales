@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
 
     int totalCoins = 0;
-    int reputation = 50;
+    public int reputation = 13;
+    public int maxRating = 25;
 
     GameObject textDisp;
     public enum prices
@@ -19,7 +20,9 @@ public class GameManager : MonoBehaviour
     public enum popularity
     {
         correct = 1,
-        incorrect = -1
+        incorrect = -1,
+        leave = -3,
+        fight = -5
     }
 
 
@@ -43,6 +46,11 @@ public class GameManager : MonoBehaviour
         totalCoins += value;
         textDisp.GetComponent<UnityEngine.UI.Text>().text = totalCoins.ToString();
         
+        reputation += effect;
+    }
+
+    public void noPatience(int effect)
+    {
         reputation += effect;
     }
 }
