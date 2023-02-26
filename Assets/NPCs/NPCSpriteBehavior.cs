@@ -39,6 +39,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public List<Sprite> HumanSprites;
     public List<Sprite> TieflingSprites;
     public List<Sprite> ElfSprites;
+    int spritenum;
 
     // Start is called before the first frame update
     void Start()
@@ -70,7 +71,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         //orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
         //spriteRender.color = orig;
         //Choose NPC sprite
-        int spritenum = Random.Range(0, 6);
+        spritenum = Random.Range(0, 6);
         if (NPCtype == "HumanFighter")
         {
             spriteRender.sprite = HumanSprites[spritenum];
@@ -235,9 +236,14 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
     }
 
-    public Color getColor()
+    public int getSpriteNum()
     {
-        return spriteRender.color;
+        return spritenum;
+    }
+
+    public string getSpriteType()
+    {
+        return NPCtype;
     }
 
     void leaveTable()

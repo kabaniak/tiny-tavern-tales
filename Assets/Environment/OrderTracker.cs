@@ -14,6 +14,7 @@ public class OrderTracker : MonoBehaviour
     public GameObject MeatPrefab;
     public GameObject FacePrefab;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +36,15 @@ public class OrderTracker : MonoBehaviour
                 float xPos = 2;
                 float yPos = 15 - 4 * i;
                 orderDisplay[i]=Instantiate(OrderPrefab, transform.position + new Vector3(xPos, yPos, 0), Quaternion.identity, transform);
-                Color npcColor = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getColor();
+                int npcSpriteNum = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getSpriteNum();
+                string npcSpriteType = npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getSpriteType();
                 if (npcOrderInfo[i].GetComponent<NPCSpriteBehavior>().getMyOrder() == "Booze")
                 {
-                    orderDisplay[i].GetComponent<Order>().DisplayOrder(BoozePrefab, FacePrefab, npcColor);
+                    orderDisplay[i].GetComponent<Order>().DisplayOrder(BoozePrefab, FacePrefab, npcSpriteNum, npcSpriteType);
                 }
                 else
                 {
-                    orderDisplay[i].GetComponent<Order>().DisplayOrder(MeatPrefab, FacePrefab, npcColor);
+                    orderDisplay[i].GetComponent<Order>().DisplayOrder(MeatPrefab, FacePrefab, npcSpriteNum, npcSpriteType);
                 }
             }
         }
