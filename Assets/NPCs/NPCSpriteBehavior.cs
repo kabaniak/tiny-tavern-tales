@@ -26,6 +26,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public Vector3 seatCoords;
     public GameObject mytable;
 
+    private string NPCtype;
     private int haveReached = 0;
     private float sensitivity = 0.3f;
     private bool forward = true;
@@ -34,6 +35,11 @@ public class NPCSpriteBehavior : MonoBehaviour
     // temporary timer info
     public float timerStart = 0;
 
+    //NPC Sprites
+    public List<Sprite> HumanSprites;
+    public List<Sprite> TieflingSprites;
+    public List<Sprite> ElfSprites;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,10 +47,42 @@ public class NPCSpriteBehavior : MonoBehaviour
         timeRemaining = 40;
         spriteRender = GetComponent<SpriteRenderer>();
 
-        orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
-        spriteRender.color = orig;
-        tolerance = 0.8f;
-        patience = 50f;
+        //choose NPC type
+        int typenum = Random.Range(0, 3);
+        if (typenum == 0)
+        {
+            NPCtype = "HumanFighter";
+            tolerance = 1.0f;
+            patience = 30f;
+        }
+        else if (typenum == 1)
+        {
+            NPCtype = "TieflingSorcerer";
+            tolerance = 0.2f;
+            patience = 90f;
+        }
+        else if (typenum == 2)
+        {
+            NPCtype = "ElfRogue";
+            tolerance = 0.5f;
+            patience = 70f;
+        }
+        //orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
+        //spriteRender.color = orig;
+        //Choose NPC sprite
+        int spritenum = Random.Range(0, 6);
+        if (NPCtype == "HumanFighter")
+        {
+            spriteRender.sprite = HumanSprites[spritenum];
+        }
+        else if (NPCtype == "TieflingSorcerer")
+        {
+            spriteRender.sprite = TieflingSprites[spritenum];
+        }
+        else if (NPCtype == "ElfRogue")
+        {
+            spriteRender.sprite = ElfSprites[spritenum];
+        }
     }
 
     // Update is called once per frame
