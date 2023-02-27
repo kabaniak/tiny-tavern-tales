@@ -19,6 +19,8 @@ public class Brawl : MonoBehaviour
     Vector2 circleCenter;
     Vector2 startDir;
 
+    float currAngle;
+
     float nextDam;
     float interval = 2.5f;
 
@@ -65,7 +67,7 @@ public class Brawl : MonoBehaviour
         var p1Here = GameObject.FindObjectOfType<player1control>().inRangeBrawl;
         var p2Here = GameObject.FindObjectOfType<player2control>().inRangeBrawl;
 
-        if (p1Here && p2Here)
+        if (p1Here == gameObject && p2Here == gameObject)
         {
             if (p1Interacting && p2Interacting)
             {
@@ -134,11 +136,27 @@ public class Brawl : MonoBehaviour
             if(distFromCenter < radius + 0.1 && distFromCenter > radius - 0.1)
             {
                 onPath = true;
+
+                currAngle = Mathf.Atan2(currPos.y - circleCenter.y, currPos.x - circleCenter.x);
             }
         }
         else
         {
+            currAngle += 0.02f;
 
+            float newXPos = circleCenter.x + Mathf.Cos(currAngle) * radius;
+            float newYPos = circleCenter.y + Mathf.Sin(currAngle) * radius;
+
+            if(Random.value > 0.8)
+            {
+                newXPos += Random.Range(-.5f, 0.5f);
+            }
+            if(Random.value > 0.8)
+            {
+                newYPos += Random.Range(-.5f, 0.5f);
+            }
+
+            transform.position = new Vector3(newXPos, newYPos, 0);
         }
     }
 }

@@ -18,7 +18,7 @@ public class player1control : MonoBehaviour
 
     // bools (optimize later)
     public bool carrying;
-    public bool inRangeBrawl;
+    public GameObject inRangeBrawl = null;
     public bool inRangeKeg;
     public bool inRangeRack;
     public bool inRangeDog;
@@ -81,7 +81,7 @@ public class player1control : MonoBehaviour
         var interacting = Input.GetKeyDown(KeyCode.E);
 
         // If in range of a brawl can't interact with anything else
-        if (inRangeBrawl == true & interacting)
+        if (inRangeBrawl != null & interacting)
         {
             // try to break up brawl
             return;
@@ -214,7 +214,7 @@ public class player1control : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Brawl"))
         {
-            inRangeBrawl = true;
+            inRangeBrawl = collision.gameObject;
         }
         if (collision.gameObject.name.Equals("MeatStorage"))
         {
@@ -242,7 +242,7 @@ public class player1control : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Brawl"))
         {
-            inRangeBrawl = false;
+            inRangeBrawl = null;
         }
         if (collision.gameObject.name.Equals("MeatStorage"))
         {
