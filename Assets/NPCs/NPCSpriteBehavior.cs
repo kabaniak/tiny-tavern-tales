@@ -477,6 +477,10 @@ public class NPCSpriteBehavior : MonoBehaviour
     {
         // stop rendering npc
         spriteRender.enabled = true;
+        if(haveReached == 0)
+        {
+            haveReached = 1;
+        }
 
         currentState = "leaving";
     }

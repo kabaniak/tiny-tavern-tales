@@ -19,6 +19,7 @@ public class player1control : MonoBehaviour
     // bools (optimize later)
     public bool carrying;
     public GameObject inRangeBrawl = null;
+    public GameObject inRangeMess = null;
     public bool inRangeKeg;
     public bool inRangeRack;
     public bool inRangeDog;
@@ -79,6 +80,7 @@ public class player1control : MonoBehaviour
         transform.GetComponent<Rigidbody2D>().position += new Vector2(hmove1, vmove1) * speed * Time.deltaTime;
 
         var interacting = Input.GetKeyDown(KeyCode.E);
+        bool didSomething = false;
 
         // If in range of a brawl can't interact with anything else
         if (inRangeBrawl != null & interacting)
@@ -96,6 +98,7 @@ public class player1control : MonoBehaviour
             carrying = true;
             currentObject = "Booze";
             GetComponent<SpriteRenderer>().sprite = b_sprite;
+            didSomething = true;
         }
 
         // Get meat from rack
@@ -107,12 +110,13 @@ public class player1control : MonoBehaviour
             carrying = true;
             currentObject = "Meat";
             GetComponent<SpriteRenderer>().sprite = upm_sprite;
+            didSomething = true;
         }
 
         // Serve Table
         if (canServe & interacting)
         {
-            servable.serveSeat(gameObject);
+            didSomething = servable.serveSeat(gameObject);
             GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
@@ -124,6 +128,7 @@ public class player1control : MonoBehaviour
             FeedtheDog();
             GetComponent<SpriteRenderer>().sprite = normalsprite;
             FindObjectOfType<TrashDog>().GetComponent<SpriteRenderer>().sprite = FindObjectOfType<TrashDog>().heart_sprite;
+            didSomething = true;
         }
 
         // Place meat onto the prep station
@@ -139,6 +144,7 @@ public class player1control : MonoBehaviour
             Prep.GetComponent<prepStation>().holdingItem = true;
             carrying = false;
             GetComponent<SpriteRenderer>().sprite = normalsprite;
+            didSomething = true;
         }
 
         // Prep the meat
@@ -149,6 +155,7 @@ public class player1control : MonoBehaviour
             carrying == false)
         {
             PrepItem();
+            didSomething = true;
         }
 
         // Pick up prepped meat
@@ -161,6 +168,7 @@ public class player1control : MonoBehaviour
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
             GetComponent<SpriteRenderer>().sprite = ucm_sprite;
+            didSomething = true;
         }
 
         // Place prepped meat onto cooking station
@@ -176,6 +184,7 @@ public class player1control : MonoBehaviour
             Cook.GetComponent<cookStation>().holdingItem = true;
             carrying = false;
             GetComponent<SpriteRenderer>().sprite = normalsprite;
+            didSomething = true;
         }
 
         // Pick up cooked or burnt meat from station
@@ -200,6 +209,14 @@ public class player1control : MonoBehaviour
                 GetComponent<SpriteRenderer>().sprite = bm_sprite;
             }
             Cook.GetComponent<cookStation>().doomsday = true;
+            didSomething = true;
+        }
+
+        // if didn't do anything else
+        if(!didSomething && inRangeMess != null && interacting)
+        {
+            Destroy(inRangeMess);
+            inRangeMess = null;
         }
     }
 
@@ -212,6 +229,10 @@ public class player1control : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag.Equals("Mess"))
+        {
+            inRangeMess = collision.gameObject;
+        }
         if (collision.gameObject.tag.Equals("Brawl"))
         {
             inRangeBrawl = collision.gameObject;
@@ -240,6 +261,10 @@ public class player1control : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag.Equals("Mess"))
+        {
+            inRangeMess = null;
+        }
         if (collision.gameObject.tag.Equals("Brawl"))
         {
             inRangeBrawl = null;

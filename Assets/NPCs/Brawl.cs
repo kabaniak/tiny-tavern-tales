@@ -23,8 +23,8 @@ public class Brawl : MonoBehaviour
     float currAngle;
 
     float nextDam;
-    int sinceMess = 0;
-    int messInt = 3;
+    int sinceMess = 2;
+    int messInt = 2;
     float interval = 2.5f;
 
 
@@ -193,6 +193,6 @@ public class Brawl : MonoBehaviour
             yPos = 15 + Random.Range(-2f, 0);
         }
         GameObject messNew = Instantiate(messPrefab, new Vector3(xPos, yPos, 0), Quaternion.identity);
-        messNew.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0f, 1f, 0f, 0.6f, 0.9f, 1.0f);
+        messNew.GetComponent<SpriteRenderer>().color = Random.ColorHSV(0.07f, 1f, 0f, 0.6f, 0.9f, 1.0f);
     }
 }

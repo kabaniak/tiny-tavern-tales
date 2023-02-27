@@ -280,7 +280,7 @@ public class Table : MonoBehaviour
         return closest;
     }
 
-    public void serveSeat(GameObject o)
+    public bool serveSeat(GameObject o)
     {
         int closest = getClosestInd(o);
 
@@ -334,7 +334,7 @@ public class Table : MonoBehaviour
                     foodTypes[closest] = "";
                     player.canServe = true;
                     player.servable = this;
-                    return;
+                    return true;
                 }
             }
             else if (player.currentObject == "Booze")
@@ -363,6 +363,7 @@ public class Table : MonoBehaviour
                 foodServed[closest] = createOnTable(closest, toCreate);
                 foodTypes[closest] = player.currentObject;
                 player.FeedtheDog();
+                return true;
             }
         }
         else if(o.tag == "Player2")
@@ -416,7 +417,7 @@ public class Table : MonoBehaviour
                     player.canServe = true;
                     player.servable = this;
                     foodTypes[closest] = "";
-                    return;
+                    return true;
                 }
             }
             else if (player.currentObject == "Booze")
@@ -445,8 +446,10 @@ public class Table : MonoBehaviour
                 foodServed[closest] = createOnTable(closest, toCreate);
                 foodTypes[closest] = player.currentObject;
                 player.FeedtheDog();
+                return true;
             }
         }
+        return false;
     }
 
     public GameObject createOnTable(int seat, GameObject source)
