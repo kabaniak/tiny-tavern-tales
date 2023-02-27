@@ -8,16 +8,27 @@ public class starRatingBar : MonoBehaviour
     public GameManager gameManager;
     List<starRating> stars = new List<starRating>();
 
+    public void Start()
+    {
+        DrawStars();
+    }
+
     public void DrawStars()
     {
         ClearStars();
 
         float maxStarRemainder = gameManager.maxRating % 5;
-        int starsToMake = (int)((gameManager.maxRating / 2) + maxStarRemainder);
+        int starsToMake = (int)((gameManager.maxRating / 5) + maxStarRemainder);
 
         for(int i = 0; i < starsToMake; i++)
         {
             CreateEmptyStar();
+        }
+
+        for(int i = 0; i < stars.Count; i++)
+        {
+            int starStatusRemainder = (int)Mathf.Clamp(gameManager.reputation - (i*5), 0, 5);
+            stars[i].SetStarImage((StarStatus)starStatusRemainder);
         }
     }
 
