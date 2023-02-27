@@ -7,14 +7,16 @@ public class NPCSpriteBehavior : MonoBehaviour
     SpriteRenderer spriteRender;
 
     Color angryColor = new Color(1, 0, 0, 1.75f);
+    Color orig;
 
     // information about the npc's stats
     private string myOrder = ""; // their order
-    public float timeRemaining; // how long they'll wait
     private float speed = 0.1f; // how fast they move
     private bool angry = false;
+    private float origPatience;
     public float patience; // how willing they are to wait
     private float tolerance; // how quickly they lose patience
+    private float hardOrder;
     private float brawlChance;
 
     // string representing the npc's state
@@ -48,8 +50,6 @@ public class NPCSpriteBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // the amount of time this npc will wait for
-        timeRemaining = 40;
         spriteRender = GetComponent<SpriteRenderer>();
 
         //choose NPC type
@@ -60,6 +60,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             tolerance = 1.0f;
             patience = 30f;
             brawlChance = 0.7f;
+            hardOrder = 0.2f;
         }
         else if (typenum == 1)
         {
@@ -67,6 +68,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             tolerance = 0.2f;
             patience = 90f;
             brawlChance = 0.2f;
+            hardOrder = 0.5f;
         }
         else if (typenum == 2)
         {
@@ -74,7 +76,9 @@ public class NPCSpriteBehavior : MonoBehaviour
             tolerance = 0.5f;
             patience = 70f;
             brawlChance = 0.4f;
+            hardOrder = 0.35f;
         }
+        origPatience = patience;
 
         //orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
         //spriteRender.color = orig;
@@ -108,7 +112,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             if (angry)
             {
-                spriteRender.color = Color.Lerp(new Color(1,1,1), angryColor, (Time.time - timerStart) / 2f);
+                spriteRender.color = Color.Lerp(orig, angryColor, (Time.time - timerStart) / 2f);
             }
 
             // if timer has run out it should leave
@@ -187,8 +191,12 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
         }
 
-
         patience -= tolerance * Time.deltaTime;
+        if (!angry)
+        {
+            spriteRender.color = Color.Lerp(angryColor, new Color(1, 1, 1), patience / (origPatience - 10f));
+        }
+
     }
 
     private void FixedUpdate()
@@ -202,6 +210,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         // if not at table yet
         else if (currentState == "toSeat")
         {
+            patience = origPatience;
             forward = true;
             move();
         }
@@ -343,7 +352,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     private void createOrder()
     {
         float ord = Random.value;
-        if (ord < .5)
+        if (ord > hardOrder)
         {
             myOrder = "Booze";
         }
@@ -380,6 +389,7 @@ public class NPCSpriteBehavior : MonoBehaviour
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
         timerStart = Time.time;
+        orig = spriteRender.color;
     }
 
     private void startABrawl()

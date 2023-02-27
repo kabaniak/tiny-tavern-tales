@@ -120,7 +120,6 @@ public class Table : MonoBehaviour
                 Destroy(foodServed[i]);
 
                 foodServed[i] = createOnTable(i, CoinPrefab);
-                foodServed[i].transform.localScale = new Vector3(0.25f, 0.25f, 1);
                 foodServed[i].GetComponent<Coin>().myTable = gameObject;
 
                 foodServed[i].GetComponent<Coin>().value[0] = price;
@@ -355,7 +354,7 @@ public class Table : MonoBehaviour
                 toCreate = BurntMeatPrefab;
             }
 
-            if (foodServed[closest] == null & player.carrying == true)
+            if (foodServed[closest] == null && toCreate != null)
             {
                 foodServed[closest] = createOnTable(closest, toCreate);
                 foodTypes[closest] = player.currentObject;
@@ -437,7 +436,7 @@ public class Table : MonoBehaviour
                 toCreate = BurntMeatPrefab;
             }
 
-            if (foodServed[closest] == null)
+            if (foodServed[closest] == null && toCreate != null)
             {
                 foodServed[closest] = createOnTable(closest, toCreate);
                 foodTypes[closest] = player.currentObject;
@@ -451,10 +450,10 @@ public class Table : MonoBehaviour
         float xCoord = transform.position.x;
         if(seat %2 == 0)
         {
-            xCoord += 2f * (seat - 1);
+            xCoord += 2.5f * (seat - 1);
         }
 
-        float yCoord = transform.position.y + 0.5f;
+        float yCoord = transform.position.y + 1.5f;
         if (seat % 2 != 0)
         {
             yCoord += 1.5f * (seat - 2);

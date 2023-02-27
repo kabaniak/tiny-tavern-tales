@@ -47,6 +47,10 @@ public class OrderTracker : MonoBehaviour
                     orderDisplay[i].GetComponent<Order>().DisplayOrder(MeatPrefab, FacePrefab, npcSpriteNum, npcSpriteType);
                 }
             }
+            if(npcOrderInfo[i] != null && orderDisplay[i] != null)
+            {
+                orderDisplay[i].transform.GetChild(1).GetComponent<SpriteRenderer>().color = npcOrderInfo[i].GetComponent<SpriteRenderer>().color;
+            }
         }
     }
     public void addOrder(GameObject npc)
