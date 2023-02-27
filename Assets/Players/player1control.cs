@@ -25,6 +25,8 @@ public class player1control : MonoBehaviour
     public bool inRangeDog;
     public bool inRangePrep;
     public bool inRangeHeat;
+    public bool inRangeCounter1;
+    public bool inRangeCounter2;
     public bool canServe;
 
     // holders
@@ -34,11 +36,17 @@ public class player1control : MonoBehaviour
     private bool holdDog;
     private bool holdPrep;
     private bool holdHeat;
+    private bool holdCounter1;
+    private bool holdCounter2;
+
 
     // interactables
     public GameObject Prep;
     public GameObject Cook;
+    public GameObject holding1;
+    public GameObject holding2;
     public Table servable;
+
 
     // ui
     public GameObject pfill;
@@ -63,12 +71,16 @@ public class player1control : MonoBehaviour
         inRangeDog = false;
         inRangeHeat = false;
         inRangePrep = false;
+        inRangeCounter1 = false;
+        inRangeCounter2 = false;
         Prep = GameObject.FindWithTag("Prep");
         Cook = GameObject.FindWithTag("Heat");
         pfill = GameObject.Find("PrepFill");
         pmask = GameObject.Find("PrepMask");
         cfill = GameObject.Find("CookFill");
         cmask = GameObject.Find("CookMask");
+        holding1 = GameObject.Find("Counter1");
+        holding2 = GameObject.Find("Counter2");
     }
 
     // Update is called once per frame
@@ -116,6 +128,33 @@ public class player1control : MonoBehaviour
         {
             didSomething = servable.serveSeat(gameObject);
         }
+
+        // Pickup and Place onto Counter1
+        //if (inRangeCounter1 &
+        //    interacting &
+        //    carrying == false &
+        //    holding1.GetComponent<holdingStationLogic>().holding == false)
+        //{
+        //    if (currentObject == "Meat")
+        //    {
+
+        //        PlaceOnSource(holding1, );
+        //    }
+        //    FeedtheDog();
+        //    holding1.GetComponent<holdingStationLogic>().holding = true;
+        //    carrying = false;
+        //    didSomething = true;
+
+        // }
+
+        // Pickup and Place onto Counter1
+        //if (inRangeCounter2 &
+        //    interacting &
+        //    carrying == false &
+        //    holding2.GetComponent<holdingStationLogic>().holding == false)
+        //{
+
+        //}
 
         // Feed the Dog
         if (inRangeDog == true &
@@ -281,6 +320,14 @@ public class player1control : MonoBehaviour
         {
             inRangeHeat = true;
         }
+        if (collision.gameObject.name.Equals("Counter1"))
+        {
+            inRangeCounter1 = true;
+        }
+        if (collision.gameObject.name.Equals("Counter2"))
+        {
+            inRangeCounter2 = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -313,6 +360,14 @@ public class player1control : MonoBehaviour
         {
             inRangeHeat = false;
         }
+        if (collision.gameObject.name.Equals("Counter1"))
+        {
+            inRangeCounter1 = false;
+        }
+        if (collision.gameObject.name.Equals("Counter2"))
+        {
+            inRangeCounter2 = false;
+        }
     }
 
     public void FeedtheDog()
@@ -322,6 +377,8 @@ public class player1control : MonoBehaviour
         holdDog = inRangeDog;
         holdPrep = inRangePrep;
         holdHeat = inRangeHeat;
+        holdCounter1 = inRangeCounter1;
+        holdCounter2 = inRangeCounter2;
         //Destroy(gameObject.transform.GetChild(0).gameObject);
         carrying = false;
         currentObject = "";
@@ -330,6 +387,8 @@ public class player1control : MonoBehaviour
         inRangeDog = holdDog;
         inRangePrep = holdPrep;
         inRangeHeat = holdHeat;
+        inRangeCounter1 = holdCounter1;
+        inRangeCounter2 = holdCounter2;
     }
 
     public void PlaceOnSource(GameObject source, GameObject item)
