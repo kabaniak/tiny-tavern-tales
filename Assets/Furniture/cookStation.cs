@@ -35,7 +35,7 @@ public class cookStation : MonoBehaviour
         holdingItem = false;
         good = Color.green;
         bad = Color.red;
-        burnTime = 5f;
+        burnTime = 6f;
         burnt = false;
         doomsday = false;
         stop = false;

@@ -97,7 +97,6 @@ public class player1control : MonoBehaviour
             pickupFromSource(gameObject, BoozePrefab);
             carrying = true;
             currentObject = "Booze";
-            GetComponent<SpriteRenderer>().sprite = b_sprite;
             didSomething = true;
         }
 
@@ -109,7 +108,6 @@ public class player1control : MonoBehaviour
             pickupFromSource(gameObject, MeatPrefab);
             carrying = true;
             currentObject = "Meat";
-            GetComponent<SpriteRenderer>().sprite = upm_sprite;
             didSomething = true;
         }
 
@@ -117,7 +115,6 @@ public class player1control : MonoBehaviour
         if (canServe & interacting)
         {
             didSomething = servable.serveSeat(gameObject);
-            GetComponent<SpriteRenderer>().sprite = normalsprite;
         }
 
         // Feed the Dog
@@ -126,7 +123,6 @@ public class player1control : MonoBehaviour
             carrying == true)
         {
             FeedtheDog();
-            GetComponent<SpriteRenderer>().sprite = normalsprite;
             FindObjectOfType<TrashDog>().GetComponent<SpriteRenderer>().sprite = FindObjectOfType<TrashDog>().heart_sprite;
             didSomething = true;
         }
@@ -143,7 +139,6 @@ public class player1control : MonoBehaviour
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
             carrying = false;
-            GetComponent<SpriteRenderer>().sprite = normalsprite;
             didSomething = true;
         }
 
@@ -167,7 +162,6 @@ public class player1control : MonoBehaviour
             pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
-            GetComponent<SpriteRenderer>().sprite = ucm_sprite;
             didSomething = true;
         }
 
@@ -183,7 +177,6 @@ public class player1control : MonoBehaviour
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;
             carrying = false;
-            GetComponent<SpriteRenderer>().sprite = normalsprite;
             didSomething = true;
         }
 
@@ -200,13 +193,11 @@ public class player1control : MonoBehaviour
             {
                 pickupFromSource(gameObject, CookedMeatPrefab);
                 currentObject = "CookedMeat";
-                GetComponent<SpriteRenderer>().sprite = cm_sprite;
             }
             else
             {
                 pickupFromSource(gameObject, BurntMeatPrefab);
                 currentObject = "BurntMeat";
-                GetComponent<SpriteRenderer>().sprite = bm_sprite;
             }
             Cook.GetComponent<cookStation>().doomsday = true;
             didSomething = true;
@@ -218,6 +209,11 @@ public class player1control : MonoBehaviour
             Destroy(inRangeMess);
             inRangeMess = null;
         }
+
+        if (didSomething)
+        {
+            updateSpriteByCurrObject();
+        }
     }
 
     public void pickupFromSource(GameObject player, GameObject source)
@@ -225,6 +221,34 @@ public class player1control : MonoBehaviour
         //GameObject created = Instantiate(source, player.transform.position, Quaternion.identity, player.transform);
         //created.GetComponent<SpriteRenderer>().sortingOrder = 3;
         carrying = true;
+    }
+
+    public void updateSpriteByCurrObject()
+    {
+        if(currentObject == "CookedMeat")
+        {
+            GetComponent<SpriteRenderer>().sprite = cm_sprite;
+        }
+        else if(currentObject == "BurntMeat")
+        {
+            GetComponent<SpriteRenderer>().sprite = bm_sprite;
+        }
+        else if(currentObject == "PreppedMeat")
+        {
+            GetComponent<SpriteRenderer>().sprite = ucm_sprite;
+        }
+        else if(currentObject == "Meat")
+        {
+            GetComponent<SpriteRenderer>().sprite = upm_sprite;
+        }
+        else if(currentObject == "Booze")
+        {
+            GetComponent<SpriteRenderer>().sprite = b_sprite;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sprite = normalsprite;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
