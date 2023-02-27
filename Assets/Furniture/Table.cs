@@ -6,6 +6,7 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
 
+    private GameManager gm;
     public GameObject BoozePrefab;
     public GameObject MeatPrefab;
     public GameObject PreppedMeatPrefab;
@@ -33,6 +34,11 @@ public class Table : MonoBehaviour
     public string[] foodTypes = { "", "", "", "" }; // the types of food served
     public bool[] locked = { false, false, false, false }; // whether the food is locked
 
+
+    private void Start()
+    {
+        gm = GameObject.FindObjectOfType<GameManager>();
+    }
     /// <summary>
     /// nothing for now
     /// </summary>
@@ -90,8 +96,8 @@ public class Table : MonoBehaviour
         {
             if (atTable[i] == npc)
             {
-                int price;
-                int rep;
+                int price = 0;
+                int rep = 0;
 
                 if (foodTypes[i] == atTable[i].GetComponent<NPCSpriteBehavior>().getMyOrder())
                 {
@@ -107,12 +113,6 @@ public class Table : MonoBehaviour
                         price = (int)GameManager.prices.meat_correct;
                         rep = (int)GameManager.popularity.correct;
                     }
-                }
-                else
-                {
-                    // order is incorrect
-                    price = (int)GameManager.prices.incorrect;
-                    rep = (int)GameManager.popularity.incorrect;
                 }
                 
                 atTable[i] = null;
@@ -137,6 +137,10 @@ public class Table : MonoBehaviour
         {
             if (atTable[i] == npc)
             {
+                int price = (int)GameManager.prices.incorrect;
+                int rep = (int)GameManager.popularity.incorrect;
+                gm.orderCompleted(price, rep);
+
                 atTable[i] = null;
                 locked[i] = false;
                 return;

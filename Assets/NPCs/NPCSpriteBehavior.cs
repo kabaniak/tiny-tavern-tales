@@ -192,7 +192,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
 
         patience -= tolerance * Time.deltaTime;
-        if (!angry)
+        if (!angry && (currentState != "eating" && currentState != "leaving"))
         {
             spriteRender.color = Color.Lerp(angryColor, new Color(1, 1, 1), patience / (origPatience - 10f));
         }
@@ -385,6 +385,10 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 findBrawlTarget();
             }
+        }
+        else
+        {
+            spriteRender.color = new Color(1, 1, 1);
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
