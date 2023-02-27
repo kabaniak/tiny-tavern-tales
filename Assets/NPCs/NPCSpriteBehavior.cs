@@ -136,7 +136,6 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 angry = true;
                 leaveTable();
-                GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
 
                 // random chance of starting a brawl
                 if (Random.value < brawlChance)
@@ -328,6 +327,9 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     void leaveTable()
     {
+
+        GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
+
         // leaving should remove me from table
         if (angry)
         {

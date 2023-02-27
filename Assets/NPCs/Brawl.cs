@@ -19,6 +19,9 @@ public class Brawl : MonoBehaviour
     Vector2 circleCenter;
     Vector2 startDir;
 
+    float nextDam;
+    float interval = 2.5f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,6 +31,8 @@ public class Brawl : MonoBehaviour
         startDir = new Vector2(circleCenter.x - transform.position.x, circleCenter.y - transform.position.y);
         if(startDir.magnitude < radius) { startDir.Scale(new Vector2(-1, -1)); }
         startDir.Normalize();
+
+        nextDam = Time.time + interval;
 
     }
 
@@ -82,6 +87,11 @@ public class Brawl : MonoBehaviour
             }
         }
 
+        if(Time.time > nextDam)
+        {
+            GameObject.FindObjectOfType<GameManager>().updateRep(-1);
+            nextDam = Time.time + interval;
+        }
     }
 
     private void FixedUpdate()

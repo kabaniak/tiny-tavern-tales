@@ -49,8 +49,10 @@ public class GameManager : MonoBehaviour
         reputation += effect;
     }
 
-    public void noPatience(int effect)
+    public void updateRep(int effect)
     {
         reputation += effect;
     }
+
+
 }
