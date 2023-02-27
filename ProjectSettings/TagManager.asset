@@ -21,7 +21,7 @@ TagManager:
   - CookFill
   - PrepMask
   - PrepFill
-  - brawl
+  - Brawl
   layers:
   - Default
   - TransparentFX

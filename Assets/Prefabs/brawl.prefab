@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 7731054828861311920}
   - component: {fileID: 2542819854596178607}
   - component: {fileID: 5458236207371766629}
+  - component: {fileID: 3170448485056863874}
   m_Layer: 0
   m_Name: brawl
-  m_TagString: Untagged
+  m_TagString: Brawl
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -95,3 +96,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43c4be1601bc29a45addc0340c192258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &3170448485056863874
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349381728258701337}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 4.4

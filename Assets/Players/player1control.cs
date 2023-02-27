@@ -212,7 +212,7 @@ public class player1control : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Brawl"))
+        if (collision.gameObject.tag.Equals("Brawl"))
         {
             inRangeBrawl = true;
         }
@@ -240,7 +240,7 @@ public class player1control : MonoBehaviour
 
     void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.name.Equals("Brawl"))
+        if (collision.gameObject.tag.Equals("Brawl"))
         {
             inRangeBrawl = false;
         }

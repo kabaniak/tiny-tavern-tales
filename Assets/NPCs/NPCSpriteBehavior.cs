@@ -6,8 +6,7 @@ public class NPCSpriteBehavior : MonoBehaviour
 {
     SpriteRenderer spriteRender;
 
-    // this will probably deprecate later
-    Color orig;
+    Color angryColor = new Color(1, 0, 0, 1.75f);
 
     // information about the npc's stats
     private string myOrder = ""; // their order
@@ -60,22 +59,23 @@ public class NPCSpriteBehavior : MonoBehaviour
             NPCtype = "HumanFighter";
             tolerance = 1.0f;
             patience = 30f;
-            brawlChance = 0.5f;
+            brawlChance = 0.7f;
         }
         else if (typenum == 1)
         {
             NPCtype = "TieflingSorcerer";
             tolerance = 0.2f;
             patience = 90f;
-            brawlChance = 0.3f;
+            brawlChance = 0.2f;
         }
         else if (typenum == 2)
         {
             NPCtype = "ElfRogue";
             tolerance = 0.5f;
             patience = 70f;
-            brawlChance = 0.15f;
+            brawlChance = 0.4f;
         }
+
         //orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
         //spriteRender.color = orig;
         //Choose NPC sprite
@@ -108,7 +108,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             if (angry)
             {
-                spriteRender.color = Color.Lerp(new Color(1, 0, 0, 1.75f), orig, (timerStart - Time.time) / 2f);
+                spriteRender.color = Color.Lerp(new Color(1,1,1), angryColor, (Time.time - timerStart) / 2f);
             }
 
             // if timer has run out it should leave
@@ -387,7 +387,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         if (currentState == "preBrawl")
         {
             // this is called when we have reached the target
-
             // instantiate a brawl sprite
             float xpos = transform.position.x + (brawlPartner.transform.position.x - transform.position.x) / 2;
             float ypos = transform.position.y + (brawlPartner.transform.position.y - transform.position.y) / 2;
@@ -426,9 +425,9 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 brawlPartner = closest.gameObject;
                 currentState = "preBrawl";
+                spriteRender.color = angryColor;
             }
         }
-
 
     }
 
@@ -445,6 +444,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 leaveTable();
                 mytable = null;
             }
+            spriteRender.color = angryColor;
             return true;
         }
         return false;
@@ -456,5 +456,12 @@ public class NPCSpriteBehavior : MonoBehaviour
         spriteRender.enabled = false;
 
         currentState = "brawling";
+    }
+    public void exitBrawl()
+    {
+        // stop rendering npc
+        spriteRender.enabled = true;
+
+        currentState = "leaving";
     }
 }
