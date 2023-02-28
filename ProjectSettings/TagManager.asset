@@ -24,6 +24,9 @@ TagManager:
   - Brawl
   - Mess
   - HoldingStation
+  - Tutorial Text
+  - Tutorial BG
+  - Instructions
   layers:
   - Default
   - TransparentFX
