@@ -74,7 +74,7 @@ public class cookStation : MonoBehaviour
                 cooked = false;
                 Destroy(gameObject.transform.GetChild(0).gameObject);
                 GameObject meat = Instantiate(BurntMeatPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-                meat.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+                meat.transform.localScale = new Vector3(1.2f, 0.6f, 1);
                 meat.GetComponent<SpriteRenderer>().sortingOrder = 3;
                 fill.transform.GetComponent<Image>().color = bad;
                 burnt = true;
@@ -86,7 +86,7 @@ public class cookStation : MonoBehaviour
         {
             Destroy(gameObject.transform.GetChild(0).gameObject);
             GameObject meat = Instantiate(CookedMeatPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
-            meat.transform.localScale = new Vector3(0.5f, 0.5f, 1);
+            meat.transform.localScale = new Vector3(1.2f, 0.6f, 1);
             meat.GetComponent<SpriteRenderer>().sortingOrder = 3;
             stop = true;
         }

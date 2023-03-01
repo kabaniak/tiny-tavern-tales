@@ -21,6 +21,9 @@ public class holdingStationLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (holding == false & transform.childCount > 0)
+        {
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+        }
     }
 }
