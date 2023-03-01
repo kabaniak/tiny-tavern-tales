@@ -47,13 +47,22 @@ public class NPCSpriteBehavior : MonoBehaviour
     public List<Sprite> ElfSprites;
     int spritenum;
 
+    // tutorial stuff
+    private bool pausedPt = false;
+
     // Start is called before the first frame update
     void Start()
     {
         spriteRender = GetComponent<SpriteRenderer>();
 
+
         //choose NPC type
         int typenum = Random.Range(0, 3);
+        setNPCType(typenum);
+    }
+
+    void setNPCType(int typenum)
+    {
         if (typenum == 0)
         {
             NPCtype = "HumanFighter";
@@ -80,8 +89,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         origPatience = patience;
 
-        //orig = Random.ColorHSV(0f, 1f, 0.5f, 1f, 0.5f, 0.7f);
-        //spriteRender.color = orig;
         //Choose NPC sprite
         spritenum = Random.Range(0, 6);
         if (NPCtype == "HumanFighter")
@@ -190,7 +197,12 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
         }
 
-        patience -= tolerance * Time.deltaTime;
+        // tutorial conditional
+        if (!pausedPt)
+        {
+            patience -= tolerance * Time.deltaTime;
+        }
+
         if (!angry && (currentState != "eating" && currentState != "leaving"))
         {
             spriteRender.color = Color.Lerp(angryColor, new Color(1, 1, 1), patience / (origPatience - 10f));
@@ -221,6 +233,11 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             approach();
         }
+    }
+
+    public void pausePatience(bool on)
+    {
+        pausedPt = on;
     }
 
     void pace()
