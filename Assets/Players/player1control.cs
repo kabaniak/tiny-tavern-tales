@@ -28,6 +28,7 @@ public class player1control : MonoBehaviour
     public bool inRangeHeat;
     public bool inRangeCounter1;
     public bool inRangeCounter2;
+    public bool inRangeCounter3;
     public bool canServe;
 
     // holders
@@ -46,6 +47,7 @@ public class player1control : MonoBehaviour
     public GameObject Cook;
     public GameObject holding1;
     public GameObject holding2;
+    public GameObject holding3;
     public Table servable;
 
 
@@ -82,6 +84,7 @@ public class player1control : MonoBehaviour
         cmask = GameObject.Find("CookMask");
         holding1 = GameObject.Find("Counter1");
         holding2 = GameObject.Find("Counter2");
+        holding3 = GameObject.Find("Counter3");
     }
 
     // Update is called once per frame
@@ -130,7 +133,7 @@ public class player1control : MonoBehaviour
             didSomething = servable.serveSeat(gameObject);
         }
 
-        //Pickup and Place onto Counter1
+        //Pickup from counters
         if (inRangeCounter1 &
             interacting &
             carrying == true &
@@ -167,44 +170,10 @@ public class player1control : MonoBehaviour
             carrying = false;
             didSomething = true;
         }
-
-        if (inRangeCounter1 &&
-           interacting &&
-           carrying == false &&
-           currentObject == "" &&
-           holding1.GetComponent<holdingStationLogic>().holding == true &
-           Time.time - placeTime > 0.5)
-        {
-            if (holding1.GetComponent<holdingStationLogic>().currentObject == "Meat")
-            {
-                currentObject = "Meat";
-            }
-            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "BurntMeat")
-            {
-                currentObject = "BurntMeat";
-            }
-            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "PreppedMeat")
-            {
-                currentObject = "PreppedMeat";
-            }
-            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "CookedMeat")
-            {
-                currentObject = "CookedMeat";
-            }
-            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "Booze")
-            {
-                currentObject = "Booze";
-            }
-            carrying = true;
-            holding1.GetComponent<holdingStationLogic>().holding = false;
-            didSomething = true;
-        }
-
-        // Pickup and Place onto Counter2
-        if (inRangeCounter2 &
-            interacting &
-            carrying == true &
-            holding2.GetComponent<holdingStationLogic>().holding == false)
+        else if (inRangeCounter2 &
+           interacting &
+           carrying == true &
+           holding2.GetComponent<holdingStationLogic>().holding == false)
         {
             placeTime = Time.time;
             holding2.GetComponent<holdingStationLogic>().holding = true;
@@ -237,8 +206,76 @@ public class player1control : MonoBehaviour
             carrying = false;
             didSomething = true;
         }
+        else if (inRangeCounter3 &
+          interacting &
+          carrying == true &
+          holding3.GetComponent<holdingStationLogic>().holding == false)
+        {
+            placeTime = Time.time;
+            holding3.GetComponent<holdingStationLogic>().holding = true;
+            if (currentObject == "Meat")
+            {
+                PlaceOnSource(holding3, MeatPrefab);
+                holding3.GetComponent<holdingStationLogic>().currentObject = "Meat";
+            }
+            else if (currentObject == "BurntMeat")
+            {
+                PlaceOnSource(holding3, BurntMeatPrefab);
+                holding3.GetComponent<holdingStationLogic>().currentObject = "BurntMeat";
+            }
+            else if (currentObject == "PreppedMeat")
+            {
+                PlaceOnSource(holding3, PreppedMeatPrefab);
+                holding3.GetComponent<holdingStationLogic>().currentObject = "PreppedMeat";
+            }
+            else if (currentObject == "CookedMeat")
+            {
+                PlaceOnSource(holding3, CookedMeatPrefab);
+                holding3.GetComponent<holdingStationLogic>().currentObject = "CookedMeat";
+            }
+            else if (currentObject == "Booze")
+            {
+                PlaceOnSource(holding3, BoozePrefab);
+                holding3.GetComponent<holdingStationLogic>().currentObject = "Booze";
+            }
+            FeedtheDog();
+            carrying = false;
+            didSomething = true;
+        }
 
-        if (inRangeCounter2 &
+        // place on counter
+        if (inRangeCounter1 &&
+           interacting &&
+           carrying == false &&
+           currentObject == "" &&
+           holding1.GetComponent<holdingStationLogic>().holding == true &
+           Time.time - placeTime > 0.5)
+        {
+            if (holding1.GetComponent<holdingStationLogic>().currentObject == "Meat")
+            {
+                currentObject = "Meat";
+            }
+            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "BurntMeat")
+            {
+                currentObject = "BurntMeat";
+            }
+            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "PreppedMeat")
+            {
+                currentObject = "PreppedMeat";
+            }
+            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "CookedMeat")
+            {
+                currentObject = "CookedMeat";
+            }
+            else if (holding1.GetComponent<holdingStationLogic>().currentObject == "Booze")
+            {
+                currentObject = "Booze";
+            }
+            carrying = true;
+            holding1.GetComponent<holdingStationLogic>().holding = false;
+            didSomething = true;
+        }
+        else if (inRangeCounter2 &
            carrying == false &
            holding2.GetComponent<holdingStationLogic>().holding == true &
            interacting &
@@ -265,6 +302,36 @@ public class player1control : MonoBehaviour
                 currentObject = "Booze";
             }
             holding2.GetComponent<holdingStationLogic>().holding = false;
+            carrying = true;
+            didSomething = true;
+        }
+        else if (inRangeCounter3 &
+          carrying == false &
+          holding3.GetComponent<holdingStationLogic>().holding == true &
+          interacting &
+          Time.time - placeTime > 0.5)
+        {
+            if (holding3.GetComponent<holdingStationLogic>().currentObject == "Meat")
+            {
+                currentObject = "Meat";
+            }
+            else if (holding3.GetComponent<holdingStationLogic>().currentObject == "BurntMeat")
+            {
+                currentObject = "BurntMeat";
+            }
+            else if (holding3.GetComponent<holdingStationLogic>().currentObject == "PreppedMeat")
+            {
+                currentObject = "PreppedMeat";
+            }
+            else if (holding3.GetComponent<holdingStationLogic>().currentObject == "CookedMeat")
+            {
+                currentObject = "CookedMeat";
+            }
+            else if (holding3.GetComponent<holdingStationLogic>().currentObject == "Booze")
+            {
+                currentObject = "Booze";
+            }
+            holding3.GetComponent<holdingStationLogic>().holding = false;
             carrying = true;
             didSomething = true;
         }
@@ -441,6 +508,10 @@ public class player1control : MonoBehaviour
         {
             inRangeCounter2 = true;
         }
+        if (collision.gameObject.name.Equals("Counter3"))
+        {
+            inRangeCounter3 = true;
+        }
     }
 
     void OnTriggerExit2D(Collider2D collision)
@@ -481,6 +552,10 @@ public class player1control : MonoBehaviour
         {
             inRangeCounter2 = false;
         }
+        if (collision.gameObject.name.Equals("Counter3"))
+        {
+            inRangeCounter3 = false;
+        }
     }
 
     public void FeedtheDog()
@@ -506,17 +581,17 @@ public class player1control : MonoBehaviour
 
     public void PlaceOnSource(GameObject source, GameObject item)
     {
-        if ((source == holding1 | source == holding2) & currentObject == "Booze")
+        if ((source == holding1 | source == holding2 | source==holding3) & currentObject == "Booze")
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
             noscale.transform.localScale = new Vector3(0.75f, 2.586207f, 1f);
         }
-        else if ((source == holding1 | source == holding2) & (currentObject == "Meat" | currentObject == "PreppedMeat"))
+        else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "Meat" | currentObject == "PreppedMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
             noscale.transform.localScale = new Vector3(8f, 25f, 1f);
         }
-        else if ((source == holding1 | source == holding2) & (currentObject == "CookedMeat" | currentObject == "BurntMeat"))
+        else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "CookedMeat" | currentObject == "BurntMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
             noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
