@@ -249,7 +249,7 @@ public class player1control : MonoBehaviour
            carrying == false &&
            currentObject == "" &&
            holding1.GetComponent<holdingStationLogic>().holding == true &
-           Time.time - placeTime > 0.5)
+           Time.time - placeTime > 0.1)
         {
             if (holding1.GetComponent<holdingStationLogic>().currentObject == "Meat")
             {
