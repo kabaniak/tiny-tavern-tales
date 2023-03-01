@@ -20,7 +20,7 @@ public class player2control : MonoBehaviour
     // bools (optimize later)
     public bool carrying;
     public GameObject inRangeBrawl = null;
-    public GameObject inRangeMess = null;
+    public List<GameObject> inRangeMess = new List<GameObject>();
     public bool inRangeKeg;
     public bool inRangeRack;
     public bool inRangeDog;
@@ -423,10 +423,10 @@ public class player2control : MonoBehaviour
         }
 
         // if didn't do anything else
-        if (!didSomething && inRangeMess != null && interacting)
+        // if didn't do anything else
+        if (!didSomething && inRangeMess.Count != 0 && interacting)
         {
-            Destroy(inRangeMess);
-            inRangeMess = null;
+            Destroy(inRangeMess[0]);
         }
 
         if (didSomething)
@@ -474,7 +474,7 @@ public class player2control : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Mess"))
         {
-            inRangeMess = collision.gameObject;
+            inRangeMess.Add(collision.gameObject);
         }
         if (collision.gameObject.tag.Equals("Brawl"))
         {
@@ -518,7 +518,7 @@ public class player2control : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals("Mess"))
         {
-            inRangeMess = null;
+            inRangeMess.Remove(collision.gameObject);
         }
         if (collision.gameObject.tag.Equals("Brawl"))
         {
