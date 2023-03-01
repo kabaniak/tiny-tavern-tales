@@ -35,7 +35,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(reputation < 0) { reputation = 0; }
+        if(reputation > maxRating) { reputation = maxRating; }
     }
 
     public void orderCompleted(int value, int effect)
