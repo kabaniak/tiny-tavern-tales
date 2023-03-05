@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -15,6 +16,11 @@ public class NPCGenerator : MonoBehaviour
     /// </summary>
     private float SpawnInterval = 8f;
     private float SpawnTime = 0;
+
+    //Used Sprites
+    public List<Sprite> UsedHumanSprites;
+    public List<Sprite> UsedTieflingSprites;
+    public List<Sprite> UsedElfSprites;
 
     /// <summary>
     /// Check if we need to generate an NPC and if so, do so.

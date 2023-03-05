@@ -46,6 +46,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public List<Sprite> TieflingSprites;
     public List<Sprite> ElfSprites;
     int spritenum;
+    NPCGenerator NPCGen;
 
     // tutorial stuff
     private bool pausedPt = false;
@@ -54,55 +55,124 @@ public class NPCSpriteBehavior : MonoBehaviour
     void Start()
     {
         spriteRender = GetComponent<SpriteRenderer>();
-
+        NPCGen = FindObjectOfType<NPCGenerator>();
 
         //choose NPC type
-        int typenum = Random.Range(0, 3);
-        setNPCType(typenum);
+        setNPCType();
     }
 
-    void setNPCType(int typenum)
+    void setNPCType()
     {
+        int typenum = Random.Range(0, 3);
         if (typenum == 0)
         {
-            NPCtype = "HumanFighter";
-            tolerance = 1.0f;
-            patience = 30f;
-            brawlChance = 0.7f;
-            hardOrder = 0.2f;
+            if (NPCGen.UsedHumanSprites.Count == 6)
+            {
+                setNPCType();
+            }
+
+            else
+            {
+                NPCtype = "HumanFighter";
+                tolerance = 1.0f;
+                patience = 30f;
+                brawlChance = 0.7f;
+                hardOrder = 0.2f;
+            }
         }
         else if (typenum == 1)
         {
-            NPCtype = "TieflingSorcerer";
-            tolerance = 1.0f;
-            patience = 90f;
-            brawlChance = 0.2f;
-            hardOrder = 0.5f;
+            if (NPCGen.UsedTieflingSprites.Count == 6)
+            {
+                setNPCType();
+            }
+
+            else
+            {
+                NPCtype = "TieflingSorcerer";
+                tolerance = 1.0f;
+                patience = 90f;
+                brawlChance = 0.2f;
+                hardOrder = 0.5f;
+            }
         }
         else if (typenum == 2)
         {
-            NPCtype = "ElfRogue";
-            tolerance = 1.0f;
-            patience = 70f;
-            brawlChance = 0.4f;
-            hardOrder = 0.35f;
+            if (NPCGen.UsedElfSprites.Count == 6)
+            {
+                setNPCType();
+            }
+
+            else
+            {
+                NPCtype = "ElfRogue";
+                tolerance = 1.0f;
+                patience = 70f;
+                brawlChance = 0.4f;
+                hardOrder = 0.35f;
+            }
+
         }
         origPatience = patience;
 
         brawlChance = 1.0f;
 
         //Choose NPC sprite
+        setNPCSprite();
+        if (NPCtype == "HumanFighter")
+        {
+            NPCGen.UsedHumanSprites.Add(spriteRender.sprite);
+        }
+
+        else if (NPCtype == "TieflingSorcerer")
+        {
+            NPCGen.UsedTieflingSprites.Add(spriteRender.sprite);
+        }
+
+        else if (NPCtype == "ElfRogue")
+        {
+            NPCGen.UsedElfSprites.Add(spriteRender.sprite);
+        }
+    }
+
+    void setNPCSprite()
+    {
         spritenum = Random.Range(0, 6);
         if (NPCtype == "HumanFighter")
         {
+            foreach (Sprite i in NPCGen.UsedHumanSprites)
+            {
+                if (i == HumanSprites[spritenum])
+                {
+                    setNPCSprite();
+                }
+            }
+
             spriteRender.sprite = HumanSprites[spritenum];
         }
         else if (NPCtype == "TieflingSorcerer")
         {
+            foreach (Sprite i in NPCGen.UsedTieflingSprites)
+            {
+                if (i == TieflingSprites[spritenum])
+                {
+                    setNPCSprite();
+                }
+            }
+
             spriteRender.sprite = TieflingSprites[spritenum];
         }
         else if (NPCtype == "ElfRogue")
         {
+            foreach (Sprite i in NPCGen.UsedElfSprites)
+            {
+                if (i == ElfSprites[spritenum])
+                {
+                    setNPCSprite();
+                }
+            }
+
+
             spriteRender.sprite = ElfSprites[spritenum];
         }
     }
@@ -131,6 +201,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 leaveTable();
                 currentState = "leaving";
+                
             }
         }
 
@@ -374,6 +445,20 @@ public class NPCSpriteBehavior : MonoBehaviour
         else
         {
             mytable.GetComponent<Table>().removeNPC(gameObject);
+            if (NPCtype == "HumanFighter")
+            {
+                NPCGen.UsedHumanSprites.Remove(spriteRender.sprite);
+            }
+
+            else if (NPCtype == "TieflingSorcerer")
+            {
+                NPCGen.UsedTieflingSprites.Remove(spriteRender.sprite);
+            }
+
+            else if (NPCtype == "ElfRogue")
+            {
+                NPCGen.UsedElfSprites.Remove(spriteRender.sprite);
+            }
         }
     }
 
@@ -566,5 +651,19 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         haveReached = 3;
         currentState = "leaving";
+        if (NPCtype == "HumanFighter")
+        {
+            NPCGen.UsedHumanSprites.Remove(spriteRender.sprite);
+        }
+
+        else if (NPCtype == "TieflingSorcerer")
+        {
+            NPCGen.UsedTieflingSprites.Remove(spriteRender.sprite);
+        }
+
+        else if (NPCtype == "ElfRogue")
+        {
+            NPCGen.UsedElfSprites.Remove(spriteRender.sprite);
+        }
     }
 }
