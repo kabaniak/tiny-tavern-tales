@@ -52,10 +52,8 @@ public class Table : MonoBehaviour
                 atTable[i].GetComponent<NPCSpriteBehavior>().givenFood(foodTypes[i]);
                 locked[i] = true;
             }
-            if(foodServed[i]!= null && atTable[i] == null && foodServed[i].GetComponent<Coin>() == null)
-            {
-                locked[i] = false;
-            }
+            else if((atTable[i] == null  || atTable[i].GetComponent<NPCSpriteBehavior>().getCurrentState() == "toSeat") && foodServed[i] == null ) { locked[i] = true; }
+            else { locked[i] = false; }
         }
     }
 
@@ -172,6 +170,7 @@ public class Table : MonoBehaviour
 
         return -1;
     }
+
     public Vector3 getSeatCoords(GameObject npc)
     {
         for (int i = 0; i < 4; i++)
@@ -283,6 +282,7 @@ public class Table : MonoBehaviour
     public bool serveSeat(GameObject o)
     {
         int closest = getClosestInd(o);
+        if (locked[closest]) { return false; }
 
         if (o.tag == "Player1")
         {
@@ -290,7 +290,7 @@ public class Table : MonoBehaviour
 
             GameObject toCreate = null;
             if (player.currentObject == ""){
-                if (foodServed[closest] != null && !locked[closest])
+                if (foodServed[closest] != null)
                 {
                     if (foodTypes[closest] == "Booze")
                     {
@@ -373,7 +373,7 @@ public class Table : MonoBehaviour
             GameObject toCreate = null;
             if (player.currentObject == "")
             {
-                if (foodServed[closest] != null && !locked[closest])
+                if (foodServed[closest] != null)
                 {
                     if (foodTypes[closest] == "Booze")
                     {
