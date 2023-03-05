@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     GameObject textDisp;
     public enum prices
     {
-        meat_correct = 6,
-        booze_correct = 3,
+        meat_correct = 3,
+        booze_correct = 1,
         incorrect = 0
     }
 

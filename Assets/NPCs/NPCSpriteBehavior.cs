@@ -74,7 +74,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         else if (typenum == 1)
         {
             NPCtype = "TieflingSorcerer";
-            tolerance = 0.2f;
+            tolerance = 1.0f;
             patience = 90f;
             brawlChance = 0.2f;
             hardOrder = 0.5f;
@@ -82,7 +82,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         else if (typenum == 2)
         {
             NPCtype = "ElfRogue";
-            tolerance = 0.5f;
+            tolerance = 1.0f;
             patience = 70f;
             brawlChance = 0.4f;
             hardOrder = 0.35f;
@@ -238,6 +238,17 @@ public class NPCSpriteBehavior : MonoBehaviour
     public void pausePatience(bool on)
     {
         pausedPt = on;
+    }
+
+    public void setPatience(float pt)
+    {
+        patience = pt;
+        origPatience = pt + 10f;
+    }
+
+    public void setBrawlChance(float chance)
+    {
+        brawlChance = chance;
     }
 
     void pace()

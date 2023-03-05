@@ -36,6 +36,7 @@ public class Tutorial : MonoBehaviour
         "waitt set",
         "Awesome! Look at that happy customer go :)",
         "When customers get the order they want, they'll pay you coins",
+        "Customers that order ale pay 1 coin.",
         "You can see how many you've earned in the top left",
         "Let's welcome in another customer!",
         "createNPC meat",
@@ -53,7 +54,35 @@ public class Tutorial : MonoBehaviour
         "Perfect job!",
         "Why don't you go deliver it to the customer?",
         "action serve meat",
-        "Great!"
+        "waitt set",
+        "Great! They loved it",
+        "Since this customer ordered meat, they paid 3 coins - triple the price of ale",
+        "You want to try to rack up as many coins as you can!",
+        "Customers won't wait forever to get their order though",
+        "Let's welcome two new customers and see what happens when we make them wait too long",
+        "createNPC meat 2",
+        "makeNPCmad",
+        "They look MAD, NPCs will get redder the longer you make them wait",
+        "Once bright red they might leave ... or ...",
+        "startBrawl",
+        "Oh no! Angry NPCs are able to start brawls",
+        "Look at the mess they're making in your tavern!",
+        "To break up a brawl, both of you need to go and interact with it",
+        "Hurry before it gets worse!",
+        "action brawl",
+        "waitt set",
+        "Whew! That was stressful",
+        "That brawl left behind a ton of messes",
+        "Go clean them up or they'll bother your other customers",
+        "action clean",
+        "Awesome job you two!",
+        "Last thing you need to know is to keep track of your rating",
+        "Your rating is shown in the stars at the top of the screen",
+        "Serving orders correctly will increase your rating",
+        "Serving them wrong, making customers wait too long, and brawling will all decrease it",
+        "If you let your rating get to no stars the tavern will get shut down :(",
+        "Good luck your tavern is ready to open for business now!",
+        "Hit SPACE to return to the main menu"
     };
 
     int currPoint = 0;
@@ -71,6 +100,8 @@ public class Tutorial : MonoBehaviour
 
     // item prep conds
     string waitItem;
+    bool tempReset = false;
+    float tempTimer;
 
 
     // Start is called before the first frame update
@@ -93,6 +124,11 @@ public class Tutorial : MonoBehaviour
     {
         var moveOn = Input.GetKeyDown(KeyCode.Space);
 
+        if (tempReset && tempTimer < Time.time) 
+        {
+            tempReset = false;
+        }
+
         if ((!waiting && moveOn) || (waiting && cond()))
         {
             waiting = false;
@@ -105,6 +141,7 @@ public class Tutorial : MonoBehaviour
             if (! checkIfCommand())
             {
                 enablePlayers(false);
+                enableNPCThings(false);
                 tutorialText.GetComponent<UnityEngine.UI.Text>().text = script[currPoint];
                 tutorialBg.SetActive(true);
                 instructions.GetComponent<RectTransform>().localPosition = new Vector3(-22, -242, 0);
@@ -120,6 +157,7 @@ public class Tutorial : MonoBehaviour
             enablePlayers(true);
             if (script[currPoint].Contains("set"))
             {
+                enablePlayers(false);
                 setWaitFor(6.25f);
                 hideInstructions();
             }
@@ -135,6 +173,11 @@ public class Tutorial : MonoBehaviour
             hideTutorial();
             hideInstructions();
             enableNPCThings(true);
+            if (script[currPoint].Contains("2"))
+            {
+                npcList.Add(Instantiate(NPCPrefab, new Vector3(-10, -20, 0), Quaternion.identity));
+                controlNPCPatience(0);
+            }
             npcList.Add(Instantiate(NPCPrefab, new Vector3(-10, -20, 0), Quaternion.identity));
             controlNPCPatience(0);
 
@@ -190,7 +233,38 @@ public class Tutorial : MonoBehaviour
                 cook.SetActive(true);
                 setWaitItem("CookedMeat");
             }
+            else if (command.Contains("brawl"))
+            {
+                enableNPCThings(true);
+                enablePlayers(true);
+                setWaitBrawl();
+            }
+            else if (command.Contains("clean"))
+            {
+                enableNPCThings(true);
+                enablePlayers(true);
+                setWaitMess();
+            }
 
+            return true;
+        }
+        else if (script[currPoint].Contains("makeNPCmad"))
+        {
+            hideTutorial();
+            hideInstructions();
+            enablePlayers(false);
+            enableNPCThings(true);
+            controlNPCPatience(1);
+            setWaitFor(4.5f);
+            return true;
+        }
+        else if (script[currPoint].Contains("startBrawl"))
+        {
+            hideTutorial();
+            hideInstructions();
+            enablePlayers(false);
+            enableNPCThings(true);
+            setWaitFor(3f);
             return true;
         }
 
@@ -225,7 +299,7 @@ public class Tutorial : MonoBehaviour
         else if (npc.getCurrentState() == npcDesiredState && npc.isAngry() != angerState)
         {
             script[currPoint - 1] = "Oops! That wasn't quite right. Why don't you try again?";
-            currPoint -= 1;
+            currPoint -= 2;
             return true;
         }
         return false;
@@ -240,13 +314,38 @@ public class Tutorial : MonoBehaviour
 
     bool gotItem()
     {
-        if(GameObject.FindObjectOfType<player1control>().currentObject == "BurntMeat" || GameObject.FindObjectOfType<player2control>().currentObject == "BurntMeat")
+        if(!tempReset && (GameObject.FindObjectOfType<player1control>().currentObject == "BurntMeat" || GameObject.FindObjectOfType<player2control>().currentObject == "BurntMeat"))
         {
             script[currPoint - 1] = "Oops! Look like you burned it. Feed it to the dog and start over";
             currPoint-=2;
+            tempReset = true;
+            tempTimer = Time.time + 7f;
             return true;
         }
         return GameObject.FindObjectOfType<player1control>().currentObject == waitItem || GameObject.FindObjectOfType<player2control>().currentObject == waitItem;
+    }
+
+
+    void setWaitBrawl()
+    {
+        waiting = true;
+        cond = noBrawls;
+    }
+
+    bool noBrawls()
+    {
+        return GameObject.FindGameObjectWithTag("Brawl") == null;
+    }
+
+    void setWaitMess()
+    {
+        waiting = true;
+        cond = noMess;
+    }
+
+    bool noMess()
+    {
+        return GameObject.FindGameObjectWithTag("Mess") == null;
     }
 
     void controlNPCPatience(int state)
@@ -256,6 +355,15 @@ public class Tutorial : MonoBehaviour
             foreach (GameObject npc in npcList)
             {
                 npc.GetComponent<NPCSpriteBehavior>().pausePatience(true);
+            }
+        }
+        if (state == 1)
+        {
+            foreach (GameObject npc in npcList)
+            {
+                npc.GetComponent<NPCSpriteBehavior>().pausePatience(false);
+                npc.GetComponent<NPCSpriteBehavior>().setBrawlChance(2.0f);
+                npc.GetComponent<NPCSpriteBehavior>().setPatience(5.0f);
             }
         }
     }
@@ -280,9 +388,14 @@ public class Tutorial : MonoBehaviour
 
     void enableNPCThings(bool on)
     {
-        GameObject.FindObjectOfType<Table>().enabled = on;
+        enableTable(on);
         NPCSpriteBehavior[] npcs = GameObject.FindObjectsOfType<NPCSpriteBehavior>();
         foreach (NPCSpriteBehavior n in npcs) { n.enabled = on; }
+    }
+
+    void enableTable(bool on)
+    {
+        GameObject.FindObjectOfType<Table>().enabled = on;
     }
 
     void enableEverything( bool on)
