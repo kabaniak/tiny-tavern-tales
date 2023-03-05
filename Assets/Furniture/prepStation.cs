@@ -30,7 +30,7 @@ public class prepStation : MonoBehaviour
         {
             holdingItem = false;
             prepComplete = false;
-            Destroy(gameObject.transform.GetChild(1).gameObject);
+            Destroy(gameObject.transform.GetChild(0).gameObject);
             fill.transform.GetComponent<Image>().fillAmount = 0;
         }
     }
