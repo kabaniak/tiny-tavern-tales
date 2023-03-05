@@ -599,12 +599,12 @@ public class player2control : MonoBehaviour
         else if (source == Prep & currentObject == "Meat")
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(10f, 5f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
         }
         else if (source == Cook & currentObject == "PreppedMeat")
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(10f, 5f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
         }
         else
         {
