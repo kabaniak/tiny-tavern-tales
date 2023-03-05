@@ -495,7 +495,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public bool engageInBrawl(GameObject npc)
     {
         // if not already in a brawl and on the screen
-        if (brawlPartner == null && transform.position.y > -13)
+        if (brawlPartner == null && transform.position.y > -15.5)
         {
             brawlPartner = npc;
             currentState = "preBrawl";
@@ -530,7 +530,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         if(2.4 < mypos.x)
         {
             // if our y means we can't just go left
-            if((-2.4> mypos.y && -8> mypos.y) || (14 > mypos.y && 9 < mypos.y))
+            if((-2.4> mypos.y && -8< mypos.y) || (14 > mypos.y && 9 < mypos.y))
             {
                 // go down or up first
                 if ((mypos.y > -5.2 && mypos.y < 0) || (mypos.y < 11.5 && mypos.y > 0))
@@ -554,14 +554,14 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
             else
             {
-                path[1] = new Vector2(-10, 0);
+                path[1] = new Vector2(-10, mypos.y);
                 path[2] = new Vector2(-10, mypos.y);
             }
 
         }
         else
         {
-            path[1] = new Vector2(-10, 0);
+            path[1] = new Vector2(-10, mypos.y);
             path[2] = new Vector2(-10, mypos.y);
         }
         haveReached = 3;
