@@ -142,15 +142,23 @@ MonoBehaviour:
   CookedMeatPrefab: {fileID: 0}
   BurntMeatPrefab: {fileID: 0}
   carrying: 0
+  inRangeBrawl: {fileID: 0}
+  inRangeMess: []
   inRangeKeg: 0
   inRangeRack: 0
   inRangeDog: 0
   inRangePrep: 0
   inRangeHeat: 0
+  inRangeCounter1: 0
+  inRangeCounter2: 0
+  inRangeCounter3: 0
   canServe: 0
   currentObject: 
   Prep: {fileID: 0}
   Cook: {fileID: 0}
+  holding1: {fileID: 0}
+  holding2: {fileID: 0}
+  holding3: {fileID: 0}
   servable: {fileID: 0}
   pfill: {fileID: 0}
   pmask: {fileID: 0}
@@ -158,6 +166,7 @@ MonoBehaviour:
   cmask: {fileID: 0}
   normalsprite: {fileID: 1115455138322390144, guid: 6af9292f128164288b6e90834901d957, type: 3}
   b_sprite: {fileID: -8938701872669142869, guid: 6af9292f128164288b6e90834901d957, type: 3}
-  um_sprite: {fileID: -2031483895012947207, guid: f6a29f2b144d64781bbc75f56fbcdd87, type: 3}
+  upm_sprite: {fileID: 21300000, guid: ae9dc3d8aef26476ea46a6351846627c, type: 3}
+  ucm_sprite: {fileID: -4243127760521825661, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
   cm_sprite: {fileID: -1818288207410235511, guid: f6a29f2b144d64781bbc75f56fbcdd87, type: 3}
   bm_sprite: {fileID: -2401453818774780720, guid: f6a29f2b144d64781bbc75f56fbcdd87, type: 3}

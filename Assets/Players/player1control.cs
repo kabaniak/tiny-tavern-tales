@@ -583,17 +583,17 @@ public class player1control : MonoBehaviour
         if ((source == holding1 | source == holding2 | source==holding3) & currentObject == "Booze")
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 2.586207f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
         }
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "Meat" | currentObject == "PreppedMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
         }
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "CookedMeat" | currentObject == "BurntMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
         }
         else if (source == Prep & currentObject == "Meat")
         {
