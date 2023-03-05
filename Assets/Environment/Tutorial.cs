@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Tutorial : MonoBehaviour
 {
+    public string mainMenu;
+
     GameObject tutorialText;
     GameObject tutorialBg;
     GameObject instructions;
@@ -136,6 +139,7 @@ public class Tutorial : MonoBehaviour
             if(currPoint >= script.Length)
             {
                 // WERE DONE WITH TUTORIAL
+                SceneManager.LoadScene(mainMenu);
                 return;
             }
             if (! checkIfCommand())
