@@ -4599,6 +4599,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reputation: 13
   maxRating: 25
+  generator: {fileID: 0}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+  cookMask: {fileID: 0}
+  gameOver: {fileID: 0}
 --- !u!4 &1265288383
 Transform:
   m_ObjectHideFlags: 0
@@ -6171,6 +6176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 387f7850362422a4d903fe0946e2eea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: MainMenu
   NPCPrefab: {fileID: 7427308276122731120, guid: 0eafe0d40190370449b345eb0870f698, type: 3}
 --- !u!4 &1919939280
 Transform:
