@@ -10,6 +10,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     Color orig;
 
     // information about the npc's stats
+    public int id;
     private string myOrder = ""; // their order
     private float speed = 0.1f; // how fast they move
     private bool angry = false;
@@ -21,7 +22,8 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     // string representing the npc's state
     // either: waiting, toSeat, reachedSeat, ordered, eating, leaving
-    private string currentState = "waiting";
+    public string currentState = "waiting";
+    private int currPos = -1;
 
     // information about where the npc is seated
     public Vector3 seatCoords;
@@ -29,10 +31,9 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     private string NPCtype;
     private int haveReached = 0;
-    private float sensitivity = 0.3f;
+    private float sensitivity = 0.1f;
     private bool forward = true;
-    private Vector2[] path = { new Vector2(-10, -20), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0) };
-    private Vector2 paceTo = new Vector2(-10, 0);
+    private Vector2[] path = { new Vector2(-7.5f, -20), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0) };
 
     // brawl information
     public GameObject brawlPartner = null;
@@ -61,6 +62,11 @@ public class NPCSpriteBehavior : MonoBehaviour
         setNPCType(typenum);
     }
 
+    public void setId(int num)
+    {
+        id = num;
+    }
+
     void setNPCType(int typenum)
     {
         if (typenum == 0)
@@ -87,9 +93,10 @@ public class NPCSpriteBehavior : MonoBehaviour
             brawlChance = 0.4f;
             hardOrder = 0.35f;
         }
+        patience = 90f;
         origPatience = patience;
 
-        brawlChance = 1.0f;
+        brawlChance = 0.0f;
 
         //Choose NPC sprite
         spritenum = Random.Range(0, 6);
@@ -139,6 +146,23 @@ public class NPCSpriteBehavior : MonoBehaviour
             OrderTracker ot = GameObject.FindObjectOfType<OrderTracker>();
             ot.addOrder(gameObject);
             currentState = "ordered";
+
+            // reset leave path
+            // record the path we should take
+            int seatInd = mytable.GetComponent<Table>().getSeatInd(gameObject);
+            path[4] = new Vector2(seatCoords.x, seatCoords.y);
+            path[3] = new Vector2(seatCoords.x, seatCoords.y);
+
+            if (seatInd == 2)
+            {
+                path[1] = new Vector2(-7.5f, 0);
+                path[2] = new Vector2(seatCoords.x, 0);
+            }
+            else
+            {
+                path[1] = new Vector2(-7.5f, seatCoords.y);
+                path[2] = new Vector2(seatCoords.x, seatCoords.y);
+            }
         }
 
         else if (currentState == "ordered")
@@ -163,32 +187,57 @@ public class NPCSpriteBehavior : MonoBehaviour
         // if not seated yet
         else if (currentState == "waiting")
         {
-            // try to find a table to go to
-            GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
-
-            foreach (GameObject t in tables)
+            if (GameObject.FindObjectOfType<NPCGenerator>().amFirst(id))
             {
-                if (t.GetComponent<Table>().seatNPC(gameObject))
+                // try to find a table to go to
+                GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
+
+                foreach (GameObject t in tables)
                 {
-                    mytable = t;
-                    currentState = "toSeat";
-                    seatCoords = t.GetComponent<Table>().getSeatCoords(gameObject);
-                    int seatInd = t.GetComponent<Table>().getSeatInd(gameObject);
-
-                    // record the path we should take
-                    path[3] = new Vector2(seatCoords.x, seatCoords.y);
-
-                    if (seatInd == 2)
+                    if (t.GetComponent<Table>().seatNPC(gameObject))
                     {
-                        path[1] = new Vector2(-10, 0);
-                        path[2] = new Vector2(seatCoords.x, 0);
+                        mytable = t;
+                        currentState = "toSeat";
+                        seatCoords = t.GetComponent<Table>().getSeatCoords(gameObject);
+                        int seatInd = t.GetComponent<Table>().getSeatInd(gameObject);
+
+                        GameObject.FindObjectOfType<NPCGenerator>().removeFromQueue(id);
+
+                        // record the path we should take
+                        path[4] = new Vector2(seatCoords.x, seatCoords.y);
+                        path[3] = new Vector2(seatCoords.x, seatCoords.y);
+
+                        if (transform.position.y < -12.5)
+                        {
+                            if (seatInd == 2)
+                            {
+                                path[1] = new Vector2(-11.2f, 0);
+                                path[2] = new Vector2(seatCoords.x, 0);
+                            }
+                            else
+                            {
+                                path[1] = new Vector2(-11.2f, seatCoords.y);
+                                path[2] = new Vector2(seatCoords.x, seatCoords.y);
+                            }
+                        }
+                        else
+                        {
+                            path[1] = new Vector2(-7.5f, transform.position.y);
+                            if (seatInd == 2)
+                            {
+                                path[2] = new Vector2(-7.5f, 0);
+                                path[3] = new Vector2(seatCoords.x, 0);
+                            }
+                            else
+                            {
+                                path[2] = new Vector2(-7.5f, seatCoords.y);
+                                path[3] = new Vector2(seatCoords.x, seatCoords.y);
+                            }
+                        }
+
+                        break;
                     }
-                    else
-                    {
-                        path[1] = new Vector2(-10, seatCoords.y);
-                        path[2] = new Vector2(seatCoords.x, seatCoords.y);
-                    }
-                    break;
+
                 }
             }
 
@@ -198,6 +247,8 @@ public class NPCSpriteBehavior : MonoBehaviour
                 haveReached = 1;
                 angry = true;
                 currentState = "leaving";
+
+                GameObject.FindObjectOfType<NPCGenerator>().removeFromQueue(id);
             }
         }
 
@@ -235,7 +286,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         else if (currentState == "waiting")
         {
-            //pace();
+            // update wait pos
+            updatePlaceInQueue();
         }
     }
 
@@ -255,26 +307,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         brawlChance = chance;
     }
 
-    void pace()
-    {
-        // check if we've reached the next position
-        if (transform.position.x - sensitivity < paceTo.x && transform.position.x + sensitivity > paceTo.x)
-        {
-            if (transform.position.y - sensitivity < paceTo.y && transform.position.y + sensitivity > paceTo.y)
-            {
-                // generate a new position to pace to
-                paceTo = new Vector2(-10, Random.Range(-12, 16));
-            }
-        }
-
-        Vector3 currPos = transform.position;
-        Vector2 dir = new Vector2(paceTo.x - currPos.x, paceTo.y - currPos.y);
-        dir.Normalize();
-
-        transform.position = new Vector3(currPos.x + dir.x * speed, currPos.y + dir.y * speed, 0);
-
-
-    }
 
     void move()
     {
@@ -317,7 +349,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
 
             // check if we can stop moving
-            if (haveReached == 3 && forward)
+            if (haveReached == 4 && forward)
             {
                 currentState = "reachedSeat";
             }
@@ -345,6 +377,27 @@ public class NPCSpriteBehavior : MonoBehaviour
         dir.Normalize();
 
         transform.position = new Vector3(currPos.x + dir.x * 0.05f, currPos.y + dir.y * 0.05f, 0);
+    }
+
+    void updatePlaceInQueue()
+    {
+        int place = GameObject.FindObjectOfType<NPCGenerator>().getPlaceInQueue(id);
+        if(place != -1 && currPos != place)
+        {
+            float desY = 11.3f - place * 3;
+            if(transform.position.y > desY - sensitivity && transform.position.y < desY + sensitivity)
+            {
+                currPos = place;
+            }
+            else
+            {
+                Vector3 currPos = transform.position;
+                Vector2 dir = new Vector2(0, desY - currPos.y);
+                dir.Normalize();
+
+                transform.position = new Vector3(currPos.x + dir.x * speed, currPos.y + dir.y * speed, 0);
+            }
+        }
     }
 
     public int getSpriteNum()
@@ -536,33 +589,33 @@ public class NPCSpriteBehavior : MonoBehaviour
                 if ((mypos.y > -5.2 && mypos.y < 0) || (mypos.y < 11.5 && mypos.y > 0))
                 {
                     path[2] = new Vector2(mypos.x, 0);
-                    path[1] = new Vector2(-10, 0);
+                    path[1] = new Vector2(-7.5f, 0);
                 }
                 else
                 {
                     if(mypos.y > 0)
                     {
                         path[2] = new Vector2(mypos.x, 15);
-                        path[1] = new Vector2(-10, 15);
+                        path[1] = new Vector2(-7.5f, 15);
                     }
                     else
                     {
                         path[2] = new Vector2(mypos.x, -10);
-                        path[1] = new Vector2(-10, -10);
+                        path[1] = new Vector2(-7.5f, -10);
                     }
                 }
             }
             else
             {
-                path[1] = new Vector2(-10, mypos.y);
-                path[2] = new Vector2(-10, mypos.y);
+                path[1] = new Vector2(-7.5f, mypos.y);
+                path[2] = new Vector2(-7.5f, mypos.y);
             }
 
         }
         else
         {
-            path[1] = new Vector2(-10, mypos.y);
-            path[2] = new Vector2(-10, mypos.y);
+            path[1] = new Vector2(-7.5f, mypos.y);
+            path[2] = new Vector2(-7.5f, mypos.y);
         }
         haveReached = 3;
         currentState = "leaving";

@@ -588,7 +588,7 @@ public class player1control : MonoBehaviour
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "Meat" | currentObject == "PreppedMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(8f, 25f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
         }
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "CookedMeat" | currentObject == "BurntMeat"))
         {

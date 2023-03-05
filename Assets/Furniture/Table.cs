@@ -53,6 +53,7 @@ public class Table : MonoBehaviour
                 locked[i] = true;
             }
             else if((atTable[i] == null  || atTable[i].GetComponent<NPCSpriteBehavior>().getCurrentState() == "toSeat") && foodServed[i] == null ) { locked[i] = true; }
+            else if(foodServed[i] != null && foodServed[i].GetComponent<Coin>() != null) { locked[i] = true; }
             else { locked[i] = false; }
         }
     }
