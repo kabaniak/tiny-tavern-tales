@@ -3777,14 +3777,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db979ea520d45428b747d0db71bddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cleared: 0
   starPrefab: {fileID: 1157501684240110267, guid: c98bde0d0d7540140855ae017cb89c22, type: 3}
   gameManager: {fileID: 1265288382}
-  generator: {fileID: 0}
-  p1: {fileID: 0}
-  p2: {fileID: 0}
-  cookMask: {fileID: 0}
-  gameOver: {fileID: 0}
 --- !u!1 &921044452
 GameObject:
   m_ObjectHideFlags: 0
@@ -5022,6 +5016,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reputation: 13
   maxRating: 25
+  generator: {fileID: 0}
+  p1: {fileID: 0}
+  p2: {fileID: 0}
+  cookMask: {fileID: 0}
+  gameOver: {fileID: 0}
 --- !u!4 &1265288383
 Transform:
   m_ObjectHideFlags: 0
@@ -5209,14 +5208,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db979ea520d45428b747d0db71bddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cleared: 0
   starPrefab: {fileID: 0}
   gameManager: {fileID: 0}
-  generator: {fileID: 0}
-  p1: {fileID: 0}
-  p2: {fileID: 0}
-  cookMask: {fileID: 0}
-  gameOver: {fileID: 0}
 --- !u!114 &1380195393
 MonoBehaviour:
   m_ObjectHideFlags: 0
