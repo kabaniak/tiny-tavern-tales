@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     int totalCoins = 0;
     public int reputation = 13;
     public int maxRating = 25;
+    GameObject starBar;
 
     GameObject textDisp;
     public enum prices
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         textDisp = GameObject.FindGameObjectWithTag("Money Stat");
+        starBar = GameObject.Find("StarRatingBar");
     }
 
     // Update is called once per frame
@@ -37,6 +39,10 @@ public class GameManager : MonoBehaviour
     {
         if(reputation < 0) { reputation = 0; }
         if(reputation > maxRating) { reputation = maxRating; }
+        if(reputation == 0)
+        {
+            starBar.transform.GetComponent<starRatingBar>().cleared = true;
+        }
     }
 
     public void orderCompleted(int value, int effect)
