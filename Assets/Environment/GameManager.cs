@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int reputation = 13;
     public int maxRating = 25;
     GameObject starBar;
+    public GameObject generator, p1, p2, cookMask, gameOver;
 
     GameObject textDisp;
     public enum prices
@@ -32,6 +33,15 @@ public class GameManager : MonoBehaviour
     {
         textDisp = GameObject.FindGameObjectWithTag("Money Stat");
         starBar = GameObject.Find("StarRatingBar");
+        generator = GameObject.Find("NPC Generator");
+        p1 = GameObject.Find("p1");
+        p2 = GameObject.Find("p2");
+        cookMask = GameObject.Find("CookMask");
+        gameOver = GameObject.Find("GameOver");
+        if (gameOver)
+        {
+            gameOver.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -39,9 +49,9 @@ public class GameManager : MonoBehaviour
     {
         if(reputation < 0) { reputation = 0; }
         if(reputation > maxRating) { reputation = maxRating; }
-        if(reputation == 0)
+        if (reputation == 0)
         {
-            starBar.transform.GetComponent<starRatingBar>().cleared = true;
+            Apocalypse();
         }
     }
 
@@ -58,5 +68,18 @@ public class GameManager : MonoBehaviour
         reputation += effect;
     }
 
-
+    private void Apocalypse()
+    {
+        generator.SetActive(false);
+        p1.SetActive(false);
+        p2.SetActive(false);
+        cookMask.SetActive(false);
+        GameObject[] brawls = (GameObject.FindGameObjectsWithTag("Brawl"));
+        foreach (GameObject brawl in brawls)
+            GameObject.Destroy(brawl);
+        GameObject[] npcs = (GameObject.FindGameObjectsWithTag("NPC"));
+        foreach (GameObject npc in npcs)
+            GameObject.Destroy(npc);
+        gameOver.SetActive(true);
+    }
 }
