@@ -536,7 +536,7 @@ PrefabInstance:
     - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: upm_sprite
       value: 
-      objectReference: {fileID: -9024087300701384196, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+      objectReference: {fileID: 21300000, guid: 33fe367d6180f4c788b81e0a718ac1e3, type: 3}
     - target: {fileID: -4223204536864849910, guid: 59147b4ba850a0d438f60e29fb052272, type: 3}
       propertyPath: BoozePrefab
       value: 
@@ -1004,6 +1004,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NPCPrefab: {fileID: 7427308276122731120, guid: 0eafe0d40190370449b345eb0870f698, type: 3}
+  UsedHumanSprites: []
+  UsedTieflingSprites: []
+  UsedElfSprites: []
 --- !u!4 &163160930
 Transform:
   m_ObjectHideFlags: 0
@@ -1808,7 +1811,7 @@ PrefabInstance:
     - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: upm_sprite
       value: 
-      objectReference: {fileID: -6795185171421732328, guid: ebc2f3150bd9c4924a32c822905f030a, type: 3}
+      objectReference: {fileID: 21300000, guid: ae9dc3d8aef26476ea46a6351846627c, type: 3}
     - target: {fileID: -6138134370124744895, guid: cd1615a1bf811f14892bfed52cbf978d, type: 3}
       propertyPath: BurntMeatPrefab
       value: 
