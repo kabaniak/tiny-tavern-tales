@@ -420,6 +420,9 @@ public class NPCSpriteBehavior : MonoBehaviour
             return;
         }
 
+
+        currentState = "eating";
+
         // check if food is our correct order
         if (received != myOrder)
         {
@@ -428,15 +431,10 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 findBrawlTarget();
             }
-            else
-            {
-                currentState = "eating";
-            }
         }
         else
         {
             spriteRender.color = new Color(1, 1, 1);
-            currentState = "eating";
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
