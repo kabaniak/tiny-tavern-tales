@@ -4894,6 +4894,7 @@ GameObject:
   - component: {fileID: 1213947597}
   - component: {fileID: 1213947596}
   - component: {fileID: 1213947595}
+  - component: {fileID: 1213947599}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4986,6 +4987,18 @@ RectTransform:
   m_AnchoredPosition: {x: 4.0388, y: 2.2633}
   m_SizeDelta: {x: 27.1165, y: 15.2789}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1213947599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213947594}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 956c1a2e8a9f78a40a93779e2d2d7712, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1265288381
 GameObject:
   m_ObjectHideFlags: 0
@@ -7293,8 +7306,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: mainMenu, Assembly-CSharp
+      - m_Target: {fileID: 1213947599}
+        m_TargetAssemblyTypeName: barsExit, Assembly-CSharp
         m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
