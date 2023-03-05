@@ -470,7 +470,7 @@ public class Table : MonoBehaviour
         GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
         if (source == MeatPrefab | source == PreppedMeatPrefab)
         {
-            thing.transform.localScale = new Vector3(7f, 7f, 1);
+            thing.transform.localScale = new Vector3(0.75f, 0.75f, 1);
         }
         else
         {
