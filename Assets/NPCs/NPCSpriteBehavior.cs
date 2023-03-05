@@ -31,7 +31,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     private int haveReached = 0;
     private float sensitivity = 0.3f;
     private bool forward = true;
-    private Vector2[] path = { new Vector2(-10,-20), new Vector2(0,0), new Vector2(0, 0), new Vector2(0, 0)};
+    private Vector2[] path = { new Vector2(-10, -20), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0) };
     private Vector2 paceTo = new Vector2(-10, 0);
 
     // brawl information
@@ -89,6 +89,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         origPatience = patience;
 
+        brawlChance = 1.0f;
+
         //Choose NPC sprite
         spritenum = Random.Range(0, 6);
         if (NPCtype == "HumanFighter")
@@ -109,10 +111,12 @@ public class NPCSpriteBehavior : MonoBehaviour
     void Update()
     {
         // check if we're ready to be destroyed
-        if(currentState == "beDestroyed")
+        if (currentState == "beDestroyed")
         {
             Destroy(gameObject);
         }
+
+        if (currentState == "brawling" || currentState == "preBrawl") { return; }
         // if it's reached it's seat
         // and if we've been served our food
         else if (currentState == "eating")
@@ -162,7 +166,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             // try to find a table to go to
             GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
 
-            foreach(GameObject t in tables)
+            foreach (GameObject t in tables)
             {
                 if (t.GetComponent<Table>().seatNPC(gameObject))
                 {
@@ -174,7 +178,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                     // record the path we should take
                     path[3] = new Vector2(seatCoords.x, seatCoords.y);
 
-                    if(seatInd == 2)
+                    if (seatInd == 2)
                     {
                         path[1] = new Vector2(-10, 0);
                         path[2] = new Vector2(seatCoords.x, 0);
@@ -213,7 +217,11 @@ public class NPCSpriteBehavior : MonoBehaviour
     private void FixedUpdate()
     {
         // check if we're on our way out
-        if (currentState == "leaving")
+        if (currentState == "preBrawl")
+        {
+            approach();
+        }
+        else if (currentState == "leaving")
         {
             forward = false;
             move();
@@ -225,13 +233,9 @@ public class NPCSpriteBehavior : MonoBehaviour
             forward = true;
             move();
         }
-        else if(currentState == "waiting")
+        else if (currentState == "waiting")
         {
             //pace();
-        }
-        else if(currentState == "preBrawl")
-        {
-            approach();
         }
     }
 
@@ -274,10 +278,10 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     void move()
     {
-        if(currentState == "leaving" || currentState == "toSeat")
+        if (currentState == "leaving" || currentState == "toSeat")
         {
             // we are actively moving
-            if (forward) 
+            if (forward)
             {
                 // go to NEXT ind
                 Vector3 currPos = transform.position;
@@ -313,11 +317,11 @@ public class NPCSpriteBehavior : MonoBehaviour
             }
 
             // check if we can stop moving
-            if(haveReached == 3 && forward)
+            if (haveReached == 3 && forward)
             {
                 currentState = "reachedSeat";
             }
-            else if(haveReached == 0 && !forward)
+            else if (haveReached == 0 && !forward)
             {
                 currentState = "beDestroyed";
             }
@@ -404,8 +408,8 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     public void givenFood(string received)
     {
-        if(currentState == "eating") { return; }
-        if(currentState == "brawling" || currentState == "preBrawl") 
+        if (currentState == "eating") { return; }
+        if (currentState == "brawling" || currentState == "preBrawl")
         {
             if (mytable != null)
             {
@@ -413,7 +417,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 leaveTable();
             }
             mytable = null;
-            return; 
+            return;
         }
 
         // check if food is our correct order
@@ -424,17 +428,21 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 findBrawlTarget();
             }
+            else
+            {
+                currentState = "eating";
+            }
         }
         else
         {
             spriteRender.color = new Color(1, 1, 1);
+            currentState = "eating";
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
         timerStart = Time.time;
         orig = spriteRender.color;
 
-        currentState = "eating";
     }
 
     private void startABrawl()
@@ -516,11 +524,49 @@ public class NPCSpriteBehavior : MonoBehaviour
     {
         // stop rendering npc
         spriteRender.enabled = true;
-        if(haveReached == 0)
-        {
-            haveReached = 1;
-        }
 
+        // set our new leave path
+        Vector3 mypos = transform.position;
+        
+        // if we're spat out to the right of the table center
+        if(2.4 < mypos.x)
+        {
+            // if our y means we can't just go left
+            if((-2.4> mypos.y && -8> mypos.y) || (14 > mypos.y && 9 < mypos.y))
+            {
+                // go down or up first
+                if ((mypos.y > -5.2 && mypos.y < 0) || (mypos.y < 11.5 && mypos.y > 0))
+                {
+                    path[2] = new Vector2(mypos.x, 0);
+                    path[1] = new Vector2(-10, 0);
+                }
+                else
+                {
+                    if(mypos.y > 0)
+                    {
+                        path[2] = new Vector2(mypos.x, 15);
+                        path[1] = new Vector2(-10, 15);
+                    }
+                    else
+                    {
+                        path[2] = new Vector2(mypos.x, -10);
+                        path[1] = new Vector2(-10, -10);
+                    }
+                }
+            }
+            else
+            {
+                path[1] = new Vector2(-10, 0);
+                path[2] = new Vector2(-10, mypos.y);
+            }
+
+        }
+        else
+        {
+            path[1] = new Vector2(-10, 0);
+            path[2] = new Vector2(-10, mypos.y);
+        }
+        haveReached = 3;
         currentState = "leaving";
     }
 }

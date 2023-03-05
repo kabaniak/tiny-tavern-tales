@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int reputation = 13;
     public int maxRating = 25;
     GameObject starBar;
-    public GameObject generator, p1, p2, cookMask, gameOver;
+    public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause;
 
     GameObject textDisp;
     public enum prices
@@ -41,6 +41,16 @@ public class GameManager : MonoBehaviour
         if (gameOver)
         {
             gameOver.SetActive(false);
+        }
+        congrats = GameObject.Find("Congrats");
+        if (congrats)
+        {
+            congrats.SetActive(false);
+        }
+        pause = GameObject.Find("PauseMenu");
+        if (pause)
+        {
+            pause.SetActive(false);
         }
     }
 
