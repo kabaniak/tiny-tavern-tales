@@ -342,6 +342,10 @@ public class NPCSpriteBehavior : MonoBehaviour
         return NPCtype;
     }
 
+    public string getCurrentState() { return currentState; }
+
+    public bool isAngry() { return angry; }
+
     void leaveTable()
     {
 
@@ -381,6 +385,12 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
     }
 
+    public void setOrder(bool beer)
+    {
+        if (beer) { myOrder = "Booze"; }
+        else { myOrder = "CookedMeat"; }
+    }
+
     public void givenFood(string received)
     {
         if(currentState == "eating") { return; }
@@ -394,7 +404,6 @@ public class NPCSpriteBehavior : MonoBehaviour
             mytable = null;
             return; 
         }
-        currentState = "eating";
 
         // check if food is our correct order
         if (received != myOrder)
@@ -413,6 +422,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
         timerStart = Time.time;
         orig = spriteRender.color;
+
+        currentState = "eating";
     }
 
     private void startABrawl()

@@ -279,7 +279,7 @@ public class player1control : MonoBehaviour
            carrying == false &
            holding2.GetComponent<holdingStationLogic>().holding == true &
            interacting &
-           Time.time - placeTime > 0.5)
+           Time.time - placeTime > 0.1)
         {
             if (holding2.GetComponent<holdingStationLogic>().currentObject == "Meat")
             {
@@ -309,7 +309,7 @@ public class player1control : MonoBehaviour
           carrying == false &
           holding3.GetComponent<holdingStationLogic>().holding == true &
           interacting &
-          Time.time - placeTime > 0.5)
+          Time.time - placeTime > 0.1)
         {
             if (holding3.GetComponent<holdingStationLogic>().currentObject == "Meat")
             {

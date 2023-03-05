@@ -62,7 +62,7 @@ public class cookStation : MonoBehaviour
             {
                 fill.transform.GetComponent<Image>().color += 
                     new Color(Time.deltaTime * cookSpeed * gradientAdjust, -Time.deltaTime * cookSpeed * gradientAdjust, 0, 1);
-                gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color -=
+                gameObject.transform.GetChild(1).gameObject.GetComponent<SpriteRenderer>().color -=
                     new Color(Time.deltaTime * cookSpeed * gradientAdjust,
                     Time.deltaTime * cookSpeed * gradientAdjust,
                     Time.deltaTime * cookSpeed * gradientAdjust, 
@@ -72,7 +72,7 @@ public class cookStation : MonoBehaviour
             if (Time.time - overcooked >= burnTime)
             {
                 cooked = false;
-                Destroy(gameObject.transform.GetChild(0).gameObject);
+                Destroy(gameObject.transform.GetChild(1).gameObject);
                 GameObject meat = Instantiate(BurntMeatPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
                 meat.transform.localScale = new Vector3(1.2f, 0.6f, 1);
                 meat.GetComponent<SpriteRenderer>().sortingOrder = 3;
@@ -84,7 +84,7 @@ public class cookStation : MonoBehaviour
 
         if (cooked & stop == false)
         {
-            Destroy(gameObject.transform.GetChild(0).gameObject);
+            Destroy(gameObject.transform.GetChild(1).gameObject);
             GameObject meat = Instantiate(CookedMeatPrefab, gameObject.transform.position, Quaternion.identity, gameObject.transform);
             meat.transform.localScale = new Vector3(1.2f, 0.6f, 1);
             meat.GetComponent<SpriteRenderer>().sortingOrder = 3;
@@ -94,7 +94,7 @@ public class cookStation : MonoBehaviour
 
         if (doomsday == true)
         {
-            Destroy(gameObject.transform.GetChild(0).gameObject);
+            Destroy(gameObject.transform.GetChild(1).gameObject);
             holdingItem = false;
             burnt = false;
             cooked = false;
@@ -104,9 +104,9 @@ public class cookStation : MonoBehaviour
             doomsday = false;
         }
 
-        if (holdingItem == false & transform.childCount > 0)
+        if (holdingItem == false & transform.childCount > 1)
         {
-            Destroy(gameObject.transform.GetChild(0).gameObject);
+            Destroy(gameObject.transform.GetChild(1).gameObject);
         }
     }
 }
