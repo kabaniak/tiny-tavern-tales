@@ -131,9 +131,8 @@ public class GameManager : MonoBehaviour
 
     public void NextDay()
     {
+        // reset stats
         dayCount += 1;
-        p1.transform.position = startPos1;
-        p2.transform.position = startPos2;
         dayCycle.GetComponent<Image>().fillAmount = 0f;
         dayreportCard.SetActive(false);
         brawlsFinal += brawlsToday;
@@ -143,6 +142,8 @@ public class GameManager : MonoBehaviour
         servedFinal += servedToday;
         servedToday = 0;
         coinsToday = 0;
+
+        resetPlayers();
 
         cookStation.GetComponent<cookStation>().resetCook();
         prepStation.GetComponent<prepStation>().resetPrep();
@@ -164,5 +165,18 @@ public class GameManager : MonoBehaviour
         GameObject.Find("Counter1").GetComponent<holdingStationLogic>().clearCounter();
         GameObject.Find("Counter2").GetComponent<holdingStationLogic>().clearCounter();
         GameObject.Find("Counter3").GetComponent<holdingStationLogic>().clearCounter();
+    }
+
+    public void resetPlayers()
+    {
+
+        p1.transform.position = startPos1;
+        p2.transform.position = startPos2;
+
+        p1.GetComponent<player1control>().FeedtheDog();
+        p2.GetComponent<player2control>().FeedtheDog();
+
+        p1.GetComponent<player1control>().updateSpriteByCurrObject();
+        p2.GetComponent<player2control>().updateSpriteByCurrObject();
     }
 }
