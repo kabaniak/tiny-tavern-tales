@@ -7,11 +7,13 @@ public class dayCycle : MonoBehaviour
 {
     // private float timeRate = 0.005f;
     //temp
+    private bool stop = false;
     private float timeRate = 0.1f;
     GameObject dailyReport;
     GameObject finalReport;
     GameObject gameManager;
     GameObject NPCGenerator;
+    public Text dailyInstructText;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +23,7 @@ public class dayCycle : MonoBehaviour
         finalReport = GameObject.Find("FinalReport");
         dailyReport = GameObject.Find("ReportCard");
         NPCGenerator = GameObject.Find("NPC Generator");
+        dailyInstructText = GameObject.Find("RCInstructionText").GetComponent<UnityEngine.UI.Text>();
     }
 
     // Update is called once per frame
@@ -51,14 +54,32 @@ public class dayCycle : MonoBehaviour
             dailyReport.SetActive(true);
             Time.timeScale = 0f;
         }
+
+        if (gameManager.GetComponent<GameManager>().dayCount == 3)
+        {
+            dailyInstructText.text = "Press SPACE to go see your final report";
+        }
+
+
         if (gameObject.transform.GetComponent<Image>().fillAmount == 1 &
             gameManager.GetComponent<GameManager>().dayCount == 3 & 
             npcCount == 0 &
-            brawlCount == 0)
+            brawlCount == 0 &
+            stop == false)
+        {
+            dailyReport.SetActive(true);
+            stop = true;
+            Time.timeScale = 0f;
+        }
+
+        if (gameObject.transform.GetComponent<Image>().fillAmount == 1 &
+            gameManager.GetComponent<GameManager>().dayCount == 3 &
+            npcCount == 0 &
+            brawlCount == 0 &
+            dailyReport.activeSelf &
+            stop == true & Input.GetKeyDown(KeyCode.Space))
         {
             finalReport.SetActive(true);
-            dailyReport.SetActive(true);
-            Time.timeScale = 0f;
         }
     }
 }

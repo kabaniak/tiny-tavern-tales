@@ -2608,7 +2608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 0}
+  m_AnchoredPosition: {x: 62, y: 0}
   m_SizeDelta: {x: 1150, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &350465483
@@ -2644,7 +2644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press SPACE to go to the next day
+  m_Text: Press SPACE to return to the Main Menu
 --- !u!222 &350465484
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4015,6 +4015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a270dbc0615c3c34abb941ec5bf4a493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dailyInstructText: {fileID: 0}
 --- !u!1 &578446715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4164,7 +4165,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Daily
+  m_Text: 'Overall
 
     Performance
 
@@ -4955,7 +4956,7 @@ GameObject:
   - component: {fileID: 771553534}
   - component: {fileID: 771553533}
   m_Layer: 5
-  m_Name: Tutorial Text
+  m_Name: ReportCardText
   m_TagString: Tutorial Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6158,7 +6159,7 @@ GameObject:
   - component: {fileID: 978739639}
   - component: {fileID: 978739638}
   m_Layer: 5
-  m_Name: Instructions
+  m_Name: RCInstructionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6180,7 +6181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1150, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &978739638
