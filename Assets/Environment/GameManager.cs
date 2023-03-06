@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     GameObject starBar;
     public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause;
 
-    public float brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
+    public int brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
 
     GameObject textDisp;
 
