@@ -15,13 +15,13 @@ public class NPCGenerator : MonoBehaviour
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    private float SpawnInterval = 8f;
+    private float SpawnInterval = 10f;
     private float SpawnTime = 0;
 
     private List<int> npcQueue = new List<int>();
 
     int npcid = 0;
-
+    
     /// <summary>
     /// Check if we need to generate an NPC and if so, do so.
     /// </summary>

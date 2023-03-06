@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,10 +9,13 @@ public class GameManager : MonoBehaviour
     int totalCoins = 0;
     public int reputation = 13;
     public int maxRating = 25;
-    GameObject starBar;
-    public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause;
+    GameObject starBar, dayreportCard, finalReport;
+    public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause, dayCycle;
 
-    public float brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
+    public int brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
+    public int dayCount = 1;
+    private Vector3 startPos1;
+    private Vector3 startPos2;
 
     GameObject textDisp;
 
@@ -37,8 +41,17 @@ public class GameManager : MonoBehaviour
         textDisp = GameObject.FindGameObjectWithTag("Money Stat");
         starBar = GameObject.Find("StarRatingBar");
         generator = GameObject.Find("NPC Generator");
+        dayCycle = GameObject.Find("DayCycleFill");
         p1 = GameObject.Find("p1");
+        if (p1)
+        {
+            startPos1 = p1.transform.position;
+        }
         p2 = GameObject.Find("p2");
+        if (p2)
+        {
+            startPos2 = p2.transform.position;
+        }
         cookMask = GameObject.Find("CookMask");
         gameOver = GameObject.Find("GameOver");
         if (gameOver)
@@ -55,6 +68,16 @@ public class GameManager : MonoBehaviour
         {
             pause.SetActive(false);
         }
+        dayreportCard = GameObject.Find("ReportCard");
+        if (dayreportCard)
+        {
+            dayreportCard.SetActive(false);
+        }
+        finalReport = GameObject.Find("FinalReport");
+        if (finalReport)
+        {
+            finalReport.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -66,13 +89,18 @@ public class GameManager : MonoBehaviour
         {
             Apocalypse();
         }
+        // Go to Next Day
+        if (dayreportCard.activeSelf & Input.GetKeyDown(KeyCode.Space) & !finalReport.activeSelf)
+        {
+            NextDay();
+        }
     }
 
     public void orderCompleted(int value, int effect)
     {
+        coinsToday += value;
         totalCoins += value;
         textDisp.GetComponent<UnityEngine.UI.Text>().text = totalCoins.ToString();
-        
         reputation += effect;
     }
 
@@ -94,5 +122,23 @@ public class GameManager : MonoBehaviour
         foreach (GameObject npc in npcs)
             GameObject.Destroy(npc);
         gameOver.SetActive(true);
+    }
+
+    public void NextDay()
+    {
+        dayCount += 1;
+        p1.transform.position = startPos1;
+        p2.transform.position = startPos2;
+        dayCycle.GetComponent<Image>().fillAmount = 0f;
+        dayreportCard.SetActive(false);
+        brawlsFinal += brawlsToday;
+        brawlsToday = 0;
+        angryFinal += angryToday;
+        angryToday = 0;
+        servedFinal += servedToday;
+        servedToday = 0;
+        coinsToday = 0;
+        Time.timeScale = 1f;
+        generator.SetActive(true);
     }
 }

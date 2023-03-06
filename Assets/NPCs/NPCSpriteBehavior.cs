@@ -5,7 +5,7 @@ using UnityEngine;
 public class NPCSpriteBehavior : MonoBehaviour
 {
     SpriteRenderer spriteRender;
-
+    public GameObject gameManager;
     Color angryColor = new Color(1, 0, 0, 1.75f);
     Color orig;
 
@@ -55,7 +55,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     void Start()
     {
         spriteRender = GetComponent<SpriteRenderer>();
-
+        gameManager = GameObject.Find("GManager");
 
         //choose NPC type
         int typenum = Random.Range(0, 3);
@@ -96,7 +96,6 @@ public class NPCSpriteBehavior : MonoBehaviour
         patience = 90f;
         origPatience = patience;
 
-        brawlChance = 1.0f;
 
         //Choose NPC sprite
         spritenum = Random.Range(0, 6);
@@ -171,7 +170,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             {
                 angry = true;
                 leaveTable();
-
+                angerCounter();
                 // random chance of starting a brawl
                 if (Random.value < brawlChance)
                 {
@@ -247,7 +246,7 @@ public class NPCSpriteBehavior : MonoBehaviour
                 haveReached = 1;
                 angry = true;
                 currentState = "leaving";
-
+                angerCounter();
                 GameObject.FindObjectOfType<NPCGenerator>().removeFromQueue(id);
             }
         }
@@ -461,13 +460,14 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     public void givenFood(string received)
     {
-        if (currentState == "eating") { return; }
+        if (currentState == "eating") {return;}
         if (currentState == "brawling" || currentState == "preBrawl")
         {
             if (mytable != null)
             {
                 angry = true;
                 leaveTable();
+                angerCounter();
             }
             mytable = null;
             return;
@@ -480,6 +480,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         if (received != myOrder)
         {
             angry = true;
+            angerCounter();
             if (Random.value < brawlChance)
             {
                 findBrawlTarget();
@@ -488,6 +489,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         else
         {
             spriteRender.color = new Color(1, 1, 1);
+            gameManager.GetComponent<GameManager>().servedToday += 1;
         }
 
         GameObject.FindObjectOfType<OrderTracker>().removeMyOrder(gameObject);
@@ -508,6 +510,7 @@ public class NPCSpriteBehavior : MonoBehaviour
 
             // tell the brawl that it's started
             br.GetComponent<Brawl>().startBrawl(gameObject, brawlPartner);
+            gameManager.GetComponent<GameManager>().brawlsToday += 1;
         }
     }
 
@@ -553,6 +556,7 @@ public class NPCSpriteBehavior : MonoBehaviour
             brawlPartner = npc;
             currentState = "preBrawl";
             angry = true;
+            angerCounter();
             if (mytable)
             {
                 leaveTable();
@@ -563,7 +567,11 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
         return false;
     }
-
+    //
+    public void angerCounter()
+    {
+        gameManager.GetComponent<GameManager>().angryToday += 1;
+    }
     public void enterBrawl()
     {
         // stop rendering npc
