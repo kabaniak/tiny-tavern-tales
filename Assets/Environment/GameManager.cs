@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1f;
         textDisp = GameObject.FindGameObjectWithTag("Money Stat");
         starBar = GameObject.Find("StarRatingBar");
         generator = GameObject.Find("NPC Generator");

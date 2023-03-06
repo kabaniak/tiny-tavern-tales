@@ -1301,6 +1301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCPrefab: {fileID: 7427308276122731120, guid: 0eafe0d40190370449b345eb0870f698, type: 3}
   tutorial: 0
+  generating: 0
 --- !u!4 &163160930
 Transform:
   m_ObjectHideFlags: 0
@@ -1614,7 +1615,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.16952372, y: -0.5084493}
+  m_Offset: {x: 0.30188215, y: -0.50844955}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1625,7 +1626,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 7}
+  m_Size: {x: 5.942812, y: 7}
   m_EdgeRadius: 0
 --- !u!4 &211960689 stripped
 Transform:
@@ -4084,7 +4085,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dailyInstructText: {fileID: 0}
+  MainMenu: 
   tutorial: 0
+  destroyedAlready: 0
 --- !u!1 &578446715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7726,6 +7729,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 0}
+  MainMenu: MainMenu
 --- !u!1 &1248612254
 GameObject:
   m_ObjectHideFlags: 0
@@ -7837,6 +7841,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa4a70bfb0ce19459af76b6f6dbe811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalCoins: 0
   reputation: 13
   maxRating: 25
   generator: {fileID: 0}
@@ -11343,7 +11348,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.31636095, y: -1.0016475}
+  m_Offset: {x: -0.07663047, y: -1.0016475}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11354,7 +11359,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5, y: 7}
+  m_Size: {x: 5.785983, y: 7}
   m_EdgeRadius: 0
 --- !u!4 &1907857434 stripped
 Transform:
@@ -12988,7 +12993,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1213947599}
         m_TargetAssemblyTypeName: barsExit, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: BackToMain
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13136,7 +13141,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2314831841273926876, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_Size.x
-      value: 5
+      value: 4.8952026
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926876, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_Size.y
@@ -13144,7 +13149,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926876, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_Offset.x
-      value: -0.09608233
+      value: -0.04368341
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926876, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_Offset.y
@@ -13172,11 +13177,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926877, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.5
+      value: 19.07
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926877, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.9
+      value: 11.49
       objectReference: {fileID: 0}
     - target: {fileID: 2314831841273926877, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
       propertyPath: m_LocalPosition.z
@@ -13305,11 +13310,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8607951512993012587, guid: ff2c190b4582db74fa017387701226ad, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.83
+      value: 19.28
       objectReference: {fileID: 0}
     - target: {fileID: 8607951512993012587, guid: ff2c190b4582db74fa017387701226ad, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.75
+      value: -13.29
       objectReference: {fileID: 0}
     - target: {fileID: 8607951512993012587, guid: ff2c190b4582db74fa017387701226ad, type: 3}
       propertyPath: m_LocalPosition.z

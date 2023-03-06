@@ -7,6 +7,7 @@ public class mainMenu : MonoBehaviour
 {
     public string newGame;
     public string Tutorial2;
+    public string MainMenu;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class mainMenu : MonoBehaviour
         SceneManager.LoadScene(newGame);
     }
 
-    public void LoadTutorial()
+    public void LoadTutorial2()
     {
         SceneManager.LoadScene(Tutorial2);
     }

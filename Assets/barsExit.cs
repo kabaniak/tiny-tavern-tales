@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class barsExit : MonoBehaviour
 {
     private bool paused = false;
     public GameObject pauseMenu;
+    public string MainMenu;
     
     void Start()
     {
@@ -32,6 +34,11 @@ public class barsExit : MonoBehaviour
             Time.timeScale = 0f;
             pauseMenu.SetActive(true);
         }
+    }
+
+    public void BackToMain()
+    {
+        SceneManager.LoadScene(MainMenu);
     }
 
     public void ResumeGame()
