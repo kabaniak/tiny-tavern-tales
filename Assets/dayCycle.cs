@@ -16,6 +16,7 @@ public class dayCycle : MonoBehaviour
     public Text dailyInstructText;
 
     public bool tutorial;
+    public bool destroyedAlready = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,9 +44,12 @@ public class dayCycle : MonoBehaviour
 
         var brawlCount = GameObject.FindGameObjectsWithTag("Brawl").Length;
 
-        if (gameObject.transform.GetComponent<Image>().fillAmount == 1)
+        if (gameObject.transform.GetComponent<Image>().fillAmount == 1 && !destroyedAlready)
         {
-            NPCGenerator.SetActive(false);
+            NPCGenerator.GetComponent<NPCGenerator>().generating = false;
+            // destroy any npcs waiting outside restaurant
+            destroyWaiting();
+            destroyedAlready = true;
         }
 
         if (tutorial) { return; }
@@ -84,6 +88,18 @@ public class dayCycle : MonoBehaviour
             stop == true & Input.GetKeyDown(KeyCode.Space))
         {
             finalReport.SetActive(true);
+        }
+    }
+
+    void destroyWaiting()
+    {
+        foreach(GameObject npc in GameObject.FindGameObjectsWithTag("NPC")) 
+        {
+            NPCSpriteBehavior n = npc.GetComponent<NPCSpriteBehavior>();
+            if(n && n.getCurrentState() == "waiting" && GameObject.FindObjectOfType<NPCGenerator>().getPlaceInQueue(n.id) >= 8)
+            {
+                n.currentState = "beDestroyed";
+            }
         }
     }
 }

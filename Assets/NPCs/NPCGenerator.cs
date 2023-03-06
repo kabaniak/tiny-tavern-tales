@@ -20,16 +20,22 @@ public class NPCGenerator : MonoBehaviour
 
     private List<int> npcQueue = new List<int>();
     public bool tutorial;
+    public bool generating;
 
     int npcid = 0;
-    
+
+    private void Start()
+    {
+        generating = true;
+    }
+
     /// <summary>
     /// Check if we need to generate an NPC and if so, do so.
     /// </summary>
     void Update()
     {
 
-        if (Time.time > SpawnTime & !tutorial)
+        if (Time.time > SpawnTime & !tutorial & generating)
         {
             SpawnTime = Time.time + SpawnInterval;
             GameObject npc = Instantiate(NPCPrefab, new Vector3(-11.2f, -20, 0), Quaternion.identity);
@@ -58,5 +64,10 @@ public class NPCGenerator : MonoBehaviour
     {
         if (tutorial) { return true; }
         return (npcQueue[0] == npc) ;
+    }
+
+    public void resetQueue()
+    {
+        npcQueue = new List<int>();
     }
 }

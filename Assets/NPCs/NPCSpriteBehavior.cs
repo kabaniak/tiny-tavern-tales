@@ -184,9 +184,10 @@ public class NPCSpriteBehavior : MonoBehaviour
         }
 
         // if not seated yet
-        else if (currentState == "waiting")
+        else if (currentState == "waiting" && currPos < 2)
         {
-            if (GameObject.FindObjectOfType<NPCGenerator>().amFirst(id))
+            NPCGenerator gen = GameObject.FindObjectOfType<NPCGenerator>();
+            if (gen.amFirst(id))
             {
                 // try to find a table to go to
                 GameObject[] tables = GameObject.FindGameObjectsWithTag("table");
@@ -381,7 +382,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     void updatePlaceInQueue()
     {
         int place = GameObject.FindObjectOfType<NPCGenerator>().getPlaceInQueue(id);
-        if(place != -1 && currPos != place)
+        if(place != -1 && place < 8 && currPos != place)
         {
             float desY = 11.3f - place * 3;
             if(transform.position.y > desY - sensitivity && transform.position.y < desY + sensitivity)

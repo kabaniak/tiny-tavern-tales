@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     private void Apocalypse()
     {
-        generator.SetActive(false);
+        generator.GetComponent<NPCGenerator>().generating = false;
         p1.SetActive(false);
         p2.SetActive(false);
         cookMask.SetActive(false);
@@ -156,7 +156,9 @@ public class GameManager : MonoBehaviour
         clearPlates();
 
         Time.timeScale = 1f;
-        generator.SetActive(true);
+        dayCycle.GetComponent<dayCycle>().destroyedAlready = false;
+        generator.GetComponent<NPCGenerator>().resetQueue();
+        generator.GetComponent<NPCGenerator>().generating = true;
     }
 
     // clear the plates
