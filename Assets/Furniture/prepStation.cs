@@ -34,4 +34,13 @@ public class prepStation : MonoBehaviour
             fill.transform.GetComponent<Image>().fillAmount = 0;
         }
     }
+
+    public void resetPrep()
+    {
+        holdingItem = false;
+        prepComplete = false;
+        if (gameObject.transform.childCount > 0) { Destroy(gameObject.transform.GetChild(0).gameObject); }
+        fill.transform.GetComponent<Image>().fillAmount = 0;
+        mask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
+    }
 }

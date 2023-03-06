@@ -92,7 +92,7 @@ public class cookStation : MonoBehaviour
         }
 
 
-        if (doomsday == true)
+        if (doomsday == true && gameObject.transform.childCount > 0)
         {
             Destroy(gameObject.transform.GetChild(0).gameObject);
             holdingItem = false;
@@ -108,5 +108,22 @@ public class cookStation : MonoBehaviour
         {
             Destroy(gameObject.transform.GetChild(0).gameObject);
         }
+    }
+
+    public void resetCook()
+    {
+        mask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
+        if (gameObject.transform.childCount > 0)
+        {
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+        }
+
+        holdingItem = false;
+        burnt = false;
+        cooked = false;
+        fill.transform.GetComponent<Image>().fillAmount = 0;
+        fill.transform.GetComponent<Image>().color = Color.green;
+        stop = false;
+        doomsday = false;
     }
 }

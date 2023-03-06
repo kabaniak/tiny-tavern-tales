@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameObject starBar, dayreportCard, finalReport;
     public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause, dayCycle;
 
+    GameObject cookStation, prepStation;
+
     public int brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
     public int dayCount = 1;
     private Vector3 startPos1;
@@ -53,6 +55,9 @@ public class GameManager : MonoBehaviour
             startPos2 = p2.transform.position;
         }
         cookMask = GameObject.Find("CookMask");
+        cookStation = GameObject.FindWithTag("Heat");
+        prepStation = GameObject.FindWithTag("Prep");
+
         gameOver = GameObject.Find("GameOver");
         if (gameOver)
         {
@@ -138,6 +143,8 @@ public class GameManager : MonoBehaviour
         servedFinal += servedToday;
         servedToday = 0;
         coinsToday = 0;
+        cookStation.GetComponent<cookStation>().resetCook();
+        prepStation.GetComponent<prepStation>().resetPrep();
         Time.timeScale = 1f;
         generator.SetActive(true);
     }
