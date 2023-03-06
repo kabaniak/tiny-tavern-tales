@@ -19,6 +19,7 @@ public class NPCGenerator : MonoBehaviour
     private float SpawnTime = 0;
 
     private List<int> npcQueue = new List<int>();
+    public bool tutorial;
 
     int npcid = 0;
     
@@ -28,7 +29,7 @@ public class NPCGenerator : MonoBehaviour
     void Update()
     {
 
-        if (Time.time > SpawnTime)
+        if (Time.time > SpawnTime & !tutorial)
         {
             SpawnTime = Time.time + SpawnInterval;
             GameObject npc = Instantiate(NPCPrefab, new Vector3(-11.2f, -20, 0), Quaternion.identity);
@@ -55,6 +56,7 @@ public class NPCGenerator : MonoBehaviour
 
     public bool amFirst(int npc)
     {
+        if (tutorial) { return true; }
         return (npcQueue[0] == npc) ;
     }
 }

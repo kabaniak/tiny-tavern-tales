@@ -79,6 +79,13 @@ public class Tutorial : MonoBehaviour
         "Go clean them up or they'll bother your other customers",
         "action clean",
         "Awesome job you two!",
+        "There a just a few more things",
+        "enableDay",
+        "On the top right is a bar indicating how far in the day you've progressed",
+        "Once it's filled you won't get any more customers, but you can finish serving anyone already there",
+        "You get three days to run your tavern as best you can",
+        "At the end of the day you'll get a report card showing how well you did",
+        "The other two buttons on the top right are to pause the game and quit to the menu",
         "Last thing you need to know is to keep track of your rating",
         "Your rating is shown in the stars at the top of the screen",
         "Serving orders correctly will increase your rating",
@@ -88,7 +95,7 @@ public class Tutorial : MonoBehaviour
         "Hit SPACE to return to the main menu"
     };
 
-    int currPoint = 0;
+    int currPoint = -1;
 
     bool waiting = false;
     public delegate bool WaitCondition();
@@ -110,12 +117,16 @@ public class Tutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindObjectOfType<GameManager>().tutorial = true;
+        GameObject.FindObjectOfType<NPCGenerator>().tutorial = true;
+        GameObject.FindObjectOfType<dayCycle>().tutorial = true;
+
         kegs = GameObject.FindGameObjectWithTag("Kegs");
         meatRack = GameObject.FindGameObjectWithTag("MeatRack");
         prep = GameObject.FindGameObjectWithTag("Prep");
         cook = GameObject.FindGameObjectWithTag("Heat");
 
-        enableEverything(false);
+        //enableEverything(false);
         tutorialText = GameObject.FindGameObjectWithTag("Tutorial Text");
         tutorialBg = GameObject.FindGameObjectWithTag("Tutorial BG");
         instructions = GameObject.FindGameObjectWithTag("Instructions");
@@ -130,6 +141,16 @@ public class Tutorial : MonoBehaviour
         if (tempReset && tempTimer < Time.time) 
         {
             tempReset = false;
+        }
+
+        if(currPoint == -1)
+        {
+            enableEverything(false);
+            currPoint += 1;
+            tutorialText.GetComponent<UnityEngine.UI.Text>().text = script[currPoint];
+            tutorialBg.SetActive(true);
+            instructions.GetComponent<RectTransform>().localPosition = new Vector3(-22, -242, 0);
+            instructions.SetActive(true);
         }
 
         if ((!waiting && moveOn) || (waiting && cond()))
@@ -177,12 +198,16 @@ public class Tutorial : MonoBehaviour
             hideTutorial();
             hideInstructions();
             enableNPCThings(true);
+            int id = 0;
             if (script[currPoint].Contains("2"))
             {
                 npcList.Add(Instantiate(NPCPrefab, new Vector3(-10, -20, 0), Quaternion.identity));
+                npcList[0].GetComponent<NPCSpriteBehavior>().setId(id);
+                id += 1;
                 controlNPCPatience(0);
             }
             npcList.Add(Instantiate(NPCPrefab, new Vector3(-10, -20, 0), Quaternion.identity));
+            npcList[0].GetComponent<NPCSpriteBehavior>().setId(id);
             controlNPCPatience(0);
 
             if (script[currPoint].Contains("beer"))
@@ -270,6 +295,11 @@ public class Tutorial : MonoBehaviour
             enableNPCThings(true);
             setWaitFor(3f);
             return true;
+        }
+        else if(script[currPoint].Contains("enableDay"))
+        {
+            GameObject.FindObjectOfType<dayCycle>().enabled = true;
+            currPoint += 1;
         }
 
         return false;
@@ -416,6 +446,8 @@ public class Tutorial : MonoBehaviour
         meatRack.SetActive(on);
         cook.SetActive(on);
         prep.SetActive(on);
+
+        GameObject.FindObjectOfType<dayCycle>().enabled = on;
 
 
         NPCSpriteBehavior[] npcs = GameObject.FindObjectsOfType<NPCSpriteBehavior>();

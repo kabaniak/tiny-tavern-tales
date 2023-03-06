@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
     GameObject starBar, dayreportCard, finalReport;
     public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause, dayCycle;
 
+    public bool tutorial;
+
     GameObject cookStation, prepStation;
 
     public int brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
@@ -90,14 +92,17 @@ public class GameManager : MonoBehaviour
     {
         if(reputation < 0) { reputation = 0; }
         if(reputation > maxRating) { reputation = maxRating; }
-        if (reputation == 0)
+        if (!tutorial)
         {
-            Apocalypse();
-        }
-        // Go to Next Day
-        if (dayreportCard.activeSelf & Input.GetKeyDown(KeyCode.Space) & !finalReport.activeSelf)
-        {
-            NextDay();
+            if (reputation == 0)
+            {
+                Apocalypse();
+            }
+            // Go to Next Day
+            if (dayreportCard.activeSelf & Input.GetKeyDown(KeyCode.Space) & !finalReport.activeSelf)
+            {
+                NextDay();
+            }
         }
     }
 

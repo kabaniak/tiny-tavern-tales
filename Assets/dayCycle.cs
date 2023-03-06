@@ -15,6 +15,8 @@ public class dayCycle : MonoBehaviour
     GameObject NPCGenerator;
     public Text dailyInstructText;
 
+    public bool tutorial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +47,8 @@ public class dayCycle : MonoBehaviour
         {
             NPCGenerator.SetActive(false);
         }
+
+        if (tutorial) { return; }
 
         if (gameObject.transform.GetComponent<Image>().fillAmount == 1 &
             gameManager.GetComponent<GameManager>().dayCount < 3 &

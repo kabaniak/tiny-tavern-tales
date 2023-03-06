@@ -347,11 +347,11 @@ public class player2control : MonoBehaviour
         }
 
         // Place meat onto the prep station
-        if (inRangePrep == true &
+        if (inRangePrep == true &&
             interacting &
             carrying == true &
-            currentObject == "Meat" &
-            Prep.GetComponent<prepStation>().holdingItem == false)
+            currentObject == "Meat" &&
+            Prep.GetComponent<prepStation>() && Prep.GetComponent<prepStation>().holdingItem == false)
         {
             pmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 1);
 
@@ -363,9 +363,10 @@ public class player2control : MonoBehaviour
         }
 
         // Prep the meat
-        if (inRangePrep == true &
-            Prep.GetComponent<prepStation>().holdingItem == true &
-            Prep.GetComponent<prepStation>().prepComplete == false &
+        if (inRangePrep == true &&
+            Prep.GetComponent<prepStation>() &&
+            Prep.GetComponent<prepStation>().holdingItem == true &&
+            Prep.GetComponent<prepStation>().prepComplete == false &&
             interacting &
             carrying == false)
         {
@@ -374,7 +375,8 @@ public class player2control : MonoBehaviour
         }
 
         // Pick up prepped meat
-        if (Prep.GetComponent<prepStation>().holdingItem == true &
+        if (inRangePrep == true && Prep.GetComponent<prepStation>() &&
+            Prep.GetComponent<prepStation>().holdingItem == true &
             Prep.GetComponent<prepStation>().prepComplete == true &
             interacting &
             carrying == false)
@@ -386,10 +388,11 @@ public class player2control : MonoBehaviour
         }
 
         // Place prepped meat onto cooking station
-        if (inRangeHeat == true &
+        if (inRangeHeat == true &&
             interacting &
             carrying == true &
-            currentObject == "PreppedMeat" &
+            currentObject == "PreppedMeat" &&
+            Cook.GetComponent<cookStation>() &&
             Cook.GetComponent<cookStation>().holdingItem == false)
         {
             cmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 1);
@@ -401,7 +404,8 @@ public class player2control : MonoBehaviour
         }
 
         // Pick up cooked or burnt meat from station
-        if (inRangeHeat == true &
+        if (inRangeHeat == true &&
+            Cook.GetComponent<cookStation>() &&
             Cook.GetComponent<cookStation>().holdingItem == true &
             (Cook.GetComponent<cookStation>().cooked == true |
             Cook.GetComponent<cookStation>().burnt == true) &
@@ -621,4 +625,3 @@ public class player2control : MonoBehaviour
         pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
     }
 }
-
