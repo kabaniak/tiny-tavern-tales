@@ -50,8 +50,7 @@ public class NPCGenerator : MonoBehaviour
     void Update()
     {
         float change = (gm.reputation * 1.0f / gm.maxRating * 1.0f) * (fastestInterval - slowestInterval);
-        //SpawnInterval = slowestInterval + change;
-        SpawnInterval = 0.2f;
+        SpawnInterval = slowestInterval + change;
 
         if (Time.time > SpawnTime & !tutorial & generating)
         {
