@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class mainMenu : MonoBehaviour
 {
     public string newGame;
-    public string Tutorial;
+    public string Tutorial2;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +26,7 @@ public class mainMenu : MonoBehaviour
 
     public void LoadTutorial()
     {
-        SceneManager.LoadScene(Tutorial);
+        SceneManager.LoadScene(Tutorial2);
     }
 
     public void QuitGame()
