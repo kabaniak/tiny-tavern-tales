@@ -37,8 +37,8 @@ public class NPCGenerator : MonoBehaviour
 
     private void Start()
     {
-        fastestInterval = 6f;
-        slowestInterval = 9.5f;
+        fastestInterval = 5f;
+        slowestInterval = 9f;
         SpawnInterval = 6f;
         generating = true;
         gm = GameObject.FindObjectOfType<GameManager>();
@@ -103,12 +103,12 @@ public class NPCGenerator : MonoBehaviour
         if(day == 2)
         {
             slowestInterval = 8f;
-            fastestInterval = 4.5f;
+            fastestInterval = 4f;
         }
         if(day == 3)
         {
             slowestInterval = 6f;
-            fastestInterval = 3f;
+            fastestInterval = 2.5f;
         }
     }
 
