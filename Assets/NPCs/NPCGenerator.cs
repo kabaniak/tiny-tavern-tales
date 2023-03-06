@@ -15,7 +15,7 @@ public class NPCGenerator : MonoBehaviour
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    private float SpawnInterval = 4f;
+    private float SpawnInterval = 8f;
     private float SpawnTime = 0;
 
     private List<int> npcQueue = new List<int>();

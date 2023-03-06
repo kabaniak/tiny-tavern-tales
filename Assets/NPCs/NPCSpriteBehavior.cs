@@ -96,7 +96,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         patience = 90f;
         origPatience = patience;
 
-        brawlChance = 0.0f;
+        brawlChance = 1.0f;
 
         //Choose NPC sprite
         spritenum = Random.Range(0, 6);
