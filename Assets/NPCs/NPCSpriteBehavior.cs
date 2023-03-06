@@ -47,6 +47,7 @@ public class NPCSpriteBehavior : MonoBehaviour
     public List<Sprite> TieflingSprites;
     public List<Sprite> ElfSprites;
     int spritenum;
+    int rolenum;
 
     // tutorial stuff
     private bool pausedPt = false;
@@ -58,8 +59,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         gameManager = GameObject.Find("GManager");
 
         //choose NPC type
-        int typenum = Random.Range(0, 3);
-        setNPCType(typenum);
+        // pick a type from screen with an unused sprite
+        setNPCType(GameObject.FindObjectOfType<NPCGenerator>().getAvailableType());
     }
 
     public void setId(int num)
@@ -69,11 +70,12 @@ public class NPCSpriteBehavior : MonoBehaviour
 
     void setNPCType(int typenum)
     {
+        rolenum = typenum;
         if (typenum == 0)
         {
             NPCtype = "HumanFighter";
             tolerance = 1.0f;
-            patience = 30f;
+            patience = 40f;
             brawlChance = 0.7f;
             hardOrder = 0.2f;
         }
@@ -81,7 +83,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             NPCtype = "TieflingSorcerer";
             tolerance = 1.0f;
-            patience = 90f;
+            patience = 70f;
             brawlChance = 0.2f;
             hardOrder = 0.5f;
         }
@@ -89,16 +91,15 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             NPCtype = "ElfRogue";
             tolerance = 1.0f;
-            patience = 70f;
+            patience = 50f;
             brawlChance = 0.4f;
             hardOrder = 0.35f;
         }
-        patience = 90f;
         origPatience = patience;
 
 
         //Choose NPC sprite
-        spritenum = Random.Range(0, 6);
+        spritenum = GameObject.FindObjectOfType<NPCGenerator>().getAvailableSprite(typenum);
         if (NPCtype == "HumanFighter")
         {
             spriteRender.sprite = HumanSprites[spritenum];
@@ -111,6 +112,8 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             spriteRender.sprite = ElfSprites[spritenum];
         }
+
+        GameObject.FindObjectOfType<NPCGenerator>().takeSprite(typenum, spritenum);
     }
 
     // Update is called once per frame
@@ -119,6 +122,7 @@ public class NPCSpriteBehavior : MonoBehaviour
         // check if we're ready to be destroyed
         if (currentState == "beDestroyed")
         {
+            GameObject.FindObjectOfType<NPCGenerator>().freeSprite(rolenum, spritenum);
             Destroy(gameObject);
         }
 
@@ -262,6 +266,13 @@ public class NPCSpriteBehavior : MonoBehaviour
         {
             spriteRender.color = Color.Lerp(angryColor, new Color(1, 1, 1), patience / (origPatience - 10f));
         }
+
+        // check if restaurant is messy
+        int count = GameObject.FindGameObjectsWithTag("Mess").Length;
+        if(count == 0){ tolerance = 1.0f; }
+        else if(count < 3){tolerance = 1.1f;}
+        else if(count < 7) { tolerance = 1.25f; }
+        else { tolerance = 1.5f; }
 
     }
 

@@ -164,6 +164,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1f;
         dayCycle.GetComponent<dayCycle>().destroyedAlready = false;
         generator.GetComponent<NPCGenerator>().resetQueue();
+        generator.GetComponent<NPCGenerator>().changeInterval(dayCount);
         generator.GetComponent<NPCGenerator>().generating = true;
     }
 

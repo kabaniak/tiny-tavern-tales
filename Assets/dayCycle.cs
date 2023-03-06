@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class dayCycle : MonoBehaviour
 {
-    private float timeRate = 0.005f;
+    private float timeRate = 0.009f;
     private bool stop = false;
     GameObject dailyReport;
     GameObject finalReport;

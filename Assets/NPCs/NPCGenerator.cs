@@ -12,11 +12,22 @@ public class NPCGenerator : MonoBehaviour
     /// </summary>
     public GameObject NPCPrefab;
 
+    private GameManager gm;
+
+    private int[,] usedSprites = new int[3, 6] {
+        { 0, 0, 0, 0, 0, 0 } ,
+        { 0, 0, 0, 0, 0, 0 } ,
+        { 0, 0, 0, 0, 0, 0 }
+    };
+
     /// <summary>
     /// Seconds between spawn operations
     /// </summary>
-    private float SpawnInterval = 3f;
+    public float SpawnInterval;
     private float SpawnTime = 0;
+
+    private float fastestInterval;
+    private float slowestInterval;
 
     private List<int> npcQueue = new List<int>();
     public bool tutorial;
@@ -26,7 +37,11 @@ public class NPCGenerator : MonoBehaviour
 
     private void Start()
     {
+        fastestInterval = 6f;
+        slowestInterval = 9.5f;
+        SpawnInterval = 6f;
         generating = true;
+        gm = GameObject.FindObjectOfType<GameManager>();
     }
 
     /// <summary>
@@ -34,14 +49,20 @@ public class NPCGenerator : MonoBehaviour
     /// </summary>
     void Update()
     {
+        float change = (gm.reputation * 1.0f / gm.maxRating * 1.0f) * (fastestInterval - slowestInterval);
+        //SpawnInterval = slowestInterval + change;
+        SpawnInterval = 0.2f;
 
         if (Time.time > SpawnTime & !tutorial & generating)
         {
-            SpawnTime = Time.time + SpawnInterval;
-            GameObject npc = Instantiate(NPCPrefab, new Vector3(-11.2f, -20, 0), Quaternion.identity);
-            npc.GetComponent<NPCSpriteBehavior>().setId(npcid);
-            npcQueue.Add(npcid);
-            npcid += 1;
+            if (npcQueue.Count < 8 && isSpriteAvailable())
+            {
+                SpawnTime = Time.time + SpawnInterval;
+                GameObject npc = Instantiate(NPCPrefab, new Vector3(-11.2f, -20, 0), Quaternion.identity);
+                npc.GetComponent<NPCSpriteBehavior>().setId(npcid);
+                npcQueue.Add(npcid);
+                npcid += 1;
+            }
         }
         return;
     }
@@ -69,5 +90,70 @@ public class NPCGenerator : MonoBehaviour
     public void resetQueue()
     {
         npcQueue = new List<int>();
+        for (int j = 0; j < 3; j++)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                usedSprites[j, i] = 0;
+            }
+        }
+    }
+
+    public void changeInterval(int day)
+    {
+        if(day == 2)
+        {
+            slowestInterval = 8f;
+            fastestInterval = 4.5f;
+        }
+        if(day == 3)
+        {
+            slowestInterval = 6f;
+            fastestInterval = 3f;
+        }
+    }
+
+    public int getAvailableType()
+    {
+        int typenum = Random.Range(0, 3);
+        while (true)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (usedSprites[typenum, i] == 0) { return typenum; }
+            }
+            typenum++;
+            if(typenum > 2) { typenum = 0; }
+        }
+    }
+
+    private bool isSpriteAvailable()
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            for (int i = 0; i < 6; i++)
+            {
+                if (usedSprites[j, i] == 0) { return true; }
+            }
+        }
+        return false;
+    }
+    public int getAvailableSprite(int type)
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (usedSprites[type, i] == 0) { return i; }
+        }
+        return -1;
+    }
+
+    public void takeSprite(int type, int sprite)
+    {
+        usedSprites[type, sprite] = 1;
+    }
+
+    public void freeSprite(int type, int sprite)
+    {
+        usedSprites[type, sprite] = 0;
     }
 }
