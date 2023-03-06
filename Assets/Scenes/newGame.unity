@@ -5198,7 +5198,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &776503914
 Transform:
   m_ObjectHideFlags: 0
@@ -7778,6 +7778,7 @@ MonoBehaviour:
   gameOver: {fileID: 0}
   congrats: {fileID: 0}
   pause: {fileID: 0}
+  dayCycle: {fileID: 0}
   brawlsToday: 0
   brawlsFinal: 0
   angryToday: 0
@@ -7785,6 +7786,7 @@ MonoBehaviour:
   servedToday: 0
   servedFinal: 0
   coinsToday: 0
+  dayCount: 1
 --- !u!4 &1265288383
 Transform:
   m_ObjectHideFlags: 0

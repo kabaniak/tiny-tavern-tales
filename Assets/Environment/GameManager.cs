@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     int totalCoins = 0;
     public int reputation = 13;
     public int maxRating = 25;
-    GameObject starBar, dayreportCard;
+    GameObject starBar, dayreportCard, finalReport;
     public GameObject generator, p1, p2, cookMask, gameOver, congrats, pause, dayCycle;
 
     public int brawlsToday, brawlsFinal, angryToday, angryFinal, servedToday, servedFinal, coinsToday = 0;
@@ -73,6 +73,11 @@ public class GameManager : MonoBehaviour
         {
             dayreportCard.SetActive(false);
         }
+        finalReport = GameObject.Find("FinalReport");
+        if (finalReport)
+        {
+            finalReport.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -85,7 +90,7 @@ public class GameManager : MonoBehaviour
             Apocalypse();
         }
         // Go to Next Day
-        if (dayreportCard.activeSelf & Input.GetKeyDown(KeyCode.Space))
+        if (dayreportCard.activeSelf & Input.GetKeyDown(KeyCode.Space) & !finalReport.activeSelf)
         {
             NextDay();
         }

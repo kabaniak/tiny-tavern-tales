@@ -56,6 +56,7 @@ public class dayCycle : MonoBehaviour
             npcCount == 0 &
             brawlCount == 0)
         {
+            finalReport.SetActive(true);
             dailyReport.SetActive(true);
             Time.timeScale = 0f;
         }
