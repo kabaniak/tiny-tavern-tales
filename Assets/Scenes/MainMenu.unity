@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   newGame: newGame
-  Tutorial2: Tutorial 2
+  Tutorial2: Tutorial2
 --- !u!222 &1046764387
 CanvasRenderer:
   m_ObjectHideFlags: 0
