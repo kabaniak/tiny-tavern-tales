@@ -469,14 +469,7 @@ public class Table : MonoBehaviour
         
 
         GameObject thing = Instantiate(source, new Vector3(xCoord, yCoord, 0), Quaternion.identity, transform);
-        if (source == MeatPrefab | source == PreppedMeatPrefab)
-        {
-            thing.transform.localScale = new Vector3(7f, 7f, 1);
-        }
-        else
-        {
-            thing.transform.localScale = new Vector3(0.75f, 0.75f, 1);
-        }
+        thing.transform.localScale = new Vector3(0.75f, 0.75f, 1);
         return thing;
     }
 
@@ -490,6 +483,19 @@ public class Table : MonoBehaviour
                 foodServed[i] = null;
                 locked[i] = false;
                 return;
+            }
+        }
+    }
+
+    public void clearTable()
+    {
+        for(int i=0; i< 4; i++)
+        {
+            if (foodServed[i])
+            {
+                Destroy(foodServed[i]);
+                foodServed[i] = null;
+                foodTypes[i] = "";
             }
         }
     }

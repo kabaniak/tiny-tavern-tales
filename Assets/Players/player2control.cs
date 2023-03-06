@@ -353,7 +353,8 @@ public class player2control : MonoBehaviour
             currentObject == "Meat" &
             Prep.GetComponent<prepStation>().holdingItem == false)
         {
-            pmask.transform.GetComponent<Image>().color += new Color(0, 0, 0, 1);
+            pmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+
             PlaceOnSource(Prep, MeatPrefab);
             FeedtheDog();
             Prep.GetComponent<prepStation>().holdingItem = true;
@@ -378,7 +379,7 @@ public class player2control : MonoBehaviour
             interacting &
             carrying == false)
         {
-            pmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
+            pmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
             pickupFromSource(gameObject, PreppedMeatPrefab);
             currentObject = "PreppedMeat";
             didSomething = true;
@@ -391,7 +392,7 @@ public class player2control : MonoBehaviour
             currentObject == "PreppedMeat" &
             Cook.GetComponent<cookStation>().holdingItem == false)
         {
-            cmask.transform.GetComponent<Image>().color += new Color(0, 0, 0, 1);
+            cmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 1);
             PlaceOnSource(Cook, PreppedMeatPrefab);
             FeedtheDog();
             Cook.GetComponent<cookStation>().holdingItem = true;
@@ -407,7 +408,7 @@ public class player2control : MonoBehaviour
             interacting &
             carrying == false)
         {
-            cmask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
+            cmask.transform.GetComponent<Image>().color = new Color(1, 1, 1, 0);
             if (Cook.GetComponent<cookStation>().cooked == true)
             {
                 pickupFromSource(gameObject, CookedMeatPrefab);
@@ -422,7 +423,6 @@ public class player2control : MonoBehaviour
             didSomething = true;
         }
 
-        // if didn't do anything else
         // if didn't do anything else
         if (!didSomething && inRangeMess.Count != 0 && interacting)
         {
@@ -584,17 +584,17 @@ public class player2control : MonoBehaviour
         if ((source == holding1 | source == holding2 | source == holding3) & currentObject == "Booze")
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
         }
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "Meat" | currentObject == "PreppedMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
         }
         else if ((source == holding1 | source == holding2 | source == holding3) & (currentObject == "CookedMeat" | currentObject == "BurntMeat"))
         {
             GameObject noscale = Instantiate(item, source.transform.position, Quaternion.identity, source.transform);
-            noscale.transform.localScale = new Vector3(0.75f, 0.75f, 1f);
+            noscale.transform.localScale = new Vector3(0.75f, 3f, 1f);
         }
         else if (source == Prep & currentObject == "Meat")
         {
@@ -621,3 +621,4 @@ public class player2control : MonoBehaviour
         pfill.transform.GetComponent<Image>().fillAmount += prepSpeed;
     }
 }
+

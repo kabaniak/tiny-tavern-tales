@@ -112,7 +112,7 @@ public class cookStation : MonoBehaviour
 
     public void resetCook()
     {
-        mask.transform.GetComponent<Image>().color -= new Color(0, 0, 0, 1);
+        mask.transform.GetComponent<Image>().color = new Color(1,1,1,0);
         if (gameObject.transform.childCount > 0)
         {
             Destroy(gameObject.transform.GetChild(0).gameObject);

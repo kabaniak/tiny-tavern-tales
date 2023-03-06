@@ -26,4 +26,14 @@ public class holdingStationLogic : MonoBehaviour
             Destroy(gameObject.transform.GetChild(0).gameObject);
         }
     }
+
+    public void clearCounter()
+    {
+        holding = false;
+        currentObject = "";
+        if(gameObject.transform.childCount > 0)
+        {
+            Destroy(gameObject.transform.GetChild(0).gameObject);
+        }
+    }
 }

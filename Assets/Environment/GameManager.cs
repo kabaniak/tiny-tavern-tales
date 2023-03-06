@@ -143,9 +143,26 @@ public class GameManager : MonoBehaviour
         servedFinal += servedToday;
         servedToday = 0;
         coinsToday = 0;
+
         cookStation.GetComponent<cookStation>().resetCook();
         prepStation.GetComponent<prepStation>().resetPrep();
+
+        clearPlates();
+
         Time.timeScale = 1f;
         generator.SetActive(true);
+    }
+
+    // clear the plates
+    public void clearPlates()
+    {
+        foreach(Table t in GameObject.FindObjectsOfType<Table>())
+        {
+            t.clearTable();
+        }
+
+        GameObject.Find("Counter1").GetComponent<holdingStationLogic>().clearCounter();
+        GameObject.Find("Counter2").GetComponent<holdingStationLogic>().clearCounter();
+        GameObject.Find("Counter3").GetComponent<holdingStationLogic>().clearCounter();
     }
 }
