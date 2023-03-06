@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
-{
-
-    int totalCoins = 0;
+{   
+    public int totalCoins = 0;
     public int reputation = 13;
     public int maxRating = 25;
     GameObject starBar, dayreportCard, finalReport;
@@ -104,6 +104,11 @@ public class GameManager : MonoBehaviour
                 NextDay();
             }
         }
+
+        if (finalReport.activeSelf)
+        {
+            JustCalc();
+        }
     }
 
     public void orderCompleted(int value, int effect)
@@ -139,7 +144,6 @@ public class GameManager : MonoBehaviour
         // reset stats
         dayCount += 1;
         dayCycle.GetComponent<Image>().fillAmount = 0f;
-        dayreportCard.SetActive(false);
         brawlsFinal += brawlsToday;
         brawlsToday = 0;
         angryFinal += angryToday;
@@ -155,6 +159,7 @@ public class GameManager : MonoBehaviour
 
         clearPlates();
 
+        dayreportCard.SetActive(false);
         Time.timeScale = 1f;
         dayCycle.GetComponent<dayCycle>().destroyedAlready = false;
         generator.GetComponent<NPCGenerator>().resetQueue();
@@ -185,5 +190,16 @@ public class GameManager : MonoBehaviour
 
         p1.GetComponent<player1control>().updateSpriteByCurrObject();
         p2.GetComponent<player2control>().updateSpriteByCurrObject();
+    }
+
+    public void JustCalc()
+    {
+        brawlsFinal += brawlsToday;
+        brawlsToday = 0;
+        angryFinal += angryToday;
+        angryToday = 0;
+        servedFinal += servedToday;
+        servedToday = 0;
+        coinsToday = 0;
     }
 }

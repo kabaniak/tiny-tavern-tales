@@ -19,13 +19,13 @@ public class numToStr : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.transform.parent != GameObject.Find("RatingStat").transform)
+        if (gameObject.transform.parent.tag == "reportFloat")
         {
-            valueText.text = value.ToString();
+            valueText.text = valuef.ToString("F1");
         }
         else
         {
-            valueText.text = valuef.ToString("F1");
+            valueText.text = value.ToString();
         }
 
         // Correct Reporting Numbers
@@ -48,6 +48,26 @@ public class numToStr : MonoBehaviour
         else if (gameObject.transform.parent == GameObject.Find("UnsatisfiedStat").transform)
         {
             value = gameManager.GetComponent<GameManager>().angryToday;
+        }
+        else if (gameObject.transform.parent == GameObject.Find("fRatingStat").transform)
+        {
+            valuef = gameManager.GetComponent<GameManager>().reputation / 5f;
+        }
+        else if (gameObject.transform.parent == GameObject.Find("fGoldStat").transform)
+        {
+            value = gameManager.GetComponent<GameManager>().totalCoins;
+        }
+        else if (gameObject.transform.parent == GameObject.Find("fServedStat").transform)
+        {
+            value = gameManager.GetComponent<GameManager>().servedFinal;
+        }
+        else if (gameObject.transform.parent == GameObject.Find("fBrawlStat").transform)
+        {
+            value = gameManager.GetComponent<GameManager>().brawlsFinal;
+        }
+        else if (gameObject.transform.parent == GameObject.Find("fUnsatisfiedStat").transform)
+        {
+            value = gameManager.GetComponent<GameManager>().angryFinal;
         }
     }
 }
