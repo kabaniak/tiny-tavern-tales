@@ -3943,7 +3943,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  valuef: 0
   valueText: {fileID: 696816084}
+  gameManager: {fileID: 0}
 --- !u!1 &701986994
 GameObject:
   m_ObjectHideFlags: 0
@@ -7089,7 +7091,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  valuef: 0
   valueText: {fileID: 1394218577}
+  gameManager: {fileID: 0}
 --- !u!114 &1394218577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9022,7 +9026,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  valuef: 0
   valueText: {fileID: 1780076601}
+  gameManager: {fileID: 0}
 --- !u!1 &1818434541
 GameObject:
   m_ObjectHideFlags: 0
@@ -9120,7 +9126,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1838945796
 Transform:
   m_ObjectHideFlags: 0
@@ -9320,7 +9326,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  valuef: 0
   valueText: {fileID: 1849364617}
+  gameManager: {fileID: 0}
 --- !u!1 &1907857432 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2314831841273926879, guid: 670f42bdb0566094e815bbf9eda0f064, type: 3}
@@ -10623,7 +10631,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  valuef: 0
   valueText: {fileID: 2116939304}
+  gameManager: {fileID: 0}
 --- !u!1 &2130834887
 GameObject:
   m_ObjectHideFlags: 0
