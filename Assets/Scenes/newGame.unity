@@ -2644,7 +2644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press SPACE to return to the Main Menu
+  m_Text: Press 'R' to return to the Main Menu
 --- !u!222 &350465484
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2828,7 +2828,7 @@ GameObject:
   - component: {fileID: 436172523}
   - component: {fileID: 436172524}
   m_Layer: 5
-  m_Name: BrawlStat
+  m_Name: fBrawlStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2982,7 +2982,7 @@ GameObject:
   - component: {fileID: 463189031}
   - component: {fileID: 463189032}
   m_Layer: 5
-  m_Name: PupStat
+  m_Name: fPupStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4016,6 +4016,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dailyInstructText: {fileID: 0}
+  MainMenu: MainMenu
 --- !u!1 &578446715
 GameObject:
   m_ObjectHideFlags: 0
@@ -4338,7 +4339,7 @@ GameObject:
   - component: {fileID: 662147591}
   - component: {fileID: 662147592}
   m_Layer: 5
-  m_Name: UnsatisfiedStat
+  m_Name: fUnsatisfiedStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5233,7 +5234,7 @@ GameObject:
   - component: {fileID: 784478842}
   - component: {fileID: 784478843}
   m_Layer: 5
-  m_Name: ServedStat
+  m_Name: fServedStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7770,6 +7771,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fa4a70bfb0ce19459af76b6f6dbe811, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  totalCoins: 0
   reputation: 13
   maxRating: 25
   generator: {fileID: 0}
@@ -9467,7 +9469,7 @@ GameObject:
   - component: {fileID: 1553382999}
   m_Layer: 5
   m_Name: RatingStat
-  m_TagString: Untagged
+  m_TagString: reportFloat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10498,8 +10500,8 @@ GameObject:
   - component: {fileID: 1710219134}
   - component: {fileID: 1710219135}
   m_Layer: 5
-  m_Name: RatingStat
-  m_TagString: Untagged
+  m_Name: fRatingStat
+  m_TagString: reportFloat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12465,7 +12467,7 @@ GameObject:
   - component: {fileID: 2093143096}
   - component: {fileID: 2093143097}
   m_Layer: 5
-  m_Name: GoldStat
+  m_Name: fGoldStat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

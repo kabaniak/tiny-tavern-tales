@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class dayCycle : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class dayCycle : MonoBehaviour
     GameObject gameManager;
     GameObject NPCGenerator;
     public Text dailyInstructText;
+    private float delay = 5f;
+    private float placeTime = 0f;
+    public string MainMenu;
 
     public bool tutorial;
 
@@ -84,6 +88,12 @@ public class dayCycle : MonoBehaviour
             stop == true & Input.GetKeyDown(KeyCode.Space))
         {
             finalReport.SetActive(true);
+        }
+
+        if (finalReport.activeSelf & Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("This works");
+            SceneManager.LoadScene(0);
         }
     }
 }
