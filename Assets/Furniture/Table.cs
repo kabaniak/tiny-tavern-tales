@@ -193,6 +193,10 @@ public class Table : MonoBehaviour
                         yCoord -= 2;
                     }
                 }
+                if(i == 3)
+                {
+                    yCoord += 2;
+                }
 
                 return new Vector3(xCoord, yCoord, 0);
             }

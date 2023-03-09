@@ -95,8 +95,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa118475b45a83d46837cc6d1d703630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeRemaining: 0
+  gameManager: {fileID: 0}
+  id: 0
   patience: 0
+  currentState: waiting
   seatCoords: {x: 0, y: 0, z: 0}
   mytable: {fileID: 0}
   brawlPartner: {fileID: 0}
